@@ -73,7 +73,11 @@
               <h5>Logs</h5>
             </div>
 
-            <div class="card-body"></div>
+            <div class="card-body" style="height: 250px; overflow-y: auto;">
+            <div v-for="(log, index) in logs" :key="index">
+            <small>{{ log }}</small>
+            </div>
+            </div>
           </div>
         </div>
       </div>
@@ -88,11 +92,12 @@ import ROSLIB from "roslib";
 export default {
   data() {
     return {
-      host: "10.10.10.102",
+      host: "localhost",
       port: "9090",
       isConnected: false,
       status: "Disconnected",
       ros: null,
+      logs: []
     };
   },
 
@@ -103,17 +108,24 @@ export default {
        });
 
       this.ros.on("connection", () => {
-         console.log("Connected to websocket server.");
+         const message = "Connected to websocket server.";
+        this.writeLog(message)
+        console.log(message)
+
          this.isConnected = true;
          this.status = "Connected";
        });
 
        this.ros.on("error", (error) => {
-         console.log(error);
+         this.writeLog(error)
+         console.log(error)
        });
 
        this.ros.on("close", () => {
-        console.log("Connection to websocket server closed.");
+        const message = "Disconnected from websocket server.";
+        this.writeLog(message)
+        console.log(message)
+
          this.isConnected = false;
          this.status = "Disconnected";
        });
@@ -127,6 +139,13 @@ export default {
       // this.isConnected = false;
       // this.status = "Disconnected";
     },
+
+    writeLog(message) {
+      let date = new Date()
+      let logMessage = `[${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}] ${message}`
+      this.logs.unshift(logMessage)
+
+    }
   },
 
   computed: {
