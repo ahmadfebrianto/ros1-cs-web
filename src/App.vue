@@ -82,7 +82,8 @@
 </template>
 
 <script>
-// import ROSLIB from "roslib";
+
+import ROSLIB from "roslib";
 
 export default {
   data() {
@@ -97,34 +98,34 @@ export default {
 
   methods: {
     connect() {
-      // this.ros = new ROSLIB.Ros({
-      //   url: this.url,
-      // });
+      this.ros = new ROSLIB.Ros({
+         url: this.url,
+       });
 
-      // this.ros.on("connection", () => {
-      //   console.log("Connected to websocket server.");
-      //   this.isConnected = true;
-      //   this.status = "Connected";
-      // });
+      this.ros.on("connection", () => {
+         console.log("Connected to websocket server.");
+         this.isConnected = true;
+         this.status = "Connected";
+       });
 
-      // this.ros.on("error", (error) => {
-      //   console.log(error);
-      // });
+       this.ros.on("error", (error) => {
+         console.log(error);
+       });
 
-      // this.ros.on("close", () => {
-      //   console.log("Connection to websocket server closed.");
-      //   this.isConnected = false;
-      //   this.status = "Disconnected";
-      // });
+       this.ros.on("close", () => {
+        console.log("Connection to websocket server closed.");
+         this.isConnected = false;
+         this.status = "Disconnected";
+       });
 
-      this.isConnected = true;
-      this.status = "Connected";
+      // this.isConnected = true;
+      // this.status = "Connected";
     },
 
     disconnect() {
-      // this.ros.close();
-      this.isConnected = false;
-      this.status = "Disconnected";
+      this.ros.close();
+      // this.isConnected = false;
+      // this.status = "Disconnected";
     },
   },
 
