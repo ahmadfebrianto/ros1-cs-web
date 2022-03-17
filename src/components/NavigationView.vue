@@ -6,37 +6,201 @@
       </div>
       <div class="card-body" style="height: 260px">
         <div class="buttons">
-          <button class="button up" value="up">
+          <button class="button up" value="up" @click="goForward">
             <span class="arrow-up arrow"></span>
           </button>
-          <button class="button down" value="down">
+          <button class="button down" value="down" @click="goBackward">
             <span class="arrow-down arrow"></span>
           </button>
-          <button class="button right" value="right">
+          <button class="button right" value="right" @click="goRight">
             <span class="arrow-right arrow"></span>
           </button>
-          <button class="button left" value="left">
+          <button class="button left" value="left" @click="goLeft">
             <span class="arrow-left arrow"></span>
           </button>
         </div>
-        <button class="reset">Start</button>
+        <button class="reset" @click="connect">Start</button>
+        <button class="reset" @click="stop">Stop</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import ROSLIB from "roslib";
+
 export default {
   name: "NavigationView",
+
   data() {
     return {
-      logs: [],
+      host: "192.168.101.94",
+      port: "9900",
+      isConnected: false,
+      status: "Disconnected",
+      ros: null,
     };
   },
 
   methods: {
-    addLog(log) {
-      this.logs.push(log);
+    connect() {
+      if (this.ros === null) {
+        this.ros = new ROSLIB.Ros({
+          url: this.url,
+        });
+      }
+
+      this.ros.on("connection", () => {
+        const message = "Connected to websocket server.";
+        this.isConnected = true;
+        this.status = "Connected";
+
+        console.log(message);
+      });
+
+      this.ros.on("error", () => {
+        const message = "Error connecting to websocket server.";
+        console.log(message);
+      });
+
+      this.ros.on("close", () => {
+        const message = "Disconnected from websocket server.";
+        console.log(message);
+
+        this.isConnected = false;
+        this.status = "Disconnected";
+        this.ros = null;
+      });
+    },
+
+    disconnect() {
+      this.ros.close();
+    },
+
+    goForward() {
+      const move = new ROSLIB.Topic({
+        ros: this.ros,
+        name: "/cmd_vel",
+        messageType: "geometry_msgs/Twist",
+      });
+
+      const twist = new ROSLIB.Message({
+        linear: {
+          x: 0.1,
+          y: 0,
+          z: 0,
+        },
+        angular: {
+          x: 0,
+          y: 0,
+          z: 0,
+        },
+      });
+
+      move.publish(twist);
+      console.log("Moving forward");
+    },
+
+    goBackward() {
+      const move = new ROSLIB.Topic({
+        ros: this.ros,
+        name: "/cmd_vel",
+        messageType: "geometry_msgs/Twist",
+      });
+
+      const twist = new ROSLIB.Message({
+        linear: {
+          x: -0.1,
+          y: 0,
+          z: 0,
+        },
+        angular: {
+          x: 0,
+          y: 0,
+          z: 0,
+        },
+      });
+
+      move.publish(twist);
+      console.log("Moving backward");
+    },
+
+    goRight() {
+      const topic = new ROSLIB.Topic({
+        ros: this.ros,
+        name: "/cmd_vel",
+        messageType: "geometry_msgs/Twist",
+      });
+
+      const twist = new ROSLIB.Message({
+        linear: {
+          x: 0,
+          y: 0,
+          z: 0,
+        },
+        angular: {
+          x: 0,
+          y: 0,
+          z: -0.3,
+        },
+      });
+
+      topic.publish(twist);
+      console.log("Moving right");
+    },
+
+    goLeft() {
+      const topic = new ROSLIB.Topic({
+        ros: this.ros,
+        name: "/cmd_vel",
+        messageType: "geometry_msgs/Twist",
+      });
+
+      const twist = new ROSLIB.Message({
+        linear: {
+          x: 0,
+          y: 0,
+          z: 0,
+        },
+        angular: {
+          x: 0,
+          y: 0,
+          z: 0.3,
+        },
+      });
+
+      topic.publish(twist);
+      console.log("Moving left");
+    },
+
+    stop() {
+      const topic = new ROSLIB.Topic({
+        ros: this.ros,
+        name: "/cmd_vel",
+        messageType: "geometry_msgs/Twist",
+      });
+
+      const twist = new ROSLIB.Message({
+        linear: {
+          x: 0,
+          y: 0,
+          z: 0,
+        },
+        angular: {
+          x: 0,
+          y: 0,
+          z: 0,
+        },
+      });
+
+      topic.publish(twist);
+      console.log("Stopping");
+    },
+  },
+
+  computed: {
+    url() {
+      return `ws://${this.host}:${this.port}`;
     },
   },
 };

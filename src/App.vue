@@ -7,13 +7,13 @@
     <div class="card-body">
       <div class="row">
         <!-- Connection View -->
-        <connection-view v-model="logs"/>
+        <!-- <connection-view v-model="logs" /> -->
 
         <!-- Navigation View -->
         <navigation-view />
 
         <!-- Log View -->
-        <log-view v-model="logs" />
+        <!-- <log-view v-model="logs" /> -->
       </div>
     </div>
   </div>
@@ -21,8 +21,8 @@
 
 
 <script>
-import ConnectionView from "./components/ConnectionView.vue";
-import LogView from "./components/LogView.vue";
+// import ConnectionView from "./components/ConnectionView.vue";
+// import LogView from "./components/LogView.vue";
 import NavigationView from "./components/NavigationView.vue";
 
 export default {
@@ -33,8 +33,8 @@ export default {
   },
 
   components: {
-    ConnectionView,
-    LogView,
+    // ConnectionView,
+    // LogView,
     NavigationView,
   },
 };

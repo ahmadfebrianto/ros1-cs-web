@@ -80,6 +80,8 @@ export default {
         this.writeLog(message);
         this.isConnected = true;
         this.status = "Connected";
+
+        this.$emit("update:ros", this.ros);
       });
 
       this.ros.on("error", () => {
@@ -93,6 +95,8 @@ export default {
 
         this.isConnected = false;
         this.status = "Disconnected";
+        this.ros = null;
+        this.$emit("update:ros", this.ros);
       });
     },
 
