@@ -1,4 +1,4 @@
-# ros-ui
+# vue3-sidebar
 
 ## Project setup
 ```

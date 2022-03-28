@@ -1,44 +1,39 @@
+<script>
+import Sidebar from '@/components/sidebar/Sidebar'
+import { sidebarWidth } from '@/components/sidebar/state'
+export default {
+  components: { Sidebar },
+  setup() {
+    return { sidebarWidth }
+  }
+}
+</script>
 <template>
-  <div class="card" style="margin-bottom: 100px">
-    <div class="card-header">
-      <h3>ROS UI</h3>
-    </div>
-
-    <div class="card-body">
-      <div class="row">
-        <!-- Connection View -->
-        <!-- <connection-view v-model="logs" /> -->
-
-        <!-- Navigation View -->
-        <navigation-view />
-
-        <!-- Log View -->
-        <!-- <log-view v-model="logs" /> -->
-      </div>
-    </div>
+  <Sidebar />
+  <div :style="{ 'margin-left': sidebarWidth }">
+    <router-view />
   </div>
 </template>
 
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
 
-<script>
-// import ConnectionView from "./components/ConnectionView.vue";
-// import LogView from "./components/LogView.vue";
-import NavigationView from "./components/NavigationView.vue";
+#nav {
+  padding: 30px;
+}
 
-export default {
-  data() {
-    return {
-      logs: [],
-    };
-  },
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
 
-  components: {
-    // ConnectionView,
-    // LogView,
-    NavigationView,
-  },
-};
-</script>
-
-
-
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style>
