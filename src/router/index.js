@@ -8,9 +8,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/controll',
-    name: 'Controll',
-    component: () => import('../views/Controll.vue')
+    path: '/control',
+    name: 'Control',
+    component: () => import('../views/Control.vue')
   },
   {
     path: '/settings',
@@ -18,9 +18,9 @@ const routes = [
     component: () => import('../views/Settings.vue')
   },
   {
-    path: '/documentations',
-    name: 'Documentations',
-    component: () => import('../views/Documentations.vue')
+    path: '/documentation',
+    name: 'Documentation',
+    component: () => import('../views/Documentation.vue')
   },
   {
     path: '/about',

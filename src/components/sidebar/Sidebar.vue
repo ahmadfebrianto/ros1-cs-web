@@ -15,17 +15,16 @@ export default {
   <div class="sidebar" :style="{ width: sidebarWidth }">
     <h1>
       <span v-if="collapsed">
-        <div>V</div>
-        <div>S</div>
+        <div class="fas fa-robot"></div>
       </span>
-      <span v-else>Vue Sidebar</span>
+      <span v-else>AGV</span>
     </h1>
 
-    <SidebarLink to="/" icon="fas fa-home">AGV Home</SidebarLink>
-    <SidebarLink to="/controll" icon="fas fa-columns">AGV Controll</SidebarLink>
-    <SidebarLink to="/settings" icon="fas fa-chart-bar">AGV Settings</SidebarLink>
-    <SidebarLink to="/documentations" icon="fas fa-users">Documentations</SidebarLink>
-    <SidebarLink to="/about" icon="fas fa-image">About</SidebarLink>
+    <SidebarLink to="/" icon="fas fa-home">Home</SidebarLink>
+    <SidebarLink to="/control" icon="fas fa-gamepad">Control</SidebarLink>
+    <SidebarLink to="/settings" icon="fas fa-wrench">Settings</SidebarLink>
+    <SidebarLink to="/documentation" icon="fas fa-book-open">Documentation</SidebarLink>
+    <SidebarLink to="/about" icon="fas fa-info">About</SidebarLink>
 
     <span
       class="collapse-icon"
