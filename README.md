@@ -1,24 +1,4 @@
-# vue3-sidebar
+# AGV UI
 
-## Project setup
-```
-yarn install
-```
+This is the web interface for AGV project maintained by SLAM TEAM. This interface is used to monitor AGV position and move AGV to the desired location on the map.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
