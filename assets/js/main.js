@@ -7,7 +7,7 @@ const app = Vue.createApp({
 
         <div id="content" class="col gx-0">
           <navbar />
-          <main class="">
+          <main class="container">
             <router-view />
           </main>
         </div>

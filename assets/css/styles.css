@@ -9,3 +9,8 @@
 #sidebar a {
   color: white;
 }
+
+.sidebar-logo {
+  line-height: 35px;
+  margin-bottom: 20px;
+}
