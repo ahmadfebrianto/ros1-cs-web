@@ -15,11 +15,7 @@ app.component('dashboard', {
       </div>
 
       <div class="col-sm px-2">
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h5>H</h5>
-          </div>
-        </div>
+        <joystick />
       </div>
     </div>
     `,
