@@ -291,6 +291,11 @@ hr {
     #sidebar.active {
         margin-left: 0;
     }
+    #sidebarCollapse {
+        color: white;
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+    }
     #sidebarCollapse span {
         display: none;
     }
