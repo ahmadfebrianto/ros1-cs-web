@@ -10,6 +10,17 @@
   color: white;
 }
 
+.menu-item {
+  margin-bottom: 5px;
+  width: 100%;
+  padding: 0 10px 0 10px;
+}
+
+.active-menu {
+  background-color: #6579AF;
+  border-radius: 5px;
+}
+
 .sidebar-logo {
   line-height: 35px;
   margin-bottom: 20px;

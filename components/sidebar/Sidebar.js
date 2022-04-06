@@ -7,10 +7,14 @@ app.component('sidebar', {
             <div class="w-100 text-center py-10 sidebar-logo">
             AGV
             </div>
-            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100"
                 id="menu">
 
-                <li class="nav-item" v-for="item in items">
+                <li
+                  @click="this.$store.commit('setActiveMenu', item.name )"
+                  :class="this.$store.state.activeMenu === item.name ? 'active-menu' : ''" 
+                  class="nav-item menu-item" 
+                  v-for="item in items">
                     <sidebar-item :item="item" />
                 </li>
             </ul>
