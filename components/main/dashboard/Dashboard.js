@@ -2,16 +2,11 @@ app.component('dashboard', {
   template: `
     <div class="row flex-nowrap mt-2 gx-0">
       <div class="col-sm px-2">
-      
-        <div class="card shadow-sm">
-          <div class="card-body">
-            <h5>H</h5>
-          </div>
-        </div>
-
+        <navigation-mode />
       </div>
 
-      <div class="col-md" id="nav">
+      <div class="col-md">
+        <dashboard-map />
       </div>
 
       <div class="col-sm px-2">
