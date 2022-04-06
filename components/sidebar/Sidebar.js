@@ -2,6 +2,7 @@ app.component('sidebar', {
   template:
     /*html*/
     `
+<<<<<<< HEAD
     <nav id="sidebar" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-blue-primary">
         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
             <div class="w-100 text-center py-10 sidebar-logo">
@@ -20,6 +21,19 @@ app.component('sidebar', {
             </ul>
             <hr>
         </div>
+=======
+    <nav id="sidebar">
+      <div class="sidebar-header">
+        <h4><b>Automatic Guided Vehicle</b></h4>
+      </div>
+
+      <ul class="list-unstyled components">
+        <li class="nav-item" v-for="item in items">
+          <sidebar-item :item="item" />
+        </li>
+      </ul>
+      
+>>>>>>> testing
     </nav>
       `,
 
