@@ -90,6 +90,23 @@ a:focus {
     width: 100%;
     align-items: stretch;
 }
+/* .sidebar {
+    color: white;
+    background-color: var(--sidebar-bg-color);
+  
+    float: left;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding: 0.5em;
+  
+    transition: 0.3s ease;
+  
+    display: flex;
+    flex-direction: column;
+  } */
 
 #sidebar {
     min-width: 250px;
@@ -97,6 +114,7 @@ a:focus {
     background: #24408E;
     color: #fff;
     transition: all 0.3s;
+    padding: 0px;
 }
 
 #sidebar.active {
@@ -154,6 +172,8 @@ a:focus {
     padding: 10px;
     font-size: 1.1em;
     display: block;
+    color: #ffffff;
+    text-decoration: none;
 }
 #sidebar ul li a i {
     padding-right: 10px;
@@ -165,6 +185,7 @@ a:focus {
     /* margin-left: 10px;
     margin-right: 10px; */
     border-radius: 5px;
+    padding-left: 20px;
 }
 
 #sidebar ul li.active>a,
