@@ -10,7 +10,9 @@ app.component('dashboard', {
       </div>
 
       <div class="col-sm px-2">
+        <Transition>
         <joystick v-if="this.$store.state.navigationMode === 'joystick'"/>
+        </Transition>
       </div>
     </div>
     `,
