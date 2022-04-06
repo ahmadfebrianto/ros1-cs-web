@@ -10,9 +10,11 @@ app.component('dashboard', {
       </div>
 
       <div class="col-sm px-2">
-        <Transition>
-        <joystick v-if="this.$store.state.navigationMode === 'Joystick'"/>
+        <Transition mode="out-in">
+          <joystick v-if="this.$store.state.navigationMode === 'Joystick'"/>
+          <interactive v-else/>
         </Transition>
+        
       </div>
     </div>
     `,
