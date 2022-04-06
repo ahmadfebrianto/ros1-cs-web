@@ -3,34 +3,42 @@ app.component('navigation-mode', {
     <div class="card shadow-sm">
         <div class="card-body pt-2">
         <small class="text-muted">Mode</small>
-        <div class="form-check">
-            <input 
-                @click="this.$store.commit('setNavigationMode', 'interactive')"
-                class="form-check-input" 
-                type="radio" 
-                name="navigation-mode" 
-                id="mode-interactive" 
-                :class="{ checked : this.$store.state.navigationMode === 'interactive' }">
-            <label class="form-check-label" for="mode-interactive">
-            Interactive
-            </label>
+        <div class="form-check" v-for="navigationMode in navigationModes">
+            <navigation-mode-item :navigationMode="navigationMode" />
         </div>
-        <div class="form-check">
-            <input 
-                @click="this.$store.commit('setNavigationMode', 'joystick')"
-                class="form-check-input" 
-                type="radio" 
-                name="navigation-mode" 
-                id="mode-joystick"
-                :class="{ checked : this.$store.state.navigationMode === 'joystick' }">
-            <label class="form-check-label" for="mode-joystick">
-            Joystick
-            </label>
-        </div>
-        </div>
-
-        <p>{{ this.$store.state.navigationMode }}</p>
     </div>
     
       `,
+
+  data() {
+    return {
+      navigationModes: [
+        {
+          id: 'mode-interactive',
+          name: 'Interactive',
+        },
+        {
+          id: 'mode-joystick',
+          name: 'Joystick',
+        },
+      ],
+    };
+  },
+});
+
+app.component('navigation-mode-item', {
+  template: `
+    <input 
+        @click="this.$store.commit('setNavigationMode', navigationMode.name)"
+        class="form-check-input" 
+        type="radio" 
+        name="navigation-mode" 
+        :id="navigationMode.id"
+        :checked="this.$store.state.navigationMode === navigationMode.name">
+
+    <label class="form-check-label" :for="navigationMode.id">
+        {{ navigationMode.name}}
+    </label>
+  `,
+  props: ['navigationMode'],
 });
