@@ -11,7 +11,7 @@ app.component('dashboard', {
 
       <div class="col-sm px-2">
         <Transition>
-        <joystick v-if="this.$store.state.navigationMode === 'joystick'"/>
+        <joystick v-if="this.$store.state.navigationMode === 'Joystick'"/>
         </Transition>
       </div>
     </div>

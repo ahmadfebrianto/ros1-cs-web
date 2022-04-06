@@ -2,8 +2,8 @@ const store = Vuex.createStore({
   state: {
     status: 'Disconnected',
     timestamp: '',
-    navigationMode: '', // interactive, joystick
-    activeMenu: '', // dashboard, control, settings, documentation, about
+    navigationMode: '',
+    activeMenu: '', 
   },
   mutations: {
     setStatus(state, status) {

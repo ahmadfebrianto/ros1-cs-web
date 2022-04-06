@@ -30,9 +30,10 @@ const app = Vue.createApp({
   mounted() {
     if (localStorage.getItem('state') !== null) {
       this.$store.replaceState(JSON.parse(localStorage.getItem('state')));
+      localStorage.clear()
     } else {
       this.$store.commit('setActiveMenu', 'Dashboard');
-      this.$store.commit('setNavigationMode', 'interactive');
+      this.$store.commit('setNavigationMode', 'Interactive');
     }
   },
 
