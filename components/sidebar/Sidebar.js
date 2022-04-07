@@ -9,7 +9,6 @@ app.component('sidebar', {
         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white">
             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100"
                 id="menu">
-
                 <li
                   @click="this.$store.commit('setActiveMenu', item.name )"
                   :class="this.$store.state.activeMenu === item.name ? 'active-menu' : ''" 

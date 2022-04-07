@@ -11,7 +11,7 @@ app.component('dashboard', {
 
       <div class="col-sm px-2">
         <Transition mode="out-in">
-          <joystick v-if="this.$store.state.navigationMode === 'Joystick'"/>
+          <joystick v-if="this.$store.state.navigationMode === 'Joystick'" :ros="ros" />
           <interactive v-else/>
         </Transition>
         
@@ -20,27 +20,31 @@ app.component('dashboard', {
     `,
 
   data() {
-    return {};
+    return {
+      ros: null,
+    };
   },
 
   methods: {
     init() {
       // Connect to ROS.
-      var ros = new ROSLIB.Ros({
-        url: 'ws://localhost:9090',
-      });
+      if (this.ros === null) {
+        this.ros = new ROSLIB.Ros({
+          url: 'ws://localhost:9090',
+        });
+      }
 
-      ros.on('connection', () => {
+      this.ros.on('connection', () => {
         this.$store.commit('setStatus', 'Connected');
         console.log('Connected to websocket server.');
       });
 
-      ros.on('close', () => {
+      this.ros.on('close', () => {
         this.$store.commit('setStatus', 'Disconnected');
         console.log('Connection to websocket server closed.');
       });
 
-      ros.on('error', (error) => {
+      this.ros.on('error', (error) => {
         console.log('Error connecting to websocket server: ', error.message);
       });
 
@@ -53,7 +57,7 @@ app.component('dashboard', {
 
       // Setup the nav client.
       var nav = NAV2D.OccupancyGridClientNav({
-        ros: ros,
+        ros: this.ros,
         rootObject: viewer.scene,
         viewer: viewer,
         serverName: '/move_base',
