@@ -3,6 +3,7 @@ app.component('dashboard', {
     <div class="row flex-nowrap mt-2 gx-0">
       <div class="col-sm" style="margin:0 10px 0 0">
         <navigation-mode />
+        <speed />
       </div>
 
       <div class="col-md">

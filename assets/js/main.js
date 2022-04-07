@@ -7,7 +7,6 @@ const app = Vue.createApp({
     
     <div class="row flex-nowrap">
       <sidebar />
-
       <div id="content" class="col gx-0">
         <navbar />
         <main class="">
@@ -29,10 +28,7 @@ const app = Vue.createApp({
     if (localStorage.getItem('state') !== null) {
       this.$store.replaceState(JSON.parse(localStorage.getItem('state')));
       localStorage.clear()
-    } else {
-      this.$store.commit('setActiveMenu', 'Dashboard');
-      this.$store.commit('setNavigationMode', 'Interactive');
-    }
+    } 
   },
 
   beforeDestroy() {

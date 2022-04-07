@@ -2,8 +2,9 @@ const store = Vuex.createStore({
   state: {
     status: 'Disconnected',
     timestamp: '',
-    navigationMode: '',
-    activeMenu: '', 
+    navigationMode: 'Interactive',
+    activeMenu: 'Dashboard',
+    robotSpeed: 0.1,
   },
   mutations: {
     setStatus(state, status) {
@@ -17,6 +18,9 @@ const store = Vuex.createStore({
     },
     setActiveMenu(state, activeMenu) {
       state.activeMenu = activeMenu;
+    },
+    setRobotSpeed(state, robotSpeed) {
+      state.robotSpeed = robotSpeed;
     },
   },
 });

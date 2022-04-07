@@ -1,6 +1,6 @@
 app.component('navigation-mode', {
   template: `
-    <div class="card shadow-sm">
+    <div class="card shadow-sm mb-2">
         <div class="card-body pt-2">
           <small class="text-muted">Mode</small>
           <div class="form-check" v-for="navigationMode in navigationModes">

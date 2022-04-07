@@ -58,7 +58,7 @@ app.component('joystick', {
 
       const twist = new ROSLIB.Message({
         linear: {
-          x: 0.1,
+          x: 0.3,
           y: 0,
           z: 0,
         },
@@ -82,7 +82,7 @@ app.component('joystick', {
 
       const twist = new ROSLIB.Message({
         linear: {
-          x: -0.1,
+          x: -0.3,
           y: 0,
           z: 0,
         },
