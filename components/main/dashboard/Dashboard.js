@@ -1,7 +1,7 @@
 app.component('dashboard', {
   template: `
     <div class="row flex-nowrap mt-2 gx-0">
-      <div class="col-sm px-2">
+      <div class="col-sm" style="margin:0 10px 0 0">
         <navigation-mode />
       </div>
 
@@ -9,7 +9,7 @@ app.component('dashboard', {
         <dashboard-map />
       </div>
 
-      <div class="col-sm px-2">
+      <div class="col-sm" style="margin:0 0 0 10px">
         <Transition mode="out-in">
           <joystick v-if="this.$store.state.navigationMode === 'Joystick'" :ros="ros" />
           <interactive v-else/>
