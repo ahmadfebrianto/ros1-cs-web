@@ -1,16 +1,16 @@
 app.component('dashboard', {
   template: `
     <div class="row flex-nowrap mt-2 gx-0">
-      <div class="col-sm" style="margin:0 10px 0 0">
+      <div id="dashboard-left" class="col-sm">
         <navigation-mode />
         <speed />
       </div>
 
-      <div class="col-md">
+      <div id="dashboard-center" class="col-md">
         <dashboard-map />
       </div>
 
-      <div class="col-sm" style="margin:0 0 0 10px">
+      <div id="dashboard-right" class="col-sm">
         <Transition mode="out-in">
           <joystick v-if="this.$store.state.navigationMode === 'Joystick'" :ros="ros" />
           <interactive v-else/>

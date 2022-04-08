@@ -1,7 +1,3 @@
-window.onbeforeunload = () => {
-  console.log('unloading');
-};
-
 const app = Vue.createApp({
   template: /*html*/ `
     
@@ -41,3 +37,6 @@ const app = Vue.createApp({
     },
   },
 });
+
+
+const emitter = mitt();
