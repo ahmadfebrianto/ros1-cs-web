@@ -48,6 +48,9 @@ app.component('joystick', {
   props: ['ros'],
 
   methods: {
+    test() {
+      console.log('test');
+    },
 
     goForward() {
       const move = new ROSLIB.Topic({
@@ -58,7 +61,7 @@ app.component('joystick', {
 
       const twist = new ROSLIB.Message({
         linear: {
-          x: 0.3,
+          x: this.$store.state.robotSpeed,
           y: 0,
           z: 0,
         },
@@ -71,6 +74,7 @@ app.component('joystick', {
 
       move.publish(twist);
       console.log('Moving forward');
+      this.$store.commit('setRobotDirection', 'forward');
     },
 
     goBackward() {
@@ -82,7 +86,7 @@ app.component('joystick', {
 
       const twist = new ROSLIB.Message({
         linear: {
-          x: -0.3,
+          x: -this.$store.state.robotSpeed,
           y: 0,
           z: 0,
         },
@@ -95,6 +99,7 @@ app.component('joystick', {
 
       move.publish(twist);
       console.log('Moving backward');
+      this.$store.commit('setRobotDirection', 'backward');
     },
 
     turnRight() {
@@ -113,12 +118,13 @@ app.component('joystick', {
         angular: {
           x: 0,
           y: 0,
-          z: -0.3,
+          z: -this.$store.state.robotSpeed,
         },
       });
 
       topic.publish(twist);
       console.log('Moving right');
+      this.$store.commit('setRobotDirection', 'right');
     },
 
     turnLeft() {
@@ -137,12 +143,13 @@ app.component('joystick', {
         angular: {
           x: 0,
           y: 0,
-          z: 0.3,
+          z: this.$store.state.robotSpeed,
         },
       });
 
       topic.publish(twist);
       console.log('Moving left');
+      this.$store.commit('setRobotDirection', 'left');
     },
 
     stop() {
@@ -167,6 +174,21 @@ app.component('joystick', {
 
       topic.publish(twist);
       console.log('Stopping');
+      this.$store.commit('setRobotDirection', 'stop');
     },
+  },
+
+  mounted() {
+    emitter.on('setRobotSpeed', (type, e) => {
+      if (this.$store.state.robotDirection === 'forward') {
+        this.goForward();
+      } else if (this.$store.state.robotDirection === 'backward') {
+        this.goBackward();
+      } else if (this.$store.state.robotDirection === 'right') {
+        this.turnRight();
+      } else if (this.$store.state.robotDirection === 'left') {
+        this.turnLeft();
+      }
+    });
   },
 });

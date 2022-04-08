@@ -1,10 +1,11 @@
 const store = Vuex.createStore({
   state: {
-    status: 'Disconnected',
+    status: 'Disconnected', // Connected, Disconnected
     timestamp: '',
-    navigationMode: 'Interactive',
-    activeMenu: 'Dashboard',
-    robotSpeed: 0.1,
+    navigationMode: 'Interactive', // Joystick or Interactive
+    activeMenu: 'Dashboard', // 'Dashboard', 'Joystick', 'Interactive'
+    robotSpeed: 0.1, // m/s
+    robotDirection: 'forward', // forward, backward, left, right
   },
   mutations: {
     setStatus(state, status) {
@@ -21,6 +22,9 @@ const store = Vuex.createStore({
     },
     setRobotSpeed(state, robotSpeed) {
       state.robotSpeed = robotSpeed;
+    },
+    setRobotDirection(state, robotDirection) {
+      state.robotDirection = robotDirection;
     },
   },
 });
