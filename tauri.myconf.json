@@ -4,8 +4,10 @@
       {
         "center": true,
         "maximized": true,
-        "resizable": false,
-        "fullscreen": false
+        "resizable": true,
+        "fullscreen": false,
+        "minWidth": 1280,
+        "minHeight": 720
       }
     ]
   }

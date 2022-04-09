@@ -1,8 +1,16 @@
 name: 'publish'
+
 on:
   push:
     branches:
       - release
+
+env:
+  APP_NAME: 'AGV SLAM'
+  WINDOW_NAME: 'Stechoq AGV by SLAM TEAM'
+  DIST_DIR: '../dist'
+  DEV_PATH: '../dist'
+  CONFIG_PATH: './tauri.myconf.json'
 
 jobs:
   publish-tauri:
@@ -14,32 +22,55 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v2
+
       - name: Create dist folder
         run: |
           mkdir -p ./dist
-          mv assets components README.md index.html ./dist
+          mv ./assets/ ./dist/
+          mv ./components ./dist/
+          mv ./index.html ./dist/
+          mv ./README.md ./dist/
+
       - name: Setup node
         uses: actions/setup-node@v1
         with:
           node-version: 16
+
       - name: Install Rust stable
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+
       - name: Install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-latest'
         run: |
           sudo apt-get update
           sudo apt-get install -y libgtk-3-dev webkit2gtk-4.0 libappindicator3-dev librsvg2-dev patchelf
+
       - name: Install tauri-cli
         run: |
           yarn add -D @tauri-apps/cli
-      - name: Initialize Tauri
+
+      - name: Initialize Tauri for Linux
+        if: matrix.platform == 'ubuntu-latest'
         run: |
-          yarn tauri init --app-name "AGV SLAM" --window-title "Stechoq AGV by SLAM TEAM" --dist-dir ../dist --dev-path ../dist
-      - name: Build Tauri
+          yarn tauri init --app-name "$APP_NAME" --window-title "$WINDOW_NAME" --dist-dir $DIST_DIR --dev-path $DEV_PATH
+
+      - name: Initialize Tauri for Windows
+        if: matrix.platform == 'windows-latest'
         run: |
-          yarn tauri build -c ./tauri.myconf.json
+          yarn tauri init --app-name "$env:APP_NAME" --window-title "$env:WINDOW_NAME" --dist-dir $env:DIST_DIR --dev-path $env:DEV_PATH
+
+      - name: Build Tauri for Linux
+        if: matrix.platform == 'ubuntu-latest'
+        run: |
+          yarn tauri build -c $CONFIG_PATH
+
+      - name: Build Tauri for Windows
+        if: matrix.platform == 'windows-latest'
+        run: |
+          yarn tauri build -c $env:CONFIG_PATH
+
       - name: Upload build bundles
         uses: actions/upload-artifact@v3
         with:
