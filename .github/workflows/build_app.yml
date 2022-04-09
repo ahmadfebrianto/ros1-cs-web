@@ -14,6 +14,10 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v2
+      - name: Create dist folder
+        run: |
+          mkdir -p ./dist
+          mv !(tauri.myconf.json|dist) ./dist
       - name: Setup node
         uses: actions/setup-node@v1
         with:
