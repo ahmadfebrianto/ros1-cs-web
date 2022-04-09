@@ -1,0 +1,12 @@
+{
+  "tauri": {
+    "windows": [
+      {
+        "center": true,
+        "maximized": true,
+        "resizable": false,
+        "fullscreen": false
+      }
+    ]
+  }
+}
