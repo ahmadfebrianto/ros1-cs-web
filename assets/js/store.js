@@ -6,7 +6,9 @@ const store = Vuex.createStore({
     activeMenu: 'Dashboard', // 'Dashboard', 'Joystick', 'Interactive'
     robotSpeed: 0.1, // m/s
     robotDirection: 'forward', // forward, backward, left, right
+    sidebarCollapsed: false,
   },
+
   mutations: {
     setStatus(state, status) {
       state.status = status;
@@ -26,6 +28,9 @@ const store = Vuex.createStore({
     setRobotDirection(state, robotDirection) {
       state.robotDirection = robotDirection;
     },
+    setSidebarCollapsed(state, sidebarCollapsed) {
+      state.sidebarCollapsed = sidebarCollapsed;
+    }
   },
 });
 

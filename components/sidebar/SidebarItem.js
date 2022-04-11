@@ -3,11 +3,14 @@ app.component('sidebarItem', {
     /*html*/
     `
     <router-link :to="item.route" class="">
-      <img :src="item.svg" :alt="item.name" />
-      {{ item.name }}
+      <img class="sidebar-item-icon" :src="item.svg" :alt="item.name" />
+      <transition name="fade">
+        <span class="sidebar-item-name" v-if="!this.$store.state.sidebarCollapsed">
+          {{ item.name }}
+        </span>
+      </transition>
     </router-link>
     `,
 
   props: ['item'],
 });
-

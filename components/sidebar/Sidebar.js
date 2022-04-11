@@ -2,9 +2,18 @@ app.component('sidebar', {
   template:
     /*html*/
     `
-    <nav id="sidebar" class="col-auto col-md-3 col-xl-2 bg-blue-primary min-vh-100">
+    <nav 
+      id="sidebar" 
+      class="col-auto bg-blue-primary min-vh-100"
+      :class="this.$store.state.sidebarCollapsed ? 'collapsed' : 'col-sm-2 col-md-2'"
+      >
         <div class="sidebar-header">
-           <img id="logo" src="assets/images/sidebar/logo.png"> 
+          <div v-if="this.$store.state.sidebarCollapsed">
+            S
+          </div>
+          <div v-else>
+            <img id="logo" src="assets/images/sidebar/logo.png"> 
+          </div>
         </div>
         <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white">
             <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100"
@@ -49,4 +58,3 @@ app.component('sidebar', {
     };
   },
 });
-
