@@ -7,7 +7,9 @@ app.component('sidebar', {
       class="col-auto bg-blue-primary min-vh-100"
       :class="this.$store.state.sidebarCollapsed ? 'collapsed' : 'col-sm-2 col-md-2'"
       >
-        <div class="sidebar-header">
+        <div 
+          class="sidebar-header"
+          :class="{ 'p-5' : !this.$store.state.sidebarCollapsed }">
           <h1 v-if="this.$store.state.sidebarCollapsed">S</h1>
           <img v-else id="sidebar-header-logo" src="assets/images/sidebar/logo.png"> 
         </div>

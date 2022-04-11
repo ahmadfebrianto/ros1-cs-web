@@ -76,8 +76,9 @@ a:focus {
 
 .sidebar-header {
   display: flex;
-  padding: 2rem;
+  /* padding: 2rem; */
   align-items: center;
+  justify-content: center;
   background: #d4d4d4;
   min-height: 20%;
   margin-bottom: 20px;
@@ -162,7 +163,6 @@ hr {
   margin-left: 10px;
 }
 
-
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
@@ -186,4 +186,3 @@ hr {
 .v-leave-to {
   opacity: 0;
 }
-
