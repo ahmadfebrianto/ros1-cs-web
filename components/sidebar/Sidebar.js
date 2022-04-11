@@ -8,20 +8,15 @@ app.component('sidebar', {
       :class="this.$store.state.sidebarCollapsed ? 'collapsed' : 'col-sm-2 col-md-2'"
       >
         <div class="sidebar-header">
-          <div v-if="this.$store.state.sidebarCollapsed">
-            S
-          </div>
-          <div v-else>
-            <img id="logo" src="assets/images/sidebar/logo.png"> 
-          </div>
+          <h1 v-if="this.$store.state.sidebarCollapsed">S</h1>
+          <img v-else id="sidebar-header-logo" src="assets/images/sidebar/logo.png"> 
         </div>
-        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white">
-            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100"
-                id="menu">
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 text-white">
+            <ul class="nav flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100">
                 <li
                   @click="this.$store.commit('setActiveMenu', item.name )"
                   :class="this.$store.state.activeMenu === item.name ? 'active-menu' : ''" 
-                  class="nav-item menu-item w-100" 
+                  class="sidebar-menu-item w-100" 
                   v-for="item in items">
                     <sidebar-item :item="item" />
                 </li>
