@@ -28,6 +28,7 @@ jobs:
           mkdir -p ./dist
           mv ./assets/ ./dist/
           mv ./components ./dist/
+          mv ./views ./dist/
           mv ./index.html ./dist/
           mv ./README.md ./dist/
 

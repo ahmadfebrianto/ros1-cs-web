@@ -3,7 +3,7 @@
     "windows": [
       {
         "center": true,
-        "maximized": true,
+        "maximized": false,
         "resizable": true,
         "fullscreen": false,
         "minWidth": 1280,
