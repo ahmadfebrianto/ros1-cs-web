@@ -29,6 +29,8 @@ jobs:
           mv ./assets/ ./dist/
           mv ./components ./dist/
           mv ./views ./dist/
+          mv ./router ./dist/
+          mv ./store ./dist/
           mv ./index.html ./dist/
           mv ./README.md ./dist/
 
