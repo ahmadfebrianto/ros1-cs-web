@@ -2,21 +2,27 @@ app.component('sidebarItem', {
   template:
     /*html*/
     `
-    <router-link 
-      :to="item.route" 
-      :class="this.$store.state.sidebarCollapsed ? 'sidebar-menu-item-a' : ''">
-      <img 
-        :class="this.$store.state.sidebarCollapsed ? '' : 'sidebar-item-icon'" 
+    <router-link :to="item.route" class="sidebar-menu-link">
+      <img
+        class="inline"
+        :class="removeMarginRightIfCollapsed()"
         :src="item.svg" 
         :alt="item.name"
          />
-      <transition name="fade">
-        <span class="sidebar-item-name" v-if="!this.$store.state.sidebarCollapsed">
-          {{ item.name }}
-        </span>
-      </transition>
+      <span class="" v-if="!sidebarIsCollapsed()">
+        {{ item.name }}
+      </span>
+
     </router-link>
     `,
-
   props: ['item'],
+
+  methods: {
+    removeMarginRightIfCollapsed() {
+      return this.$store.state.sidebarCollapsed ? 'collapsed' : 'mr-2';
+    },
+    sidebarIsCollapsed() {
+      return this.$store.state.sidebarCollapsed;
+    }
+  },
 });

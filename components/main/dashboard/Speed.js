@@ -1,8 +1,8 @@
 app.component('speed', {
   template: `
-    <div class="card shadow-sm mb-2">
-        <div class="card-body pt-2">
-            <div class="row">
+    <div class="card">
+        <div class="">
+            <div class="">
                 <small class="text-muted">Speed</small>
                 <small class="text-danger">{{ speed }}</small>
             </div>
@@ -10,7 +10,7 @@ app.component('speed', {
                   @change="setRobotSpeed" 
                   v-model="speed"
                   type="range" 
-                  class="form-range" 
+                  class="" 
                   min="1" max="5" 
                   step=1 
                   id="customRange2">
@@ -38,21 +38,3 @@ app.component('speed', {
     this.speed = this.$store.state.robotSpeed * 10;
   },
 });
-
-
-{/* <div class="card shadow-sm mb-2">
-        <div class="card-body pt-2">
-            <div class="row">
-                <small class="text-muted">Speed</small>
-                <small class="text-danger">{{ speed }}</small>
-            </div>
-            <input 
-                  @change="setRobotSpeed" 
-                  v-model="speed"
-                  type="range" 
-                  class="form-range" 
-                  min="1" max="5" 
-                  step=1 
-                  id="customRange2">
-        </div>
-    </div> */}

@@ -1,16 +1,16 @@
 app.component('dashboard', {
   template: `
-    <div class="row flex-nowrap mt-2 gx-0">
-      <div id="dashboard-left" class="col-sm">
+    <div class="mt-5 grid grid-cols-4 grid-flow-col gap-5">
+      <div id="" class="">
         <navigation-mode />
         <speed />
       </div>
 
-      <div id="dashboard-center" class="col-md">
+      <div id="" class="col-span-2">
         <dashboard-map />
       </div>
 
-      <div id="dashboard-right" class="col-sm">
+      <div id="" class="">
         <Transition mode="out-in">
           <joystick v-if="this.$store.state.navigationMode === 'Joystick'" :ros="ros" />
           <interactive v-else/>
@@ -51,7 +51,7 @@ app.component('dashboard', {
 
       // Create the main viewer.
       var viewer = new ROS2D.Viewer({
-        divID: 'nav',
+        divID: 'map',
         width: 500,
         height: 500,
       });

@@ -2,31 +2,61 @@ app.component('sidebar', {
   template:
     /*html*/
     `
-    <nav 
+    <aside 
       id="sidebar" 
-      class="col-auto bg-blue-primary min-vh-100"
-      :class="this.$store.state.sidebarCollapsed ? 'collapsed' : 'col-sm-2 col-md-2'"
-      >
+      class=""
+      :class="this.$store.state.sidebarCollapsed ? 'collapsed' : ''"
+    >
         <div 
-          class="sidebar-header"
-          :class="{ 'p-5' : !this.$store.state.sidebarCollapsed }">
-          <h1 v-if="this.$store.state.sidebarCollapsed">S</h1>
-          <img v-else id="sidebar-header-logo" src="assets/images/sidebar/logo.png"> 
+          id="sidebar-header"
+          class="bg-gray-300 h-32 grid content-center"
+        >
+          <h1 v-if="isSidebarCollapsed()">S</h1>
+          <img v-else id="sidebar-logo" src="assets/images/sidebar/logo.png"> 
         </div>
-        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 text-white">
-            <ul class="nav flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100">
-                <li
-                  @click="this.$store.commit('setActiveMenu', item.name )"
-                  :class="this.$store.state.activeMenu === item.name ? 'active-menu' : ''" 
-                  class="sidebar-menu-item w-100" 
-                  v-for="item in items">
-                    <sidebar-item :item="item" />
-                </li>
-            </ul>
-            <hr>
-        </div>
-    </nav>
+        <ul class="mt-10 px-2">
+          <li 
+            class="sidebar-menu" 
+            :class="setActiveMenuColor(item.name)"
+            @click="setActiveMenu(item.name)"
+            v-for="item in items"
+          >
+            <sidebar-item :item="item"/>
+          </li>
+        </ul>
+        
+    </aside>
       `,
+
+  methods: {
+    isSidebarCollapsed() {
+      return this.$store.state.sidebarCollapsed;
+    },
+
+    setActiveMenu(route) {
+      this.$store.commit('setActiveMenu', route);
+    },
+
+    setActiveMenuColor(route) {
+      if (this.$store.state.activeMenu === route) {
+        return 'sidebar-menu-active';
+      }
+    },
+
+    getSidebarWidth() {
+      return this.$store.state.sidebarWidth;
+    },
+
+    updateSidebarWidth() {
+      if (this.$store.state.refreshed) {
+        this.$store.commit('setRefreshed', false);
+        this.$store.commit('setSidebarWidth', this.$store.state.sidebarWidth);
+      } else {
+        this.$store.commit('setSidebarWidth', this.$el.clientWidth);
+      }
+      emitter.emit('sidebarWidthUpdated');
+    },
+  },
 
   data() {
     return {
@@ -53,5 +83,11 @@ app.component('sidebar', {
         },
       ],
     };
+  },
+
+  mounted() {},
+
+  updated() {
+    this.updateSidebarWidth();
   },
 });

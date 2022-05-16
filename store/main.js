@@ -1,20 +1,18 @@
 const store = Vuex.createStore({
   state: {
     status: 'Disconnected', // Connected, Disconnected
-    timestamp: '',
     navigationMode: 'Interactive', // Joystick or Interactive
-    activeMenu: 'Dashboard', // 'Dashboard', 'Joystick', 'Interactive'
+    activeMenu: 'Dashboard', // 'Dashboard', 'Settings', 'Documentation', 'About'
     robotSpeed: 0.1, // m/s
     robotDirection: 'forward', // forward, backward, left, right
     sidebarCollapsed: false,
+    sidebarWidth: null,
+    refreshed: false,
   },
 
   mutations: {
     setStatus(state, status) {
       state.status = status;
-    },
-    setTimestamp(state, timestamp) {
-      state.timestamp = timestamp;
     },
     setNavigationMode(state, navigationMode) {
       state.navigationMode = navigationMode;
@@ -30,7 +28,13 @@ const store = Vuex.createStore({
     },
     setSidebarCollapsed(state, sidebarCollapsed) {
       state.sidebarCollapsed = sidebarCollapsed;
-    }
+    },
+    setSidebarWidth(state, sidebarWidth) {
+      state.sidebarWidth = sidebarWidth;
+    },
+    setRefreshed(state, refreshed) {
+      state.refreshed = refreshed;
+    },
   },
 });
 

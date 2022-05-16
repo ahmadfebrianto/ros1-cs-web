@@ -1,12 +1,9 @@
 app.component('dashboard-map', {
-    template:
+  template:
     /*HTML*/
-    `
-    <div class="card shadow-sm">
-        <div class="card-body p-2">
-            <div id="nav" style="justify-content:center; text-align:center;"></div>
-        </div>
-    </div>`
-    ,
-  });
-  
+    `    
+    <div class="card">
+        <div id="map"></div>
+    </div>`,
+
+});
