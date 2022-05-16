@@ -11,8 +11,8 @@ app.component('sidebar', {
           id="sidebar-header"
           class="bg-gray-300 h-32 grid content-center"
         >
-          <h1 v-if="isSidebarCollapsed()">S</h1>
-          <img v-else id="sidebar-logo" src="assets/images/sidebar/logo.png"> 
+          <img v-if="isSidebarCollapsed()" class="sidebar-logo" src="assets/images/sidebar/header/s.png">
+          <img v-else class="sidebar-logo" src="assets/images/sidebar/header/logo.png"> 
         </div>
         <ul class="mt-10 px-2">
           <li 
