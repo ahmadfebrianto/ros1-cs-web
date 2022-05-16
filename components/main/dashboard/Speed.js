@@ -1,8 +1,8 @@
 app.component('speed', {
   template: `
     <div class="card">
-      <div class="">
-        <small class="">Speed</small>
+      <div class="mb-1">
+        <small class="font-bold">Speed</small>
       </div>
       <div id="input-speed">
         <div class="grid grid-cols-5">

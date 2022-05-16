@@ -2,10 +2,10 @@ app.component('navigation-mode', {
   template: `
     <div class="card">
         <div class="">
-          <small class="">Mode</small>
-          <div class="" v-for="navigationMode in navigationModes">
-              <navigation-mode-item :navigationMode="navigationMode" />
-          </div>
+          <small class="font-bold">Mode</small>
+        </div>
+        <div class="" v-for="navigationMode in navigationModes">
+            <navigation-mode-item :navigationMode="navigationMode" />
         </div>
     </div>
     
@@ -31,13 +31,13 @@ app.component('navigation-mode-item', {
   template: `
     <input 
         @click="this.$store.commit('setNavigationMode', navigationMode.name)"
-        class="" 
+        class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" 
         type="radio" 
         name="navigation-mode" 
         :id="navigationMode.id"
         :checked="this.$store.state.navigationMode === navigationMode.name">
 
-    <label class="" :for="navigationMode.id">
+    <label class="form-check-label inline-block text-gray-800 text-sm hover:font-bold" :for="navigationMode.id">
         {{ navigationMode.name}}
     </label>
   `,
