@@ -11,11 +11,8 @@ app.component('dashboard', {
       </div>
 
       <div id="" class="">
-        <Transition mode="out-in">
-          <joystick v-if="this.$store.state.navigationMode === 'Joystick'" :ros="ros" />
-          <interactive v-else/>
-        </Transition>
-        
+        <joystick v-if="this.$store.state.navigationMode === 'Joystick'" :ros="ros" />
+        <interactive v-else/>
       </div>
     </div>
     `,

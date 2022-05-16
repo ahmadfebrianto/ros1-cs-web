@@ -187,7 +187,7 @@ app.component('joystick', {
   },
 
   mounted() {
-    emitter.on('setRobotSpeed', (type, e) => {
+    emitter.on('robotSpeedChanged', (type, e) => {
       if (this.$store.state.robotDirection === 'forward') {
         this.goForward();
       } else if (this.$store.state.robotDirection === 'backward') {
