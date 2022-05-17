@@ -8,8 +8,7 @@ app.component('sidebar', {
       :class="this.$store.state.sidebarCollapsed ? 'collapsed' : ''"
     >
         <div 
-          id="sidebar-header"
-          class="bg-gray-300 h-32 grid content-center"
+          class="bg-gray-secondary h-32 grid content-center text-center"
         >
           <img v-if="isSidebarCollapsed()" class="sidebar-logo" src="assets/images/sidebar/header/s.png">
           <img v-else class="sidebar-logo" src="assets/images/sidebar/header/logo.png"> 

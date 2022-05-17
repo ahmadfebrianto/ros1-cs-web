@@ -6,6 +6,7 @@ const store = Vuex.createStore({
     robotSpeed: 0.1, // m/s
     robotDirection: 'forward', // forward, backward, left, right
     sidebarCollapsed: false,
+    sidebarHidden: false,
     sidebarWidth: null,
     refreshed: false,
   },
@@ -28,6 +29,9 @@ const store = Vuex.createStore({
     },
     setSidebarCollapsed(state, sidebarCollapsed) {
       state.sidebarCollapsed = sidebarCollapsed;
+    },
+    setSidebarHidden(state, sidebarHidden) {
+      state.sidebarHidden = sidebarHidden;
     },
     setSidebarWidth(state, sidebarWidth) {
       state.sidebarWidth = sidebarWidth;

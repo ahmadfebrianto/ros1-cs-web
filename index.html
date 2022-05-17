@@ -27,6 +27,20 @@
     <script src="assets/js/vue3/vuex.global.js"></script>
     <!-- Event Emitter -->
     <script src="assets/js/mitt/mitt.umd.js"></script>
+
+    <style type="text/tailwindcss">
+        #sidebar {
+            @apply bg-blue-primary max-w-1/5 h-full
+            sm:hidden
+            md:hidden
+            lg:block fixed top-0 left-0 bottom-0
+        }
+
+        .dashboard-wrapper {
+            @apply mt-5 grid grid-cols-4 grid-flow-col gap-5;
+
+        }
+    </style>
 </head>
 
 <body>

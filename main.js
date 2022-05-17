@@ -9,8 +9,6 @@ const app = Vue.createApp({
         </main>
       </div>
     </div>
- 
-
   `,
   data() {
     return {};
@@ -31,8 +29,12 @@ const app = Vue.createApp({
     },
 
     resizeHandler(event) {
-      console.log('resize');
       let newSidebarSize = this.$refs.sidebar.$el.clientWidth;
+      if (newSidebarSize === 0) {
+        this.$store.commit('setSidebarHidden', true);
+      } else {
+        this.$store.commit('setSidebarHidden', false);
+      }
       this.$store.commit('setSidebarWidth', newSidebarSize);
       this.updateSidebarAndContentMargin();
     },

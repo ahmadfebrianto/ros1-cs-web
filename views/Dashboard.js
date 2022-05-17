@@ -1,6 +1,6 @@
 app.component('dashboard', {
   template: `
-    <div class="mt-5 grid grid-cols-4 grid-flow-col gap-5">
+    <div class="dashboard-wrapper">
       <div id="" class="">
         <navigation-mode />
         <speed />
