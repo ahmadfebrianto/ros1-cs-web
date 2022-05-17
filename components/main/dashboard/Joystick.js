@@ -3,9 +3,10 @@ app.component('joystick', {
     <div id="joystick" class="card">
         <div class="grid grid-cols-3">
           <div 
-
             v-for="button in joystickButtons" 
-            :class="button.icon ? 'joystick-button' : ''">
+            :class="button.icon ? 'joystick-button' : ''"
+            @click="button.direction ? move(button.direction) : null"
+          >
             <img :src="button.icon" alt="">
           </div>
         </div>
@@ -21,153 +22,61 @@ app.component('joystick', {
         {
           name: 'top-left',
           icon: '',
+          direction: null,
         },
         {
           name: 'top-middle',
           icon: 'assets/images/joystick/caret-up.svg',
+          direction: 'forward',
         },
         {
           name: 'top-right',
           icon: '',
+          direction: null,
         },
         {
           name: 'middle-left',
           icon: 'assets/images/joystick/caret-left.svg',
+          direction: 'left',
         },
         {
           name: 'middle-middle',
           icon: 'assets/images/joystick/stop-fill.svg',
+          direction: 'stop',
         },
         {
           name: 'middle-right',
           icon: 'assets/images/joystick/caret-right.svg',
+          direction: 'right',
         },
         {
           name: 'bottom-left',
           icon: '',
+          direction: null,
         },
         {
           name: 'bottom-middle',
           icon: 'assets/images/joystick/caret-down.svg',
+          direction: 'backward',
         },
         {
           name: 'bottom-right',
           icon: '',
+          direction: null,
         },
-
-      ]
-    }
+      ],
+    };
   },
 
   methods: {
-    goForward() {
-      const move = new ROSLIB.Topic({
-        ros: this.ros,
-        name: '/cmd_vel',
-        messageType: 'geometry_msgs/Twist',
-      });
-
-      const twist = new ROSLIB.Message({
-        linear: {
-          x: this.$store.state.robotSpeed,
-          y: 0,
-          z: 0,
-        },
-        angular: {
-          x: 0,
-          y: 0,
-          z: 0,
-        },
-      });
-
-      move.publish(twist);
-      console.log('Moving forward');
-      this.$store.commit('setRobotDirection', 'forward');
-    },
-
-    goBackward() {
-      const move = new ROSLIB.Topic({
-        ros: this.ros,
-        name: '/cmd_vel',
-        messageType: 'geometry_msgs/Twist',
-      });
-
-      const twist = new ROSLIB.Message({
-        linear: {
-          x: -this.$store.state.robotSpeed,
-          y: 0,
-          z: 0,
-        },
-        angular: {
-          x: 0,
-          y: 0,
-          z: 0,
-        },
-      });
-
-      move.publish(twist);
-      console.log('Moving backward');
-      this.$store.commit('setRobotDirection', 'backward');
-    },
-
-    turnRight() {
+    move(direction) {
       const topic = new ROSLIB.Topic({
         ros: this.ros,
         name: '/cmd_vel',
         messageType: 'geometry_msgs/Twist',
       });
 
-      const twist = new ROSLIB.Message({
-        linear: {
-          x: 0,
-          y: 0,
-          z: 0,
-        },
-        angular: {
-          x: 0,
-          y: 0,
-          z: -this.$store.state.robotSpeed,
-        },
-      });
-
-      topic.publish(twist);
-      console.log('Moving right');
-      this.$store.commit('setRobotDirection', 'right');
-    },
-
-    turnLeft() {
-      const topic = new ROSLIB.Topic({
-        ros: this.ros,
-        name: '/cmd_vel',
-        messageType: 'geometry_msgs/Twist',
-      });
-
-      const twist = new ROSLIB.Message({
-        linear: {
-          x: 0,
-          y: 0,
-          z: 0,
-        },
-        angular: {
-          x: 0,
-          y: 0,
-          z: this.$store.state.robotSpeed,
-        },
-      });
-
-      topic.publish(twist);
-      console.log('Moving left');
-      this.$store.commit('setRobotDirection', 'left');
-    },
-
-    stop() {
-      const topic = new ROSLIB.Topic({
-        ros: this.ros,
-        name: '/cmd_vel',
-        messageType: 'geometry_msgs/Twist',
-      });
-
-      const twist = new ROSLIB.Message({
+      let options = {
         linear: {
           x: 0,
           y: 0,
@@ -178,11 +87,28 @@ app.component('joystick', {
           y: 0,
           z: 0,
         },
-      });
+      };
 
+      const speed = this.$store.state.robotSpeed;
+
+      if (direction === 'forward') {
+        options.linear.x = speed;
+      } else if (direction === 'backward') {
+        options.linear.x = -speed;
+      } else if (direction === 'left') {
+        options.angular.z = speed;
+      } else if (direction === 'right') {
+        options.angular.z = -speed;
+      }
+
+      const twist = new ROSLIB.Message(options);
       topic.publish(twist);
-      console.log('Stopping');
-      this.$store.commit('setRobotDirection', 'stop');
+      if (direction !== 'stop') {
+        console.log(`Moving ${direction}`);
+      } else {
+        console.log(`Stopping`);
+      }
+      this.$store.commit('setRobotDirection', direction);
     },
   },
 
