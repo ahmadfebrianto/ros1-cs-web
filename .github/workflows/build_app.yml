@@ -32,6 +32,7 @@ jobs:
           mv ./router ./dist/
           mv ./store ./dist/
           mv ./index.html ./dist/
+          mv ./main.js ./dist/
           mv ./README.md ./dist/
 
       - name: Setup node
