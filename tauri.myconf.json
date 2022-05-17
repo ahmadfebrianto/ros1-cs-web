@@ -1,5 +1,9 @@
 {
   "tauri": {
+    "bundle": {
+      "identifier": "com.stechoq.slam.agv"
+    },
+
     "windows": [
       {
         "center": true,
