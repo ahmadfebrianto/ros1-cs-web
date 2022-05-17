@@ -23,7 +23,6 @@ body {
 }
 
 /*--------------------SIDEBAR--------------------*/
-
 #sidebar {
   background-color: var(--blue-primary);
   max-width: 20%;
@@ -65,12 +64,7 @@ body {
   pointer-events: none;
 }
 
-#content {
-  background-color: var(--white-secondary);
-  padding: 10px 20px;
-  margin-left: 20%;
-}
-
+/*--------------------NAVBAR--------------------*/
 .navbar {
   background-color: var(--white-primary);
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -85,6 +79,13 @@ body {
 .disconnected {
   background-color: var(--red-primary);
   border-radius: 15px;
+}
+
+/*--------------------CONTENT--------------------*/
+#content {
+  background-color: var(--white-secondary);
+  padding: 10px 20px;
+  margin-left: 20%;
 }
 
 .card {
@@ -110,6 +111,10 @@ body {
 #map {
   display: flex;
   justify-content: center;
+}
+
+#map canvas {
+  width: 100%;
 }
 
 #input-speed {
