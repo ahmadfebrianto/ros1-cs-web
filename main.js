@@ -17,7 +17,7 @@ const app = Vue.createApp({
   },
 
   methods: {
-    handler: function handler(event) {
+    refreshHandler(event) {
       this.$store.commit('setRefreshed', true);
       if (
         this.$refs.sidebar.$el.clientWidth !== this.$store.state.sidebarWidth
@@ -28,6 +28,13 @@ const app = Vue.createApp({
         );
       }
       localStorage.setItem('state', JSON.stringify(this.$store.state));
+    },
+
+    resizeHandler(event) {
+      console.log('resize');
+      let newSidebarSize = this.$refs.sidebar.$el.clientWidth;
+      this.$store.commit('setSidebarWidth', newSidebarSize);
+      this.updateSidebarAndContentMargin();
     },
 
     getSidebarWidth() {
@@ -48,11 +55,13 @@ const app = Vue.createApp({
   },
 
   created() {
-    window.addEventListener('beforeunload', this.handler);
+    window.addEventListener('beforeunload', this.refreshHandler);
+    window.addEventListener('resize', this.resizeHandler);
   },
 
   beforeDestroy() {
     window.removeEventListener('beforeunload', this.handler);
+    window.removeEventListener('resize', this.resizeHandler);
   },
 
   mounted() {

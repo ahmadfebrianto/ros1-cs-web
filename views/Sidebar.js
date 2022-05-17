@@ -88,6 +88,7 @@ app.component('sidebar', {
   mounted() {},
 
   updated() {
+    console.log('sidebar updated');
     this.updateSidebarWidth();
   },
 });
