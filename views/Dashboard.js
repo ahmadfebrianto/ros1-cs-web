@@ -27,11 +27,12 @@ app.component('dashboard', {
   },
 
   methods: {
-    connect(options) {
-      if (this.ros === null) {
-        this.ros = new ROSLIB.Ros(options);
-      }
-
+    connect() {
+      const connection = this.$store.state.connection;
+      const options = {
+        url: `ws://${connection.ip}:${connection.port}`,
+      };
+      this.ros = new ROSLIB.Ros(options);
       this.ros.on('connection', () => {
         this.$store.commit('setStatus', 'Connected');
         console.log('Connected to websocket server.');
@@ -61,6 +62,8 @@ app.component('dashboard', {
         viewer: viewer,
         serverName: '/move_base',
       });
+
+      emitter.emit('mapLoaded', viewer, nav);
     },
 
     disconnect() {
@@ -78,17 +81,26 @@ app.component('dashboard', {
   },
 
   mounted() {
+    if (this.$store.state.status === 'Connected') {
+      this.disconnect();
+      this.connect();
+    }
+
     emitter.on('connect', () => {
-      const connection = this.$store.state.connection;
-      const options = {
-        url: `ws://${connection.ip}:${connection.port}`,
-      };
-      this.connect(options);
+      this.connect();
     });
 
     emitter.on('disconnect', () => {
       this.disconnect();
       this.removeCanvas();
+    });
+
+    emitter.on('mapLoaded', () => {
+      const map = document.getElementById('map');
+      let canvasses = map.getElementsByTagName('canvas');
+      while (canvasses.length > 1) {
+        map.removeChild(canvasses[0]);
+      }
     });
   },
 });

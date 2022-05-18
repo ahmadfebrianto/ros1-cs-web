@@ -28,5 +28,13 @@ app.component('dashboard-map', {
     },
   },
 
-  mounted() {},
+  updated() {
+    if (this.isConnected()) {
+      const map = document.getElementById('map');
+      let canvasses = map.getElementsByTagName('canvas');
+      while (canvasses.length > 1) {
+        map.removeChild(canvasses[0]);
+      }
+    }
+  },
 });
