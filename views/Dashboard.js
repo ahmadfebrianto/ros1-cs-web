@@ -1,7 +1,8 @@
 app.component('dashboard', {
   template: `
-    <div class="dashboard-wrapper">
+    <div class="mt-3 grid grid-cols-4 grid-flow-col gap-5">
       <div id="" class="">
+        <connection />
         <navigation-mode />
         <speed />
       </div>
@@ -20,40 +21,36 @@ app.component('dashboard', {
   data() {
     return {
       ros: null,
+      viewer: null,
+      nav: null
     };
   },
 
   methods: {
-    init() {
+    connect(options) {
       // Connect to ROS.
       if (this.ros === null) {
-        this.ros = new ROSLIB.Ros({
-          url: 'ws://localhost:9090',
-        });
+        this.ros = new ROSLIB.Ros(options);
       }
-
       this.ros.on('connection', () => {
         this.$store.commit('setStatus', 'Connected');
         console.log('Connected to websocket server.');
+        // this.initNav(this.viewer);
       });
-
       this.ros.on('close', () => {
         this.$store.commit('setStatus', 'Disconnected');
         console.log('Connection to websocket server closed.');
       });
-
       this.ros.on('error', (error) => {
         console.log('Error connecting to websocket server: ', error.message);
       });
-
-      // Create the main viewer.
+      
       var viewer = new ROS2D.Viewer({
         divID: 'map',
         width: 500,
         height: 500,
       });
 
-      // Setup the nav client.
       var nav = NAV2D.OccupancyGridClientNav({
         ros: this.ros,
         rootObject: viewer.scene,
@@ -61,9 +58,27 @@ app.component('dashboard', {
         serverName: '/move_base',
       });
     },
+
+    disconnect() {
+      if (this.ros !== null) {
+        this.ros.close();
+        this.ros = null;
+      }
+      this.$store.commit('setStatus', 'Disconnected');
+    },
   },
 
   mounted() {
-    this.init();
+    emitter.on('connect', () => {
+      const connection = this.$store.state.connection;
+      const options = {
+        url: `ws://${connection.ip}:${connection.port}`,
+      };
+      this.connect(options);
+    });
+
+    emitter.on('disconnect', () => {
+      this.disconnect();
+    });
   },
 });

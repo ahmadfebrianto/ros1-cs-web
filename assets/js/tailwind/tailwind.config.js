@@ -17,6 +17,7 @@ tailwind.config = {
           primary: '#24408e',
           secondary: '#4a63a75d',
           tertiary: '#6579af',
+          slam: '#5587ad',
         },
         green: {
           primary: '#10b981',
@@ -27,6 +28,9 @@ tailwind.config = {
       },
       maxWidth: {
         '1/5': '20%',
+      },
+      height: {
+        500: '500px',
       },
     },
   },

@@ -4,7 +4,7 @@ app.component('sidebar', {
     `
     <aside 
       id="sidebar" 
-      class=""
+      class="bg-blue-primary max-w-1/5 h-full sm:hidden md:hidden lg:block fixed top-0 left-0 bottom-0"
       :class="this.$store.state.sidebarCollapsed ? 'collapsed' : ''"
     >
         <div 
@@ -87,7 +87,6 @@ app.component('sidebar', {
   mounted() {},
 
   updated() {
-    console.log('sidebar updated');
     this.updateSidebarWidth();
   },
 });

@@ -28,19 +28,6 @@
     <!-- Event Emitter -->
     <script src="assets/js/mitt/mitt.umd.js"></script>
 
-    <style type="text/tailwindcss">
-        #sidebar {
-            @apply bg-blue-primary max-w-1/5 h-full
-            sm:hidden
-            md:hidden
-            lg:block fixed top-0 left-0 bottom-0
-        }
-
-        .dashboard-wrapper {
-            @apply mt-5 grid grid-cols-4 grid-flow-col gap-5;
-
-        }
-    </style>
 </head>
 
 <body>
@@ -52,12 +39,13 @@
 
     <!-- Import Components -->
     <script src="components/sidebar/SidebarItem.js"></script>
-    <script src="components/main/dashboard/Joystick.js"></script>
+    <script src="components/main/Navbar.js"></script>
+    <script src="components/main/dashboard/Connection.js"></script>
     <script src="components/main/dashboard/NavigationMode.js"></script>
+    <script src="components/main/dashboard/Speed.js"></script>
     <script src="components/main/dashboard/Map.js"></script>
     <script src="components/main/dashboard/Interactive.js"></script>
-    <script src="components/main/dashboard/Speed.js"></script>
-    <script src="components/main/Navbar.js"></script>
+    <script src="components/main/dashboard/Joystick.js"></script>
 
     <!-- Import views -->
     <script src="views/Dashboard.js"></script>
