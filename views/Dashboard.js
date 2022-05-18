@@ -28,23 +28,27 @@ app.component('dashboard', {
 
   methods: {
     connect(options) {
-      // Connect to ROS.
       if (this.ros === null) {
         this.ros = new ROSLIB.Ros(options);
       }
+
       this.ros.on('connection', () => {
         this.$store.commit('setStatus', 'Connected');
         console.log('Connected to websocket server.');
-        // this.initNav(this.viewer);
+        this.renderMap();
       });
+
       this.ros.on('close', () => {
         this.$store.commit('setStatus', 'Disconnected');
         console.log('Connection to websocket server closed.');
       });
+
       this.ros.on('error', (error) => {
         console.log('Error connecting to websocket server: ', error.message);
       });
+    },
 
+    renderMap() {
       var viewer = new ROS2D.Viewer({
         divID: 'map',
         width: 500,
