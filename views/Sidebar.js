@@ -1,15 +1,12 @@
 app.component('sidebar', {
   template:
-    /*html*/
     `
     <aside 
       class="bg-blue-primary max-w-1/5 h-full sm:hidden md:hidden lg:block fixed top-0 left-0 bottom-0"
-      :class="this.$store.state.sidebarCollapsed ? 'collapsed' : ''"
-    >
+      :class="this.$store.state.sidebarCollapsed ? 'collapsed' : ''">
         <div 
-          class="bg-gray-secondary h-32 grid content-center text-center"
-        >
-          <img v-if="isSidebarCollapsed()" class="sidebar-logo" src="assets/images/sidebar/header/s.png">
+          class="bg-gray-secondary h-32 flex justify-center items-center">
+          <img v-if="isSidebarCollapsed()" src="assets/images/sidebar/header/s.png">
           <img v-else class="m-w-full m-h-full p-5" src="assets/images/sidebar/header/logo.png"> 
         </div>
         <ul class="mt-10 px-2">
