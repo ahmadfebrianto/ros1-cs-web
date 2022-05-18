@@ -3,7 +3,11 @@ app.component('dashboard-map', {
     /*HTML*/
     `    
     <div class="card">
-        <div id="map" class="h-500 flex justify-center items-center bg-gray-100">
+        <div 
+          id="map" 
+          class="h-500 flex justify-center items-center bg-gray-100"
+          :class="disableClickOnJoystickMode()"
+        >
           <img v-if="!isConnected()" src="assets/images/map/agv.png"> 
         </div>
     </div>`,
@@ -15,7 +19,13 @@ app.component('dashboard-map', {
   methods: {
     isConnected() {
       return this.$store.state.status === 'Connected';
-    }
+    },
+
+    disableClickOnJoystickMode() {
+      return this.$store.state.navigationMode === 'Joystick'
+        ? 'pointer-events-none'
+        : '';
+    },
   },
 
   mounted() {},
