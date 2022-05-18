@@ -1,22 +1,24 @@
 app.component('dashboard', {
   template: `
-    <div class="mt-3 grid grid-cols-4 grid-flow-col gap-5">
-      <div id="" class="">
+    <div class="mt-3 
+              md:flex flex-row gap-4
+              sm:grid sm:grid-rows-3 sm:grid-cols-3">
+      <div class="sm:row-span-2 sm:col-span-1 md:basis-1/4">
         <connection />
         <navigation-mode />
         <speed />
       </div>
 
-      <div id="" class="col-span-2">
+      <div class="sm:col-span-2 sm:row-span-3 md:basis-2/4">
         <dashboard-map />
       </div>
 
-      <div id="" class="">
+      <div class="basis-1/4">
         <joystick v-if="this.$store.state.navigationMode === 'Joystick'" :ros="ros" />
         <interactive v-else/>
       </div>
     </div>
-    `,
+  `,
 
   data() {
     return {

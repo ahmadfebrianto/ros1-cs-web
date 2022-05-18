@@ -6,7 +6,7 @@ app.component('connection', {
             </div> 
             <div class="flex sm:flex-col lg:flex-row gap-1">
                 <div class="basis-2/3">
-                    <input class="input pl-4 tracking-widest" type="text" v-model="ip" placeholder="IP">
+                    <input class="input text-center pl-4 tracking-widest" type="text" v-model="ip" placeholder="IP">
                 </div>
                 <div class="basis-1/3">
                     <input class="input text-center tracking-wide" type="text" v-model="port" placeholder="Port">
