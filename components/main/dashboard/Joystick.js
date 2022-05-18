@@ -115,13 +115,13 @@ app.component('joystick', {
   mounted() {
     emitter.on('robotSpeedChanged', (type, e) => {
       if (this.$store.state.robotDirection === 'forward') {
-        this.goForward();
+        this.move('forward');
       } else if (this.$store.state.robotDirection === 'backward') {
-        this.goBackward();
+        this.move('backward');
       } else if (this.$store.state.robotDirection === 'right') {
-        this.turnRight();
+        this.move('right');
       } else if (this.$store.state.robotDirection === 'left') {
-        this.turnLeft();
+        this.move('left');
       }
     });
   },
