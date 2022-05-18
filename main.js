@@ -2,7 +2,9 @@ const app = Vue.createApp({
   template: /*html*/ `
     <div class="flex h-screen">
       <sidebar ref="sidebar" />
-      <div id="content" ref="content" class="flex-initial w-full">
+      <div 
+        ref="content" 
+        class="flex-initial w-full bg-white-secondary py-2 px-4">
         <navbar />
         <main>
           <router-view />

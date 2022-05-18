@@ -1,77 +1,16 @@
 :root {
-  --dark-primary-color: #212121;
-  --white-primary: #fff;
-  --white-secondary: #fafafa;
-  --blue-primary: #24408e;
-  --blue-secondary: #4a63a75d;
-  --blue-tertiary: #6579af;
-  --green-primary: #10b981;
-  --red-primary: #ef4444;
-  --gray-primary: #c8d3dd;
+  --white-primary: #f6f6f6;
+  --blue-secondary: #1c78aa8a;
 }
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: #fafafa;
-
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-}
-
-/*--------------------SIDEBAR--------------------*/
-.sidebar-logo {
-  max-width: 100%;
-  max-height: 100%;
-  padding: 20px;
-}
-
-.sidebar-menu {
-  color: var(--white-primary);
-  border-radius: 10px;
-  margin-top: 5px;
-}
-
-.sidebar-menu:hover {
-  background-color: var(--blue-secondary);
-  border-radius: 10px;
-}
-
-.sidebar-menu-link {
-  display: block;
-  padding: 10px;
-}
-
-.sidebar-menu-active {
-  background-color: var(--blue-tertiary);
-  pointer-events: none;
-}
-
-/*--------------------NAVBAR--------------------*/
-.navbar {
-  background-color: var(--white-primary);
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  padding: 10px;
-}
-
-.connected {
-  background-color: var(--green-primary);
-  border-radius: 15px;
-}
-
-.disconnected {
-  background-color: var(--red-primary);
-  border-radius: 15px;
-}
-
-/*--------------------CONTENT--------------------*/
-#content {
-  background-color: var(--white-secondary);
-  padding: 10px 20px;
-  margin-left: 20%;
 }
 
 .card {
@@ -82,49 +21,8 @@ body {
   margin-bottom: 8px;
 }
 
-.joystick-button {
-  padding: 10px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-}
-
-.joystick-button:hover {
-  border-radius: 25px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-#map {
-  display: flex;
-  justify-content: center;
-}
-
 #map canvas {
   width: 100%;
-}
-
-#input-speed {
-  width: 100%;
-  padding: 2px;
-  border-radius: 10px;
-  border: none;
-  background-color: #e7ecf180;
-  color: var(--blue-primary);
-  font-size: 20px;
-  text-align: center;
-  outline: none;
-}
-
-.input-speed-control {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.input-speed-control:hover {
-  border-radius: 10px;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  cursor: pointer;
 }
 
 .input {
@@ -163,5 +61,4 @@ body {
 
 .button:hover {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-
 }

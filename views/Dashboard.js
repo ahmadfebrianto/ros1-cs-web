@@ -40,13 +40,11 @@ app.component('dashboard', {
       });
 
       this.ros.on('close', () => {
-        emitter.emit('disconnect');
-        this.$store.commit('setStatus', 'Disconnected');
         console.log('Connection to websocket server closed.');
       });
 
       this.ros.on('error', (error) => {
-        console.log('Error connecting to websocket server: ', error.message);
+        console.log('Error connecting to websocket server.');
       });
     },
 
@@ -64,7 +62,7 @@ app.component('dashboard', {
         serverName: '/move_base',
       });
 
-      emitter.emit('mapLoaded', viewer, nav);
+      emitter.emit('mapLoaded');
     },
 
     disconnect() {
@@ -75,9 +73,20 @@ app.component('dashboard', {
       this.$store.commit('setStatus', 'Disconnected');
     },
 
-    removeCanvas() {
+    removeCanvasses() {
       const map = document.getElementById('map');
-      map.removeChild(map.lastElementChild);
+      let canvasses = map.getElementsByTagName('canvas');
+      if (canvasses.length > 0) {
+        map.removeChild(canvasses[0]);
+      }
+    },
+
+    ensureOneCanvas() {
+      const map = document.getElementById('map');
+      let canvasses = map.getElementsByTagName('canvas');
+      while (canvasses.length > 1) {
+        map.removeChild(canvasses[0]);
+      }
     },
   },
 
@@ -93,15 +102,15 @@ app.component('dashboard', {
 
     emitter.on('disconnect', () => {
       this.disconnect();
-      this.removeCanvas();
+      this.removeCanvasses();
     });
 
     emitter.on('mapLoaded', () => {
-      const map = document.getElementById('map');
-      let canvasses = map.getElementsByTagName('canvas');
-      while (canvasses.length > 1) {
-        map.removeChild(canvasses[0]);
-      }
+      this.ensureOneCanvas();
+    });
+
+    emitter.on('ensureOneCanvas', () => {
+      this.ensureOneCanvas();
     });
   },
 });
