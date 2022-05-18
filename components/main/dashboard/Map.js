@@ -4,7 +4,7 @@ app.component('dashboard-map', {
     `    
     <div class="card">
         <div id="map" class="h-500 flex justify-center items-center bg-gray-100">
-          <img src="assets/images/map/agv.png" class=""> 
+          <img v-if="!isConnected()" src="assets/images/map/agv.png"> 
         </div>
     </div>`,
 
@@ -12,7 +12,11 @@ app.component('dashboard-map', {
     return {};
   },
 
-  methods: {},
+  methods: {
+    isConnected() {
+      return this.$store.state.status === 'Connected';
+    }
+  },
 
   mounted() {},
 });

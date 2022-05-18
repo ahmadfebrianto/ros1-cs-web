@@ -22,7 +22,7 @@ app.component('dashboard', {
     return {
       ros: null,
       viewer: null,
-      nav: null
+      nav: null,
     };
   },
 
@@ -44,7 +44,7 @@ app.component('dashboard', {
       this.ros.on('error', (error) => {
         console.log('Error connecting to websocket server: ', error.message);
       });
-      
+
       var viewer = new ROS2D.Viewer({
         divID: 'map',
         width: 500,
@@ -66,6 +66,11 @@ app.component('dashboard', {
       }
       this.$store.commit('setStatus', 'Disconnected');
     },
+
+    removeCanvas() {
+      const map = document.getElementById('map');
+      map.removeChild(map.lastElementChild);
+    },
   },
 
   mounted() {
@@ -79,6 +84,7 @@ app.component('dashboard', {
 
     emitter.on('disconnect', () => {
       this.disconnect();
+      this.removeCanvas();
     });
   },
 });
