@@ -1,8 +1,9 @@
 app.component('sidebarItem', {
   template:
-    /*html*/
     `
-    <router-link :to="item.route" class="sidebar-menu-link">
+    <router-link 
+      :to="item.route" 
+      class="block p-3">
       <img
         class="inline"
         :class="removeMarginRightIfCollapsed()"

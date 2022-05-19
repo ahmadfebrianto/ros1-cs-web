@@ -1,7 +1,5 @@
 app.component('sidebar', {
-  template:
-    /*html*/
-    `
+  template: `
     <aside 
       id="sidebar" 
       class="bg-blue-primary max-w-1/5 h-full sm:hidden md:hidden lg:block fixed top-0 left-0 bottom-0"
@@ -10,12 +8,19 @@ app.component('sidebar', {
         <div 
           class="bg-gray-secondary h-32 grid content-center text-center"
         >
-          <img v-if="isSidebarCollapsed()" class="sidebar-logo" src="assets/images/sidebar/header/s.png">
-          <img v-else class="sidebar-logo" src="assets/images/sidebar/header/logo.png"> 
+          <img 
+            v-if="isSidebarCollapsed()" 
+            class="m-w-full m-h-full p-5" 
+            src="assets/images/sidebar/header/s.png">
+          <img 
+            v-else 
+            class="m-w-full m-h-full p-5" 
+            src="assets/images/sidebar/header/logo.png"> 
         </div>
         <ul class="mt-10 px-2">
           <li 
-            class="sidebar-menu" 
+            class="text-white-primary rounded-lg mt-1
+                  hover:bg-blue-secondary" 
             :class="setActiveMenuColor(item.name)"
             @click="setActiveMenu(item.name)"
             v-for="item in items"
@@ -38,7 +43,7 @@ app.component('sidebar', {
 
     setActiveMenuColor(route) {
       if (this.$store.state.activeMenu === route) {
-        return 'sidebar-menu-active';
+        return 'bg-blue-tertiary pointer-events-none';
       }
     },
 
