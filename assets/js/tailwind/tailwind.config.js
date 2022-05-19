@@ -6,7 +6,7 @@ tailwind.config = {
           primary: '#212121',
         },
         white: {
-          primary: '#f6f6f6',
+          primary: '#f8f8f8',
           secondary: '#f0f0f0',
         },
         gray: {
@@ -35,6 +35,9 @@ tailwind.config = {
       boxShadow: {
         'primary': '0px 2px 8px 0px rgba(99, 99, 99, 0.2)',
       },
+      margin: {
+        'primary': '20%',
+      }
     },
   },
 };

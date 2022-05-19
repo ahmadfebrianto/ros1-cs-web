@@ -4,22 +4,25 @@ app.component('speed', {
       <div class="mb-1">
         <small class="font-bold">Speed</small>
       </div>
-      <div id="input-speed" class="grid grid-cols-5">
+      <div class="grid grid-cols-5
+                w-full p-1 rounded-md
+                bg-gray-tertiary text-blue-primary
+                text-lg font-boldest text-center">
         <div 
-          class="input-speed-control" 
+          class="flex justify-center items-center
+                hover:scale-150 cursor-pointer" 
           :class="checkMinSpeed()"
-          @click="decreaseSpeed()"
-        >
+          @click="decreaseSpeed()">
           <img src="assets/images/speed/minus.svg" alt="Decrease Speed" />
         </div>
         <div class="col-span-3 text-md">
           {{ speed }}
         </div>
         <div 
-          class="input-speed-control" 
+          class="flex justify-center items-center
+                hover:scale-150 cursor-pointer" 
           :class="checkMaxSpeed()"
-          @click="increaseSpeed()"
-        >
+          @click="increaseSpeed()">
           <img src="assets/images/speed/plus.svg" alt="Increase Speed" class="" />
         </div>
       </div>
