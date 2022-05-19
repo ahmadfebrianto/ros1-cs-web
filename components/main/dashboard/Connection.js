@@ -1,19 +1,19 @@
 app.component('connection', {
   template: `
         <div id="connection" class="card">
-            <div class="mb-2">
+            <div class="mb-1">
                 <small class="font-bold">Connection</small>
             </div> 
-            <div class="grid grid-cols-3 gap-1">
-                <div class="col-span-2">
-                    <input class="input pl-4 tracking-widest" type="text" v-model="ip" placeholder="IP">
+            <div class="flex flex-3 gap-x-1 sm:flex-col md:flex-row">
+                <div class="basis-2/3">
+                    <input class="input pl-4 text-center tracking-widest" type="text" v-model="ip" placeholder="IP">
                 </div>
-                <div class="col-span-1">
+                <div class="basis-1/3">
                     <input class="input text-center tracking-wide" type="text" v-model="port" placeholder="Port">
                 </div>
             </div>
             <div>
-                <div class="flex">
+                <div class="flex mt-1">
                   <button v-if="this.$store.state.status === 'Disconnected'" class="button bg-blue-primary text-slate-100" @click="connect">Connect</button>
                   <button v-else class="button bg-red-500 text-slate-100" @click="disconnect">Disconnect</button>
                 </div>
