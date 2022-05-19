@@ -1,20 +1,14 @@
 app.component('interactive', {
-    template:
-    `
+  template: `
     <div class="card">
-        <div class="">
-            <div class="row">
-                <div class="">
-                    <a href="#" class="">Start</a>
-                </div>
-                <div class="">
-                    <a href="#" class="">Stop</a>
-                </div>
+        <div class="flex flex-2 sm:flex-col md:flex-row gap-2 p-2">
+            <div class="button bg-orange-500 hover:opacity-80">
+                Pause
+            </div>
+            <div class="button bg-red-500 hover:opacity-80">
+                Cancel
             </div>
         </div>
     </div>
     `,
-
-
-
-})
+});

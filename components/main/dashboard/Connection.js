@@ -2,7 +2,7 @@ app.component('connection', {
   template: `
         <div id="connection" class="card">
             <div class="mb-1">
-                <small class="font-bold">Connection</small>
+                <small class="text-gray-700 font-bold tracking-wider">Connection</small>
             </div> 
             <div class="flex flex-3 gap-x-1 sm:flex-col md:flex-row">
                 <div class="basis-2/3">
@@ -24,12 +24,12 @@ app.component('connection', {
                 <div class="flex mt-1">
                   <button 
                     v-if="this.$store.state.status === 'Disconnected'" 
-                    class="button bg-blue-primary text-slate-100 hover:opacity-90" 
+                    class="button bg-blue-primary hover:opacity-90" 
                     @click="connect">
                     Connect
                   </button>
                   <button v-else 
-                    class="button bg-red-500 text-slate-100 hover:opacity-90""
+                    class="button bg-red-500 hover:opacity-90""
                     @click="disconnect">
                     Disconnect
                   </button>

@@ -2,7 +2,7 @@ app.component('speed', {
   template: `
     <div class="card">
       <div class="mb-1">
-        <small class="font-bold">Speed</small>
+        <small class="text-gray-700 font-bold tracking-wider">Speed</small>
       </div>
       <div class="grid grid-cols-5
                 w-full p-1 rounded-md

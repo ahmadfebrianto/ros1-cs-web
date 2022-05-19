@@ -46,4 +46,5 @@ body {
   border-radius: 10px;
   font-size: 14px;
   text-align: center;
+  color: var(--white-primary);
 }
