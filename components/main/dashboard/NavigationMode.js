@@ -31,7 +31,7 @@ app.component('navigation-mode-item', {
   template: `
     <input 
         @click="this.$store.commit('setNavigationMode', navigationMode.name)"
-        class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-slam checked:border-blue-slam focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" 
+        class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-primary checked:border-blue-primaryfocus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" 
         type="radio" 
         name="navigation-mode" 
         :id="navigationMode.id"

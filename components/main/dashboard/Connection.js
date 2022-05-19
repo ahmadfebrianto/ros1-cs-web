@@ -14,7 +14,7 @@ app.component('connection', {
             </div>
             <div>
                 <div class="flex">
-                  <button v-if="this.$store.state.status === 'Disconnected'" class="button bg-blue-slam text-slate-100" @click="connect">Connect</button>
+                  <button v-if="this.$store.state.status === 'Disconnected'" class="button bg-blue-primary text-slate-100" @click="connect">Connect</button>
                   <button v-else class="button bg-red-500 text-slate-100" @click="disconnect">Disconnect</button>
                 </div>
             </div>

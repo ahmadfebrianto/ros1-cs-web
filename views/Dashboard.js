@@ -40,8 +40,6 @@ app.component('dashboard', {
       });
 
       this.ros.on('close', () => {
-        emitter.emit('disconnect');
-        this.$store.commit('setStatus', 'Disconnected');
         console.log('Connection to websocket server closed.');
       });
 
