@@ -2,16 +2,14 @@ app.component('sidebarItem', {
   template:
     /*html*/
     `
-    <router-link 
-      :to="item.route" 
-      class="block p-2">
+    <router-link :to="item.route" class="sidebar-menu-link">
       <img
         class="inline"
         :class="removeMarginRightIfCollapsed()"
         :src="item.svg" 
         :alt="item.name"
          />
-      <span class="font-bold" v-if="!sidebarIsCollapsed()">
+      <span class="" v-if="!sidebarIsCollapsed()">
         {{ item.name }}
       </span>
 

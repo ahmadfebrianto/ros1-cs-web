@@ -4,7 +4,7 @@ app.component('joystick', {
         <div class="grid grid-cols-3">
           <div 
             v-for="button in joystickButtons" 
-            :class="button.icon ? 'p-2 cursor-pointer flex justify-center hover:rounded-full hover:shadow-primary' : ''"
+            :class="button.icon ? 'joystick-button' : ''"
             @click="button.direction ? move(button.direction) : null"
           >
             <img :src="button.icon" alt="">

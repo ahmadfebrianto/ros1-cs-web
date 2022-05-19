@@ -6,18 +6,18 @@ tailwind.config = {
           primary: '#212121',
         },
         white: {
-          primary: '#f6f6f6',
-          secondary: '#f0f0f0',
+          primary: '#ffffff',
+          secondary: '#fafafa',
         },
         gray: {
           primary: '#c8d3dd',
           secondary: '#D1D5DB',
-          tertiary: '#e7ecf1ea',
         },
         blue: {
-          primary: '#0369A1',
-          secondary: '#1c78aa8a',
-          tertiary: '#3587b3',
+          primary: '#24408e',
+          secondary: '#4a63a75d',
+          tertiary: '#6579af',
+          slam: '#5587ad',
         },
         green: {
           primary: '#10b981',
@@ -31,9 +31,6 @@ tailwind.config = {
       },
       height: {
         500: '500px',
-      },
-      boxShadow: {
-        'primary': '0px 2px 8px 0px rgba(99, 99, 99, 0.2)',
       },
     },
   },

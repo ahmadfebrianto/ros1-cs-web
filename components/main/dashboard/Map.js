@@ -30,7 +30,11 @@ app.component('dashboard-map', {
 
   updated() {
     if (this.isConnected()) {
-      emitter.emit('ensureOneCanvas');
+      const map = document.getElementById('map');
+      let canvasses = map.getElementsByTagName('canvas');
+      while (canvasses.length > 1) {
+        map.removeChild(canvasses[0]);
+      }
     }
   },
 });

@@ -1,24 +1,22 @@
 app.component('dashboard', {
   template: `
-    <div class="mt-3 
-              md:flex flex-row gap-4
-              sm:grid sm:grid-rows-3 sm:grid-cols-3">
-      <div class="sm:row-span-2 sm:col-span-1 md:basis-1/4">
+    <div class="mt-3 grid grid-cols-4 grid-flow-col gap-5">
+      <div id="" class="">
         <connection />
         <navigation-mode />
         <speed />
       </div>
 
-      <div class="sm:col-span-2 sm:row-span-3 md:basis-2/4">
+      <div id="" class="col-span-2">
         <dashboard-map />
       </div>
 
-      <div class="basis-1/4">
+      <div id="" class="">
         <joystick v-if="this.$store.state.navigationMode === 'Joystick'" :ros="ros" />
         <interactive v-else/>
       </div>
     </div>
-  `,
+    `,
 
   data() {
     return {
@@ -42,11 +40,13 @@ app.component('dashboard', {
       });
 
       this.ros.on('close', () => {
+        emitter.emit('disconnect');
+        this.$store.commit('setStatus', 'Disconnected');
         console.log('Connection to websocket server closed.');
       });
 
       this.ros.on('error', (error) => {
-        console.log('Error connecting to websocket server.');
+        console.log('Error connecting to websocket server: ', error.message);
       });
     },
 
@@ -64,7 +64,7 @@ app.component('dashboard', {
         serverName: '/move_base',
       });
 
-      emitter.emit('mapLoaded');
+      emitter.emit('mapLoaded', viewer, nav);
     },
 
     disconnect() {
@@ -75,20 +75,9 @@ app.component('dashboard', {
       this.$store.commit('setStatus', 'Disconnected');
     },
 
-    removeCanvasses() {
+    removeCanvas() {
       const map = document.getElementById('map');
-      let canvasses = map.getElementsByTagName('canvas');
-      if (canvasses.length > 0) {
-        map.removeChild(canvasses[0]);
-      }
-    },
-
-    ensureOneCanvas() {
-      const map = document.getElementById('map');
-      let canvasses = map.getElementsByTagName('canvas');
-      while (canvasses.length > 1) {
-        map.removeChild(canvasses[0]);
-      }
+      map.removeChild(map.lastElementChild);
     },
   },
 
@@ -104,15 +93,15 @@ app.component('dashboard', {
 
     emitter.on('disconnect', () => {
       this.disconnect();
-      this.removeCanvasses();
+      this.removeCanvas();
     });
 
     emitter.on('mapLoaded', () => {
-      this.ensureOneCanvas();
-    });
-
-    emitter.on('ensureOneCanvas', () => {
-      this.ensureOneCanvas();
+      const map = document.getElementById('map');
+      let canvasses = map.getElementsByTagName('canvas');
+      while (canvasses.length > 1) {
+        map.removeChild(canvasses[0]);
+      }
     });
   },
 });

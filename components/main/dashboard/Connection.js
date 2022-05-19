@@ -1,30 +1,21 @@
 app.component('connection', {
   template: `
-        <div class="card">
-            <div class="mb-1 tracking-wide">
+        <div id="connection" class="card">
+            <div class="mb-2">
                 <small class="font-bold">Connection</small>
             </div> 
-            <div class="flex sm:flex-col lg:flex-row gap-1">
-                <div class="basis-2/3">
-                    <input class="input text-center pl-4 tracking-widest" type="text" v-model="ip" placeholder="IP">
+            <div class="grid grid-cols-3 gap-1">
+                <div class="col-span-2">
+                    <input class="input pl-4 tracking-widest" type="text" v-model="ip" placeholder="IP">
                 </div>
-                <div class="basis-1/3">
+                <div class="col-span-1">
                     <input class="input text-center tracking-wide" type="text" v-model="port" placeholder="Port">
                 </div>
             </div>
-            <div class="mt-1">
-                <div class="flex ">
-                  <button 
-                    v-if="this.$store.state.status === 'Disconnected'" 
-                    class="button bg-blue-primary text-white-primary font-bold"
-                    @click="connect">
-                      Connect
-                  </button>
-                  <button 
-                    v-else class="button bg-red-500 text-white-primary font-bold" 
-                    @click="disconnect">
-                      Disconnect
-                  </button>
+            <div>
+                <div class="flex">
+                  <button v-if="this.$store.state.status === 'Disconnected'" class="button bg-blue-slam text-slate-100" @click="connect">Connect</button>
+                  <button v-else class="button bg-red-500 text-slate-100" @click="disconnect">Disconnect</button>
                 </div>
             </div>
         </div>
