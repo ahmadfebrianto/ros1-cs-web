@@ -22,23 +22,6 @@ body {
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
-/*--------------------NAVBAR--------------------*/
-.navbar {
-  background-color: var(--white-primary);
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  padding: 10px;
-}
-
-.connected {
-  background-color: var(--green-primary);
-  border-radius: 15px;
-}
-
-.disconnected {
-  background-color: var(--red-primary);
-  border-radius: 15px;
-}
-
 /*--------------------CONTENT--------------------*/
 #content {
   background-color: var(--white-secondary);
