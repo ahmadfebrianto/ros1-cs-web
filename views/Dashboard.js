@@ -3,20 +3,20 @@ app.component('dashboard', {
   <div class="mt-3 
             md:flex flex-row md:gap-3 
             sm:grid sm:grid-rows-3 sm:grid-cols-3 sm:gap-x-3">
-    <div class="sm:row-span-2 sm:col-span-1 md:basis-1/4">
+    <div class="sm:row-span-3 sm:col-span-1 md:basis-1/4">
       <connection />
-      <navigation-mode />
       <speed />
-      <log />
-    </div>
-
-    <div class="sm:col-span-2 sm:row-span-3 md:basis-2/4">
-      <dashboard-map />
-    </div>
-
-    <div class="md:basis-1/4">
+      <navigation-mode />
       <joystick v-if="this.$store.state.navigationMode === 'Joystick'" :ros="ros" />
       <interactive v-else/>
+    </div>
+
+    <div class="sm:col-span-2 sm:row-span-2 md:basis-2/4">
+    <dashboard-map />
+    </div>
+    
+    <div class="sm:col-span-2 md:basis-1/4">
+      <log />
     </div>
   </div>
     `,
@@ -26,7 +26,6 @@ app.component('dashboard', {
       ros: null,
       viewer: null,
       nav: null,
-      log: null,
     };
   },
 
