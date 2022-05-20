@@ -7,7 +7,7 @@ app.component('speed', {
       <div class="grid grid-cols-5
                 w-full p-1 rounded-md
                 bg-gray-tertiary text-blue-primary
-                text-lg font-boldest text-center">
+                text-lg font-semibold text-center">
         <div 
           class="flex justify-center items-center
                 hover:scale-150 cursor-pointer" 

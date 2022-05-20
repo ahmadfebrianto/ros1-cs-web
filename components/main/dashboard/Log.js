@@ -11,7 +11,7 @@ app.component('log', {
                     v-for="(log, index) in rosLogs" 
                     :key="index" 
                     class="text-xxs"
-                    :class="log.color">
+                    :class="[log.color, highlightNewLog(index)]">
                     {{ log.text }}
                 </p>
                 <p v-else class="text-xxs">No logs</p>
@@ -59,6 +59,12 @@ app.component('log', {
       if (localStorage.getItem('logs')) {
         this.logs = JSON.parse(localStorage.getItem('logs'));
         localStorage.removeItem('logs');
+      }
+    },
+
+    highlightNewLog(index) {
+      if (index === this.logs.length - 1) {
+        return 'font-black';
       }
     },
   },
