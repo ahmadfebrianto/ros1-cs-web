@@ -40,8 +40,11 @@ app.component('speed', {
   methods: {
     setRobotSpeed() {
       this.$store.commit('setRobotSpeed', this.speed / 10);
-      emitter.emit('robotSpeedChanged');
       this.sendLog(`Speed changed to ${this.speed}`, 'info');
+
+      if (this.$store.state.robotMoving) {
+        emitter.emit('robotSpeedChanged');
+      }
     },
 
     increaseSpeed() {

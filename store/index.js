@@ -7,6 +7,7 @@ const store = Vuex.createStore({
     activeMenu: 'Dashboard', // 'Dashboard', 'Settings', 'Documentation', 'About'
     robotSpeed: 0.1, // m/s
     robotDirection: 'forward', // forward, backward, left, right
+    robotMoving: false,
     sidebarCollapsed: false,
     sidebarHidden: false,
     sidebarWidth: null,
@@ -40,6 +41,10 @@ const store = Vuex.createStore({
 
     setRobotDirection(state, robotDirection) {
       state.robotDirection = robotDirection;
+    },
+
+    setRobotMoving(state, robotMoving) {
+      state.robotMoving = robotMoving;
     },
 
     setSidebarCollapsed(state, sidebarCollapsed) {

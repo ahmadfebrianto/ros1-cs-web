@@ -104,8 +104,12 @@ app.component('joystick', {
       const twist = new ROSLIB.Message(options);
       topic.publish(twist);
       if (direction !== 'stop') {
+        if (!this.$store.state.robotMoving) {
+          this.$store.commit('setRobotMoving', true);
+        }
         console.log(`Moving ${direction}`);
       } else {
+        this.$store.commit('setRobotMoving', false);
         console.log(`Stopping`);
       }
       this.$store.commit('setRobotDirection', direction);
