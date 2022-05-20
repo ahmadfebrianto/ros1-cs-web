@@ -29,7 +29,7 @@ app.component('connection', {
                     Connect
                   </button>
                   <button v-else 
-                    class="button bg-red-500 hover:opacity-90""
+                    class="button bg-red-500 hover:opacity-90"
                     @click="disconnect">
                     Disconnect
                   </button>

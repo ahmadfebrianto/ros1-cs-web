@@ -7,6 +7,7 @@ app.component('dashboard', {
       <connection />
       <navigation-mode />
       <speed />
+      <log />
     </div>
 
     <div class="sm:col-span-2 sm:row-span-3 md:basis-2/4">
@@ -25,6 +26,7 @@ app.component('dashboard', {
       ros: null,
       viewer: null,
       nav: null,
+      log: null,
     };
   },
 
@@ -37,16 +39,17 @@ app.component('dashboard', {
       this.ros = new ROSLIB.Ros(options);
       this.ros.on('connection', () => {
         this.$store.commit('setStatus', 'Connected');
-        console.log('Connected to websocket server.');
+        this.sendLog(`Connected to ${connection.ip}:${connection.port}`);
         this.renderMap();
       });
 
       this.ros.on('close', () => {
-        console.log('Connection to websocket server closed.');
+        log = 'Connection to websocket server closed.';
+        console.log(log);
       });
 
       this.ros.on('error', (error) => {
-        console.log('Error connecting to websocket server: ', error.message);
+        this.sendLog('Error connecting to websocket server.');
       });
     },
 
@@ -78,6 +81,10 @@ app.component('dashboard', {
     removeCanvas() {
       const map = document.getElementById('map');
       map.removeChild(map.lastElementChild);
+    },
+
+    sendLog(text) {
+      emitter.emit('insertLog', text);
     },
   },
 

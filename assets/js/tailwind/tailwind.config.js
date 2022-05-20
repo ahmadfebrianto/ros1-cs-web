@@ -25,6 +25,11 @@ tailwind.config = {
         red: {
           primary: '#ef4444',
         },
+        log: {
+          error: '#f7643d',
+          success: '#79d246',
+          info: '#fe9a01',
+        },
       },
       maxWidth: {
         '1/5': '20%',
@@ -33,11 +38,14 @@ tailwind.config = {
         500: '500px',
       },
       boxShadow: {
-        'primary': '0px 2px 8px 0px rgba(99, 99, 99, 0.2)',
+        primary: '0px 2px 8px 0px rgba(99, 99, 99, 0.2)',
       },
       margin: {
-        'primary': '20%',
-      }
+        primary: '20%',
+      },
+      fontSize: {
+        xxs: '10px',
+      },
     },
   },
 };
