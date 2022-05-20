@@ -26,9 +26,9 @@ tailwind.config = {
           primary: '#ef4444',
         },
         log: {
-          error: '#f7643d',
-          success: '#79d246',
-          info: '#fe9a01',
+          error: '#B91C1C',
+          success: '#15803D',
+          info: '#1D4ED8',
         },
       },
       maxWidth: {

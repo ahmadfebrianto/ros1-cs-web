@@ -10,8 +10,9 @@ app.component('log', {
                     v-if="rosLogs.length > 0" 
                     v-for="(log, index) in rosLogs" 
                     :key="index" 
-                    class="text-xxs">
-                    {{ log }}
+                    class="text-xxs"
+                    :class="log.color">
+                    {{ log.text }}
                 </p>
                 <p v-else class="text-xxs">No logs</p>
             </div>
@@ -30,16 +31,26 @@ app.component('log', {
   },
 
   methods: {
-    insertLog(text) {
-      this.logs.push(text);
+    insertLog(log) {
+      let _log = { text: log.text };
+      if (log.category === 'success') {
+        _log.color = 'text-log-success';
+      } else if (log.category === 'info') {
+        _log.color = 'text-log-info';
+      } else {
+        _log.color = 'text-log-error';
+      }
+      this.logs.push(_log);
+
+      if (this.logs.length > 5) {
+        this.logs.shift();
+      }
+
+      console.log(this.logs);
     },
 
     clearLogs() {
       this.logs = [];
-    },
-
-    removeLog(log) {
-      this.logs.splice(this.logs.indexOf(log), 1);
     },
   },
 

@@ -39,17 +39,22 @@ app.component('dashboard', {
       this.ros = new ROSLIB.Ros(options);
       this.ros.on('connection', () => {
         this.$store.commit('setStatus', 'Connected');
-        this.sendLog(`Connected to ${connection.ip}:${connection.port}`);
+        this.sendLog(
+          `Connected to ${connection.ip}:${connection.port}`,
+          'success'
+        );
         this.renderMap();
       });
 
       this.ros.on('close', () => {
-        log = 'Connection to websocket server closed.';
-        console.log(log);
+        this.sendLog(
+          `Connection to ${connection.ip}:${connection.port} closed`,
+          'error'
+        );
       });
 
       this.ros.on('error', (error) => {
-        this.sendLog('Error connecting to websocket server.');
+        this.sendLog('Error connecting to websocket server.', 'error');
       });
     },
 
@@ -83,8 +88,9 @@ app.component('dashboard', {
       map.removeChild(map.lastElementChild);
     },
 
-    sendLog(text) {
-      emitter.emit('insertLog', text);
+    sendLog(text, category) {
+      const log = { text, category };
+      emitter.emit('insertLog', log);
     },
   },
 
