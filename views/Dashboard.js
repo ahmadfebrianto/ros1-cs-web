@@ -46,13 +46,6 @@ app.component('dashboard', {
         this.renderMap();
       });
 
-      this.ros.on('close', () => {
-        this.sendLog(
-          `Connection to ${connection.ip}:${connection.port} closed`,
-          'error'
-        );
-      });
-
       this.ros.on('error', (error) => {
         this.sendLog('Error connecting to websocket server.', 'error');
       });
@@ -81,6 +74,7 @@ app.component('dashboard', {
         this.ros = null;
       }
       this.$store.commit('setStatus', 'Disconnected');
+      this.sendLog(`Connection closed`, 'error');
     },
 
     removeCanvas() {

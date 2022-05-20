@@ -45,26 +45,30 @@ app.component('log', {
       if (this.logs.length > 5) {
         this.logs.shift();
       }
-
-      console.log(this.logs);
     },
 
-    clearLogs() {
-      this.logs = [];
+    saveLogs() {
+      // Save logs to localStorage
+      localStorage.setItem('logs', JSON.stringify(this.logs));
+    },
+
+    loadLogs() {
+      // Load logs from localStorage
+      if (localStorage.getItem('logs')) {
+        this.logs = JSON.parse(localStorage.getItem('logs'));
+        localStorage.removeItem('logs');
+      }
     },
   },
 
   mounted() {
     emitter.on('insertLog', this.insertLog);
+    this.loadLogs();
   },
 
   watch: {
-    logs: {
-      handler(newValue) {
-        if (newValue.length > 5) {
-          this.removeLog(newValue[0]);
-        }
-      },
+    $route(to, from) {
+      this.saveLogs();
     },
   },
 });
