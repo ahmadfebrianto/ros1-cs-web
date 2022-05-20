@@ -107,12 +107,21 @@ app.component('joystick', {
         if (!this.$store.state.robotMoving) {
           this.$store.commit('setRobotMoving', true);
         }
-        console.log(`Moving ${direction}`);
+        if (this.$store.state.robotDirection !== direction) {
+          this.sendLog(`Moving ${direction}`, 'info');
+        }
       } else {
         this.$store.commit('setRobotMoving', false);
-        console.log(`Stopping`);
+        if (this.$store.state.robotDirection !== direction) {
+          this.sendLog(`Stopping`, 'info');
+        }
       }
       this.$store.commit('setRobotDirection', direction);
+    },
+
+    sendLog(text, category) {
+      const log = { text, category };
+      emitter.emit('addLog', log);
     },
   },
 
