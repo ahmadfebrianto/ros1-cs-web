@@ -1,6 +1,6 @@
 app.component('joystick', {
   template: `
-    <div id="joystick" class="card">
+    <div id="joystick" class="card" :class="classObject">
         <div class="grid grid-cols-3">
           <div 
             v-for="button in joystickButtons" 
@@ -66,6 +66,14 @@ app.component('joystick', {
         },
       ],
     };
+  },
+
+  computed: {
+    classObject() {
+      return {
+        'pointer-events-none': this.$store.state.status === 'Disconnected',
+      };
+    },
   },
 
   methods: {
