@@ -84,7 +84,7 @@ app.component('dashboard', {
 
     sendLog(text, category) {
       const log = { text, category };
-      emitter.emit('insertLog', log);
+      emitter.emit('addLog', log);
     },
   },
 

@@ -5,7 +5,8 @@ app.component('dashboard-map', {
     <div class="card">
         <div 
           id="map" 
-          class="h-500 flex justify-center items-center bg-gray-100"
+          class="flex justify-center items-center bg-gray-100
+                sm:h-auto md:h-500"
           :class="disableClickOnJoystickMode()">
           <img v-if="!isConnected()" src="assets/images/map/agv.png"> 
         </div>

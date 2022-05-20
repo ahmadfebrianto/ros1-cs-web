@@ -41,6 +41,7 @@ app.component('speed', {
     setRobotSpeed() {
       this.$store.commit('setRobotSpeed', this.speed / 10);
       emitter.emit('robotSpeedChanged');
+      this.sendLog(`Speed changed to ${this.speed}`, 'info');
     },
 
     increaseSpeed() {
@@ -67,6 +68,11 @@ app.component('speed', {
         return 'pointer-events-none';
       }
       return '';
+    },
+
+    sendLog(text, category) {
+      const log = { text, category };
+      emitter.emit('addLog', log);
     },
   },
 

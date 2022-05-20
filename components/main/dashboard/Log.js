@@ -45,6 +45,8 @@ app.component('log', {
       if (this.logs.length > 5) {
         this.logs.shift();
       }
+
+      console.log(this.logs);
     },
 
     saveLogs() {
@@ -62,7 +64,7 @@ app.component('log', {
   },
 
   mounted() {
-    emitter.on('insertLog', this.insertLog);
+    emitter.on('addLog', this.insertLog);
     this.loadLogs();
   },
 
