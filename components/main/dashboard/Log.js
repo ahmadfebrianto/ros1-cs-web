@@ -2,7 +2,7 @@ app.component('log', {
   template: `
         <div class="card">
             <div class="mb-1">
-                <small class="text-gray-700 font-bold tracking-wider">Log</small>
+                <small class="text-gray-700 font-bold tracking-wider">Logs</small>
             </div>
 
             <div class="input p-3">

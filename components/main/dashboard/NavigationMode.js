@@ -30,7 +30,7 @@ app.component('navigation-mode', {
 app.component('navigation-mode-item', {
   template: `
     <input 
-        @click="this.$store.commit('setNavigationMode', navigationMode.name)"
+        @click="setNavigationMode(navigationMode.name)"
         class="form-check-input appearance-none rounded-full h-4 w-4 
               border border-gray-300 bg-white checked:bg-blue-primary 
               checked:border-blue-primaryfocus:outline-none 
@@ -46,4 +46,16 @@ app.component('navigation-mode-item', {
     </label>
   `,
   props: ['navigationMode'],
+
+  methods: {
+    setNavigationMode(mode) {
+      this.$store.commit('setNavigationMode', mode);
+      this.sendLog(`Navigation mode changed to ${mode}`);
+    },
+
+    sendLog(text, category) {
+      const log = { text, category };
+      emitter.emit('addLog', log);
+    },
+  },
 });
