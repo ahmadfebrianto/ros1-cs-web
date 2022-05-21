@@ -13,7 +13,7 @@ app.component('speed', {
                 hover:scale-150 cursor-pointer" 
           :class="checkMinSpeed()"
           @click="decreaseSpeed()">
-          <img src="assets/images/speed/minus.svg" alt="Decrease Speed" />
+          <img src="assets/icons/speed/minus.svg" alt="Decrease Speed" />
         </div>
         <div class="col-span-3 text-md">
           {{ speed }}
@@ -23,7 +23,7 @@ app.component('speed', {
                 hover:scale-150 cursor-pointer" 
           :class="checkMaxSpeed()"
           @click="increaseSpeed()">
-          <img src="assets/images/speed/plus.svg" alt="Increase Speed" class="" />
+          <img src="assets/icons/speed/plus.svg" alt="Increase Speed" class="" />
         </div>
       </div>
     </div>

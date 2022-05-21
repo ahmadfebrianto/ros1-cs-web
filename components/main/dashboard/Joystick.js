@@ -26,7 +26,7 @@ app.component('joystick', {
         },
         {
           name: 'top-middle',
-          icon: 'assets/images/joystick/caret-up.svg',
+          icon: 'assets/icons/joystick/caret-up.svg',
           direction: 'forward',
         },
         {
@@ -36,17 +36,17 @@ app.component('joystick', {
         },
         {
           name: 'middle-left',
-          icon: 'assets/images/joystick/caret-left.svg',
+          icon: 'assets/icons/joystick/caret-left.svg',
           direction: 'left',
         },
         {
           name: 'middle-middle',
-          icon: 'assets/images/joystick/stop-fill.svg',
+          icon: 'assets/icons/joystick/stop-fill.svg',
           direction: 'stop',
         },
         {
           name: 'middle-right',
-          icon: 'assets/images/joystick/caret-right.svg',
+          icon: 'assets/icons/joystick/caret-right.svg',
           direction: 'right',
         },
         {
@@ -56,7 +56,7 @@ app.component('joystick', {
         },
         {
           name: 'bottom-middle',
-          icon: 'assets/images/joystick/caret-down.svg',
+          icon: 'assets/icons/joystick/caret-down.svg',
           direction: 'backward',
         },
         {

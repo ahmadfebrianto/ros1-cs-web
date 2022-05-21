@@ -11,11 +11,11 @@ app.component('sidebar', {
           <img 
             v-if="isSidebarCollapsed()" 
             class="m-w-full m-h-full p-5" 
-            src="assets/images/sidebar/header/s.png">
+            src="assets/icons/sidebar/header/s.png">
           <img 
             v-else 
             class="m-w-full m-h-full p-5" 
-            src="assets/images/sidebar/header/logo.png"> 
+            src="assets/icons/sidebar/header/logo.png"> 
         </div>
         <ul class="mt-10 px-2">
           <li 
@@ -67,22 +67,22 @@ app.component('sidebar', {
       items: [
         {
           name: 'Dashboard',
-          svg: 'assets/images/sidebar/grid-fill.svg',
+          svg: 'assets/icons/sidebar/grid-fill.svg',
           route: '/',
         },
         {
           name: 'Settings',
-          svg: 'assets/images/sidebar/gear-fill.svg',
+          svg: 'assets/icons/sidebar/gear-fill.svg',
           route: '/settings',
         },
         {
           name: 'Documentation',
-          svg: 'assets/images/sidebar/bookmarks-fill.svg',
+          svg: 'assets/icons/sidebar/bookmarks-fill.svg',
           route: '/documentation',
         },
         {
           name: 'About',
-          svg: 'assets/images/sidebar/info-circle-fill.svg',
+          svg: 'assets/icons/sidebar/info-circle-fill.svg',
           route: '/about',
         },
       ],
