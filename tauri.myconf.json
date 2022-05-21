@@ -1,4 +1,8 @@
 {
+  "package": {
+    "productName": "AGV",
+    "version": "0.1.0"
+  },
   "tauri": {
     "bundle": {
       "identifier": "com.stechoq.slam.agv"
@@ -7,6 +11,7 @@
       {
         "fullscreen": false,
         "resizable": true,
+        "title": "AGV SLAM",
         "maximized": true,
         "minWidth": 1280,
         "minHeight": 720,
