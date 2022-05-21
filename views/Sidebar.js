@@ -6,15 +6,15 @@ app.component('sidebar', {
       :class="this.$store.state.sidebarCollapsed ? 'collapsed' : ''"
     >
         <div 
-          class="bg-gray-secondary h-32 grid content-center text-center"
+          class="bg-gray-secondary h-32 grid content-center"
         >
           <img 
             v-if="isSidebarCollapsed()" 
-            class="m-w-full m-h-full p-5" 
-            src="assets/icons/sidebar/header/s.png">
+            class="m-auto" 
+            src="assets/icons/app/32x32.png">
           <img 
             v-else 
-            class="m-w-full m-h-full p-5" 
+            class="m-auto p-12" 
             src="assets/icons/sidebar/header/logo.png"> 
         </div>
         <ul class="mt-10 px-2">
