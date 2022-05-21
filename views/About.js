@@ -29,6 +29,7 @@ app.component('about', {
             
             <div class="flex mt-3 -mx-2">
               <a 
+                target="_blank"
                 :href="member.linkedin" 
                 class="mx-2 text-gray-600 hover:scale-110"
                 :class="disableIfLinkEmpty(member.linkedin)">
@@ -37,7 +38,8 @@ app.component('about', {
                 </svg>
               </a>
 
-                <a 
+              <a 
+                target="_blank"
                 :href="member.github" 
                 class="mx-2 text-gray-600 hover:scale-110 "
                 :class="disableIfLinkEmpty(member.github)">
