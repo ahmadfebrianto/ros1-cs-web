@@ -1,17 +1,25 @@
 {
   "package": {
-    "productName": "AGV",
+    "productName": "AGV SLAM",
     "version": "0.1.0"
   },
   "tauri": {
     "bundle": {
+      "category": "Utility",
+      "icon": [
+        "../dist/assets/icons/app/32x32.png",
+        "../dist/assets/icons/app/128x128.png",
+        "../dist/assets/icons/app/128x128@2x.png",
+        "../dist/assets/icons/app/icon.icns",
+        "../dist/assets/icons/app/icon.ico"
+      ],
       "identifier": "com.stechoq.slam.agv"
     },
     "windows": [
       {
         "fullscreen": false,
         "resizable": true,
-        "title": "AGV SLAM",
+        "title": "Stechoq AGV by SLAM",
         "maximized": true,
         "minWidth": 1280,
         "minHeight": 720,
