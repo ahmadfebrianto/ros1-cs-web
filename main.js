@@ -56,16 +56,23 @@ const app = Vue.createApp({
         !this.$store.state.sidebarCollapsed
       );
     },
+
+    disableContextMenu(event) {
+      event.preventDefault();
+      return false;
+    },
   },
 
   created() {
     window.addEventListener('beforeunload', this.refreshHandler);
     window.addEventListener('resize', this.resizeHandler);
+    window.addEventListener('contextmenu', this.disableContextMenu);
   },
 
   beforeDestroy() {
     window.removeEventListener('beforeunload', this.handler);
     window.removeEventListener('resize', this.resizeHandler);
+    window.removeEventListener('contextmenu', this.disableContextMenu);
   },
 
   mounted() {
