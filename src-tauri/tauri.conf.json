@@ -1,0 +1,68 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "build": {
+    "beforeBuildCommand": "",
+    "beforeDevCommand": "",
+    "devPath": "s",
+    "distDir": "s"
+  },
+  "package": {
+    "productName": "AGV SLAM",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": true
+    },
+    "bundle": {
+      "active": true,
+      "category": "Utility",
+      "copyright": "",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "icon": [
+        "../dist/assets/icons/app/32x32.png",
+        "../dist/assets/icons/app/128x128.png",
+        "../dist/assets/icons/app/128x128@2x.png",
+        "../dist/assets/icons/app/icon.icns",
+        "../dist/assets/icons/app/icon.ico"
+      ],
+      "identifier": "com.stechoq.slam.agv",
+      "longDescription": "",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "shortDescription": "",
+      "targets": "all",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "resizable": true,
+        "title": "Stechoq AGV by SLAM",
+        "maximized": true,
+        "minWidth": 1280,
+        "minHeight": 720,
+        "center": true
+      }
+    ]
+  }
+}
