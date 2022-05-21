@@ -3,8 +3,8 @@
   "build": {
     "beforeBuildCommand": "",
     "beforeDevCommand": "",
-    "devPath": "s",
-    "distDir": "s"
+    "devPath": "http://localhost:8080",
+    "distDir": "../dist"
   },
   "package": {
     "productName": "AGV SLAM",
