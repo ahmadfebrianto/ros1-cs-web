@@ -76,7 +76,7 @@ app.component('about', {
           name: 'Abdul Mujib',
           role: 'Software Engineer',
           avatar: 'assets/images/team/mujib.jpg',
-          github: '',
+          github: 'https://github.com/mujibluth',
           linkedin: '',
         },
         {

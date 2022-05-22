@@ -71,16 +71,6 @@ app.component('sidebar', {
           route: '/',
         },
         {
-          name: 'Settings',
-          svg: 'assets/icons/sidebar/gear-fill.svg',
-          route: '/settings',
-        },
-        {
-          name: 'Documentation',
-          svg: 'assets/icons/sidebar/bookmarks-fill.svg',
-          route: '/documentation',
-        },
-        {
           name: 'About',
           svg: 'assets/icons/sidebar/info-circle-fill.svg',
           route: '/about',

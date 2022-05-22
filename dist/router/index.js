@@ -5,16 +5,6 @@ const routes = [
     component: Dashboard,
   },
   {
-    path: '/settings',
-    name: 'settings',
-    component: Settings,
-  },
-  {
-    path: '/documentation',
-    name: 'documentation',
-    component: Documentation,
-  },
-  {
     path: '/about',
     name: 'about',
     component: About,
