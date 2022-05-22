@@ -10,7 +10,6 @@ env:
   WINDOW_NAME: 'Stechoq AGV by SLAM TEAM'
   DIST_DIR: '../dist'
   DEV_PATH: '../dist'
-  CONFIG_PATH: './tauri.myconf.json'
 
 jobs:
   publish-tauri:
@@ -22,18 +21,6 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v2
-
-      - name: Create dist folder
-        run: |
-          mkdir -p ./dist
-          mv ./assets/ ./dist/
-          mv ./components ./dist/
-          mv ./views ./dist/
-          mv ./router ./dist/
-          mv ./store ./dist/
-          mv ./index.html ./dist/
-          mv ./main.js ./dist/
-          mv ./README.md ./dist/
 
       - name: Setup node
         uses: actions/setup-node@v1
@@ -53,12 +40,12 @@ jobs:
 
       - name: Install tauri-cli
         run: |
-          yarn add -D @tauri-apps/cli
+          npm i @tauri-apps/cli
 
       - name: Initialize Tauri for Linux
         if: matrix.platform == 'ubuntu-latest'
         run: |
-          yarn tauri init --app-name "$APP_NAME" --window-title "$WINDOW_NAME" --dist-dir $DIST_DIR --dev-path $DEV_PATH
+          npm run tauri init --app-name "$APP_NAME" --window-title "$WINDOW_NAME" --dist-dir $DIST_DIR --dev-path $DEV_PATH
 
       - name: Initialize Tauri for Windows
         if: matrix.platform == 'windows-latest'
@@ -68,12 +55,12 @@ jobs:
       - name: Build Tauri for Linux
         if: matrix.platform == 'ubuntu-latest'
         run: |
-          yarn tauri build -c $CONFIG_PATH
+          npm run tauri build 
 
       - name: Build Tauri for Windows
         if: matrix.platform == 'windows-latest'
         run: |
-          yarn tauri build -c $env:CONFIG_PATH
+          npm run tauri build
 
       - name: Upload build bundles
         uses: actions/upload-artifact@v3
