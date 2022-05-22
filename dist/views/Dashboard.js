@@ -62,6 +62,8 @@ app.component('dashboard', {
         rootObject: viewer.scene,
         viewer: viewer,
         serverName: '/move_base',
+        markerImage: 'assets/icons/app/32x32.png',
+        withOrientation: true,
       });
 
       emitter.emit('mapLoaded', viewer, nav);
