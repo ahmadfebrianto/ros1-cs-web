@@ -40,25 +40,9 @@ jobs:
 
       - name: Install tauri-cli
         run: |
-          npm i @tauri-apps/cli
+          npm install 
 
-      - name: Initialize Tauri for Linux
-        if: matrix.platform == 'ubuntu-latest'
-        run: |
-          npm run tauri init --app-name "$APP_NAME" --window-title "$WINDOW_NAME" --dist-dir $DIST_DIR --dev-path $DEV_PATH
-
-      - name: Initialize Tauri for Windows
-        if: matrix.platform == 'windows-latest'
-        run: |
-          yarn tauri init --app-name "$env:APP_NAME" --window-title "$env:WINDOW_NAME" --dist-dir $env:DIST_DIR --dev-path $env:DEV_PATH
-
-      - name: Build Tauri for Linux
-        if: matrix.platform == 'ubuntu-latest'
-        run: |
-          npm run tauri build 
-
-      - name: Build Tauri for Windows
-        if: matrix.platform == 'windows-latest'
+      - name: Build Tauri App
         run: |
           npm run tauri build
 
