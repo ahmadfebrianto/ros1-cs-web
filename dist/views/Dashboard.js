@@ -62,7 +62,7 @@ app.component('dashboard', {
         rootObject: viewer.scene,
         viewer: viewer,
         serverName: '/move_base',
-        markerImage: 'assets/icons/app/32x32.png',
+        markerImage: 'assets/icons/app/agv-marker.png',
         withOrientation: true,
       });
 
