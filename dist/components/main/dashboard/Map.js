@@ -13,7 +13,9 @@ app.component('dashboard-map', {
     </div>`,
 
   data() {
-    return {};
+    return {
+      nav: null,
+    };
   },
 
   methods: {
@@ -26,6 +28,51 @@ app.component('dashboard-map', {
         ? 'pointer-events-none'
         : '';
     },
+
+    renderMap() {
+      var viewer = new ROS2D.Viewer({
+        divID: 'map',
+        width: 500,
+        height: 500,
+      });
+
+      this.nav = new NAV2D.OccupancyGridClientNav({
+        ros: this.ros,
+        rootObject: viewer.scene,
+        viewer: viewer,
+        serverName: '/move_base',
+        markerImage: 'assets/icons/app/agv-marker.png',
+        withOrientation: true,
+      });
+
+      emitter.emit('mapLoaded');
+    },
+
+    cancelGoal() {
+      this.nav.navigator.cancelGoal();
+      this.sendLog('Goal cancelled', 'info');
+    },
+
+    sendLog(text, category) {
+      const log = { text, category };
+      emitter.emit('addLog', log);
+    },
+  },
+
+  computed: {
+    ros() {
+      return this.$store.state.ros;
+    },
+  },
+
+  mounted() {
+    emitter.on('connected', () => {
+      this.renderMap();
+    });
+
+    emitter.on('cancelGoal', () => {
+      this.cancelGoal();
+    });
   },
 
   updated() {

@@ -43,30 +43,13 @@ app.component('dashboard', {
           `Connected to ${connection.ip}:${connection.port}`,
           'success'
         );
-        this.renderMap();
+        this.$store.commit('setRos', this.ros);
+        emitter.emit('connected');
       });
 
       this.ros.on('error', (error) => {
         this.sendLog('Error connecting to websocket server.', 'error');
       });
-    },
-
-    renderMap() {
-      var viewer = new ROS2D.Viewer({
-        divID: 'map',
-        width: 500,
-        height: 500,
-      });
-
-      this.nav = new NAV2D.OccupancyGridClientNav({
-        ros: this.ros,
-        rootObject: viewer.scene,
-        viewer: viewer,
-        serverName: '/move_base',
-        markerImage: 'assets/icons/app/agv-marker.png',
-        withOrientation: true,
-      });
-      emitter.emit('mapLoaded');
     },
 
     disconnect() {
@@ -86,11 +69,6 @@ app.component('dashboard', {
     sendLog(text, category) {
       const log = { text, category };
       emitter.emit('addLog', log);
-    },
-
-    cancelGoal() {
-      this.nav.navigator.cancelGoal();
-      this.sendLog('Goal cancelled', 'info');
     },
   },
 
@@ -115,10 +93,6 @@ app.component('dashboard', {
       while (canvasses.length > 1) {
         map.removeChild(canvasses[0]);
       }
-    });
-
-    emitter.on('cancelGoal', () => {
-      this.cancelGoal();
     });
   },
 });
