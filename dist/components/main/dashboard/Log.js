@@ -45,8 +45,6 @@ app.component('log', {
       if (this.logs.length > 5) {
         this.logs.shift();
       }
-
-      console.log(this.logs);
     },
 
     saveLogs() {

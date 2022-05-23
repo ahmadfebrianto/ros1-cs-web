@@ -108,6 +108,9 @@ NAV2D.Navigator = function (options) {
    *
    * @param pose - the goal pose
    */
+
+  var currentGoal
+
   function sendGoal(pose) {
     // create a goal
     var goal = new ROSLIB.Goal({
@@ -122,6 +125,8 @@ NAV2D.Navigator = function (options) {
       },
     });
     goal.send();
+
+    that.currentGoal = goal;
 
     // create a marker for the goal
     var goalMarker = new ROS2D.NavigationArrow({
@@ -141,6 +146,12 @@ NAV2D.Navigator = function (options) {
       that.rootObject.removeChild(goalMarker);
     });
   }
+
+  this.cancelGoal = function () {
+    if (typeof that.currentGoal !== 'undefined' && that.currentGoal !== null) {
+      that.currentGoal.cancel();
+    }
+  };
 
   // get a handle to the stage
   var stage;

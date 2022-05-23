@@ -35,6 +35,7 @@ app.component('dashboard', {
       const options = {
         url: `ws://${connection.ip}:${connection.port}`,
       };
+
       this.ros = new ROSLIB.Ros(options);
       this.ros.on('connection', () => {
         this.$store.commit('setStatus', 'Connected');
@@ -57,7 +58,7 @@ app.component('dashboard', {
         height: 500,
       });
 
-      var nav = NAV2D.OccupancyGridClientNav({
+      this.nav = new NAV2D.OccupancyGridClientNav({
         ros: this.ros,
         rootObject: viewer.scene,
         viewer: viewer,
@@ -65,8 +66,7 @@ app.component('dashboard', {
         markerImage: 'assets/icons/app/agv-marker.png',
         withOrientation: true,
       });
-
-      emitter.emit('mapLoaded', viewer, nav);
+      emitter.emit('mapLoaded');
     },
 
     disconnect() {
@@ -86,6 +86,11 @@ app.component('dashboard', {
     sendLog(text, category) {
       const log = { text, category };
       emitter.emit('addLog', log);
+    },
+
+    cancelGoal() {
+      this.nav.navigator.cancelGoal();
+      this.sendLog('Goal cancelled', 'info');
     },
   },
 
@@ -110,6 +115,10 @@ app.component('dashboard', {
       while (canvasses.length > 1) {
         map.removeChild(canvasses[0]);
       }
+    });
+
+    emitter.on('cancelGoal', () => {
+      this.cancelGoal();
     });
   },
 });
