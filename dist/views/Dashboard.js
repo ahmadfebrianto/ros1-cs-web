@@ -7,7 +7,7 @@ app.component('dashboard', {
       <connection />
       <speed />
       <navigation-mode />
-      <joystick v-if="this.$store.state.navigationMode === 'Joystick'" :ros="ros" />
+      <joystick v-if="this.$store.state.navigationMode === 'Joystick'"/>
       <interactive v-else/>
     </div>
 
