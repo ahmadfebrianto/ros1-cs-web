@@ -1,7 +1,7 @@
 app.component('joystick', {
   template: `
     <div class="card">
-      <div id="joystick" class="relative h-64" >
+      <div id="joystick" class="relative h-44" :class="classObject">
       </div>
     </div>
         `,
@@ -23,8 +23,12 @@ app.component('joystick', {
       };
     },
 
-    robotSpeed() {
-      return this.$store.state.robotSpeed;
+    linearSpeed() {
+      return this.$store.state.linearSpeed;
+    },
+
+    angularSpeed() {
+      return this.$store.state.angularSpeed;
     },
   },
 
@@ -36,8 +40,8 @@ app.component('joystick', {
         messageType: 'geometry_msgs/Twist',
       });
 
-      var _linear = (linear * this.robotSpeed) / 1;
-      var _angular = -(angular * this.robotSpeed) / 1;
+      var _linear = (linear * this.linearSpeed) / 1;
+      var _angular = -(angular * this.angularSpeed) / 1;
       var twist = new ROSLIB.Message({
         linear: {
           x: _linear,
@@ -67,7 +71,7 @@ app.component('joystick', {
         position: { left: '50%', top: '50%' },
         color: 'blue',
         dynamicPage: true,
-        size: 150,
+        size: 100,
       };
       this.joystick = nipplejs.create(options);
 
@@ -81,9 +85,9 @@ app.component('joystick', {
       });
 
       this.joystick.on('move', (event, nipple) => {
-        if (nipple.distance / 75 > 0.1) {
+        if (nipple.distance / 50 > 0.1) {
           linear_speed =
-            (Math.sign(Math.sin(nipple.angle.radian)) * nipple.distance) / 75;
+            (Math.sign(Math.sin(nipple.angle.radian)) * nipple.distance) / 50;
         } else {
           linear_speed = 0;
         }

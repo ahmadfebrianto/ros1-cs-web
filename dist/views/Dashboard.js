@@ -5,8 +5,8 @@ app.component('dashboard', {
             sm:grid sm:grid-rows-3 sm:grid-cols-3 sm:gap-x-3">
     <div class="sm:row-span-3 sm:col-span-1 md:basis-1/4">
       <connection />
-      <speed />
       <navigation-mode />
+      <speed />
       <joystick v-if="this.$store.state.navigationMode === 'Joystick'"/>
       <interactive v-else/>
     </div>

@@ -5,7 +5,8 @@ const store = Vuex.createStore({
     status: 'Disconnected', // Connected, Disconnected
     navigationMode: 'Interactive', // Joystick or Interactive
     activeMenu: 'Dashboard', // 'Dashboard', 'Settings', 'Documentation', 'About'
-    robotSpeed: 0.1, // m/s
+    linearSpeed: 0.1,
+    angularSpeed: 0.1,
     robotDirection: 'forward', // forward, backward, left, right
     robotMoving: false,
     sidebarCollapsed: false,
@@ -35,8 +36,12 @@ const store = Vuex.createStore({
       state.activeMenu = activeMenu;
     },
 
-    setRobotSpeed(state, robotSpeed) {
-      state.robotSpeed = robotSpeed;
+    setLinearSpeed(state, linearSpeed) {
+      state.linearSpeed = linearSpeed;
+    },
+
+    setAngularSpeed(state, angularSpeed) {
+      state.angularSpeed = angularSpeed;
     },
 
     setRobotDirection(state, robotDirection) {

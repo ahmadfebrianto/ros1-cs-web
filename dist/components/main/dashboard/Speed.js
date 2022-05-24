@@ -4,70 +4,122 @@ app.component('speed', {
       <div class="mb-1">
         <small class="text-gray-700 font-bold tracking-wider">Speed</small>
       </div>
-      <div class="grid grid-cols-5
-                w-full p-1 rounded-md
-                bg-gray-tertiary text-blue-primary
-                text-lg font-semibold text-center">
-        <div 
-          class="flex justify-center items-center
-                hover:scale-150 cursor-pointer" 
-          :class="checkMinSpeed()"
-          @click="decreaseSpeed()">
-          <img src="assets/icons/speed/minus.svg" alt="Decrease Speed" />
+
+      <div class="flex flex-col gap-2">
+        <div class="flex flex-row gap-5">
+          <div class="basis-1/3 flex items-center pl-2">
+            <small>Linear</small>
+          </div>
+          
+          <div class="grid grid-cols-5
+                    w-full p-1 rounded-md
+                    bg-gray-tertiary text-blue-primary
+                    font-semibold text-center
+                    basis-2/3">
+            <div 
+              class="flex justify-center items-center
+                    hover:scale-150 cursor-pointer" 
+              :class="checkMinSpeed(linearSpeed)"
+              @click="decreaseSpeed('L')">
+              <img src="assets/icons/speed/minus.svg" alt="Decrease Speed" />
+            </div>
+            <div class="col-span-3 text-md">
+              {{ linearSpeed }}
+            </div>
+            <div 
+              class="flex justify-center items-center
+                    hover:scale-150 cursor-pointer" 
+              :class="checkMaxSpeed(linearSpeed)"
+              @click="increaseSpeed('L')">
+              <img src="assets/icons/speed/plus.svg" alt="Increase Speed" class="" />
+            </div>
+          </div>
         </div>
-        <div class="col-span-3 text-md">
-          {{ speed }}
+
+        <div class="flex flex-row gap-5">
+          <div class="basis-1/3 flex items-center pl-2">
+            <small>Angular</small>
+          </div>
+          
+          <div class="grid grid-cols-5
+                    w-full p-1 rounded-md
+                    bg-gray-tertiary text-blue-primary
+                    font-semibold text-center
+                    basis-2/3">
+            <div 
+              class="flex justify-center items-center
+                    hover:scale-150 cursor-pointer" 
+              :class="checkMinSpeed(angularSpeed)"
+              @click="decreaseSpeed('A')">
+              <img src="assets/icons/speed/minus.svg" alt="Decrease Speed" />
+            </div>
+            <div class="col-span-3 text-md">
+              {{ angularSpeed }}
+            </div>
+            <div 
+              class="flex justify-center items-center
+                    hover:scale-150 cursor-pointer" 
+              :class="checkMaxSpeed(angularSpeed)"
+              @click="increaseSpeed('A')">
+              <img src="assets/icons/speed/plus.svg" alt="Increase Speed" class="" />
+            </div>
+          </div>
         </div>
-        <div 
-          class="flex justify-center items-center
-                hover:scale-150 cursor-pointer" 
-          :class="checkMaxSpeed()"
-          @click="increaseSpeed()">
-          <img src="assets/icons/speed/plus.svg" alt="Increase Speed" class="" />
-        </div>
+      
       </div>
+
     </div>
   `,
 
   data() {
     return {
-      speed: {
+      linearSpeed: {
+        type: Number,
+      },
+      angularSpeed: {
         type: Number,
       },
     };
   },
 
   methods: {
-    setRobotSpeed() {
-      this.$store.commit('setRobotSpeed', this.speed / 10);
-      this.sendLog(`Speed changed to ${this.speed}`, 'info');
-
-      if (this.$store.state.robotMoving) {
-        emitter.emit('robotSpeedChanged');
+    commitRobotSpeed(type) {
+      if (type === 'L') {
+        this.$store.commit('setLinearSpeed', this.linearSpeed / 10);
+        this.sendLog(`Linear speed set to ${this.linearSpeed}`, 'success');
+      } else {
+        this.$store.commit('setAngularSpeed', this.angularSpeed / 10);
+        this.sendLog(`Angular speed set to ${this.angularSpeed}`, 'success');
       }
     },
 
-    increaseSpeed() {
-      if (this.speed < 5) {
-        this.speed = this.speed + 1;
-        this.setRobotSpeed();
+    increaseSpeed(type) {
+      if (type === 'L') {
+        this.linearSpeed += 1;
+      } else {
+        this.angularSpeed += 1;
       }
+      this.commitRobotSpeed(type);
     },
 
-    decreaseSpeed() {
-      this.speed = this.speed - 1;
-      this.setRobotSpeed();
+    decreaseSpeed(type) {
+      if (type === 'L') {
+        this.linearSpeed -= 1;
+      } else {
+        this.angularSpeed -= 1;
+      }
+      this.commitRobotSpeed(type);
     },
 
-    checkMaxSpeed() {
-      if (this.speed >= 5) {
+    checkMaxSpeed(speed) {
+      if (speed >= 9) {
         return 'pointer-events-none';
       }
       return '';
     },
 
-    checkMinSpeed() {
-      if (this.speed <= 1) {
+    checkMinSpeed(speed) {
+      if (speed <= 1) {
         return 'pointer-events-none';
       }
       return '';
@@ -80,6 +132,7 @@ app.component('speed', {
   },
 
   mounted() {
-    this.speed = this.$store.state.robotSpeed * 10;
+    this.linearSpeed = this.$store.state.linearSpeed * 10;
+    this.angularSpeed = this.$store.state.angularSpeed * 10;
   },
 });
