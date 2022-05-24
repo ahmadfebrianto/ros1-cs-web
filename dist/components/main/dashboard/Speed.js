@@ -19,17 +19,17 @@ app.component('speed', {
             <div 
               class="flex justify-center items-center
                     hover:scale-150 cursor-pointer" 
-              :class="checkMinSpeed(linearSpeed)"
+              :class="checkMinSpeed(computedLinearSpeed)"
               @click="decreaseSpeed('L')">
               <img src="assets/icons/speed/minus.svg" alt="Decrease Speed" />
             </div>
             <div class="col-span-3 text-md">
-              {{ linearSpeed }}
+              {{ computedLinearSpeed }}
             </div>
             <div 
               class="flex justify-center items-center
                     hover:scale-150 cursor-pointer" 
-              :class="checkMaxSpeed(linearSpeed)"
+              :class="checkMaxSpeed(computedLinearSpeed)"
               @click="increaseSpeed('L')">
               <img src="assets/icons/speed/plus.svg" alt="Increase Speed" class="" />
             </div>
@@ -49,17 +49,17 @@ app.component('speed', {
             <div 
               class="flex justify-center items-center
                     hover:scale-150 cursor-pointer" 
-              :class="checkMinSpeed(angularSpeed)"
+              :class="checkMinSpeed(computedAngularSpeed)"
               @click="decreaseSpeed('A')">
               <img src="assets/icons/speed/minus.svg" alt="Decrease Speed" />
             </div>
             <div class="col-span-3 text-md">
-              {{ angularSpeed }}
+              {{ computedAngularSpeed }}
             </div>
             <div 
               class="flex justify-center items-center
                     hover:scale-150 cursor-pointer" 
-              :class="checkMaxSpeed(angularSpeed)"
+              :class="checkMaxSpeed(computedAngularSpeed)"
               @click="increaseSpeed('A')">
               <img src="assets/icons/speed/plus.svg" alt="Increase Speed" class="" />
             </div>
@@ -82,31 +82,40 @@ app.component('speed', {
     };
   },
 
+  computed: {
+    computedLinearSpeed() {
+      return Math.floor(this.linearSpeed * 10);
+    },
+    computedAngularSpeed() {
+      return Math.floor(this.angularSpeed * 10);
+    },
+  },
+
   methods: {
     commitRobotSpeed(type) {
       if (type === 'L') {
-        this.$store.commit('setLinearSpeed', this.linearSpeed / 10);
-        this.sendLog(`Linear speed set to ${this.linearSpeed}`, 'success');
+        this.$store.commit('setLinearSpeed', this.linearSpeed);
+        this.sendLog(`Linear speed set to ${this.computedLinearSpeed}`, 'success');
       } else {
-        this.$store.commit('setAngularSpeed', this.angularSpeed / 10);
-        this.sendLog(`Angular speed set to ${this.angularSpeed}`, 'success');
+        this.$store.commit('setAngularSpeed', this.angularSpeed);
+        this.sendLog(`Angular speed set to ${this.computedAngularSpeed}`, 'success');
       }
     },
 
     increaseSpeed(type) {
       if (type === 'L') {
-        this.linearSpeed += 1;
+        this.linearSpeed += 0.1;
       } else {
-        this.angularSpeed += 1;
+        this.angularSpeed += 0.1;
       }
       this.commitRobotSpeed(type);
     },
 
     decreaseSpeed(type) {
       if (type === 'L') {
-        this.linearSpeed -= 1;
+        this.linearSpeed -= 0.1;
       } else {
-        this.angularSpeed -= 1;
+        this.angularSpeed -= 0.1;
       }
       this.commitRobotSpeed(type);
     },
@@ -132,7 +141,7 @@ app.component('speed', {
   },
 
   mounted() {
-    this.linearSpeed = this.$store.state.linearSpeed * 10;
-    this.angularSpeed = this.$store.state.angularSpeed * 10;
+    this.linearSpeed = this.$store.state.linearSpeed;
+    this.angularSpeed = this.$store.state.angularSpeed;
   },
 });
