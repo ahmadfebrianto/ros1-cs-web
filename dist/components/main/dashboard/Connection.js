@@ -41,6 +41,7 @@ app.component('connection', {
 
   data() {
     return {
+      ros: null,
       ip: 'localhost',
       port: '9090',
     };
@@ -49,19 +50,60 @@ app.component('connection', {
   methods: {
     connect() {
       if (this.ip === '' || this.port === '') {
-        console.log('IP or port is empty');
+        this.sendLog('IP or port is empty', 'error');
         return;
       }
 
-      this.$store.commit('setConnection', { ip: this.ip, port: this.port });
-      emitter.emit('connect');
-      console.log(`Connecting to ${this.ip}:${this.port}`)
+      const connection = {
+        ip: this.ip,
+        port: this.port,
+      };
+
+      const options = {
+        url: `ws://${connection.ip}:${connection.port}`,
+      };
+
+      this.ros = new ROSLIB.Ros(options);
+
+      this.ros.on('connection', () => {
+        this.$store.commit('setStatus', 'Connected');
+        this.sendLog(
+          `Connected to ${connection.ip} on port ${connection.port}`,
+          'success'
+        );
+        this.$store.commit('setRos', this.ros);
+        emitter.emit('connected');
+      });
+
+      this.ros.on('error', (error) => {
+        this.sendLog('Error connecting to websocket server.', 'error');
+      });
+
+      this.$store.commit('setConnection', connection);
     },
 
     disconnect() {
-      this.$store.commit('setConnection', null);
-      emitter.emit('disconnect');
-      console.log('Disconnecting');
+      if (this.ros !== null) {
+        this.ros.close();
+        this.ros = null;
+        this.$store.commit('setRos', this.ros);
+      }
+      this.$store.commit('setConnection', null); 
+      this.$store.commit('setStatus', 'Disconnected');
+      this.sendLog(`Connection closed`, 'error');
+      emitter.emit('disconnected');
+    },
+
+    sendLog(text, category) {
+      const log = { text, category };
+      emitter.emit('addLog', log);
     },
   },
+
+  mounted() {
+    if (this.$store.state.status === 'Connected') {
+      this.disconnect();
+      this.connect();
+    }
+  } 
 });

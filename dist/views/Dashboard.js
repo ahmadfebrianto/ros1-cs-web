@@ -30,37 +30,6 @@ app.component('dashboard', {
   },
 
   methods: {
-    connect() {
-      const connection = this.$store.state.connection;
-      const options = {
-        url: `ws://${connection.ip}:${connection.port}`,
-      };
-
-      this.ros = new ROSLIB.Ros(options);
-      this.ros.on('connection', () => {
-        this.$store.commit('setStatus', 'Connected');
-        this.sendLog(
-          `Connected to ${connection.ip}:${connection.port}`,
-          'success'
-        );
-        this.$store.commit('setRos', this.ros);
-        emitter.emit('connected');
-      });
-
-      this.ros.on('error', (error) => {
-        this.sendLog('Error connecting to websocket server.', 'error');
-      });
-    },
-
-    disconnect() {
-      if (this.ros !== null) {
-        this.ros.close();
-        this.ros = null;
-      }
-      this.$store.commit('setStatus', 'Disconnected');
-      this.sendLog(`Connection closed`, 'error');
-    },
-
     removeCanvas() {
       const map = document.getElementById('map');
       map.removeChild(map.lastElementChild);
@@ -73,17 +42,7 @@ app.component('dashboard', {
   },
 
   mounted() {
-    if (this.$store.state.status === 'Connected') {
-      this.disconnect();
-      this.connect();
-    }
-
-    emitter.on('connect', () => {
-      this.connect();
-    });
-
-    emitter.on('disconnect', () => {
-      this.disconnect();
+    emitter.on('disconnected', () => {
       this.removeCanvas();
     });
 
