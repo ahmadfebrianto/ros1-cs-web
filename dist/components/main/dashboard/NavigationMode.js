@@ -39,9 +39,9 @@ app.component('navigation-mode-item', {
         type="radio" 
         name="navigation-mode" 
         :id="navigationMode.id"
-        :checked="this.$store.state.navigationMode === navigationMode.name">
+        :checked="checkNavigationMode(navigationMode.name)">
 
-    <label class="form-check-label inline-block text-gray-800 text-sm cursor-pointer" :for="navigationMode.id">
+    <label class="form-check-label inline-block text-gray-800 text-xs tracking-wider cursor-pointer" :for="navigationMode.id">
         {{ navigationMode.name}}
     </label>
   `,
@@ -51,6 +51,10 @@ app.component('navigation-mode-item', {
     setNavigationMode(mode) {
       this.$store.commit('setNavigationMode', mode);
       this.sendLog(`Navigation mode changed to ${mode}`);
+    },
+
+    checkNavigationMode(mode) {
+      return this.$store.state.navigationMode === mode;
     },
 
     sendLog(text, category) {

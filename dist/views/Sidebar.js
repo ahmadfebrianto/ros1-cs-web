@@ -2,14 +2,13 @@ app.component('sidebar', {
   template: `
     <aside 
       id="sidebar" 
-      class="bg-blue-primary max-w-1/5 h-full sm:hidden md:hidden lg:block fixed top-0 left-0 bottom-0"
-      :class="this.$store.state.sidebarCollapsed ? 'collapsed' : ''"
-    >
+      class="bg-blue-primary max-w-1/5 h-full 
+            sm:hidden md:hidden 
+            lg:block fixed top-0 left-0 bottom-0">
         <div 
-          class="bg-gray-secondary h-32 grid content-center"
-        >
+          class="bg-gray-secondary h-32 grid content-center">
           <img 
-            v-if="isSidebarCollapsed()" 
+            v-if="sidebarCollapsed" 
             class="m-auto" 
             src="assets/icons/app/32x32.png">
           <img 
@@ -23,20 +22,37 @@ app.component('sidebar', {
                   hover:bg-blue-secondary" 
             :class="setActiveMenuColor(item.name)"
             @click="setActiveMenu(item.name)"
-            v-for="item in items"
-          >
+            v-for="item in items">
             <sidebar-item :item="item"/>
           </li>
         </ul>
-        
     </aside>
       `,
 
-  methods: {
-    isSidebarCollapsed() {
-      return this.$store.state.sidebarCollapsed;
-    },
+  data() {
+    return {
+      items: [
+        {
+          name: 'Dashboard',
+          svg: 'assets/icons/sidebar/grid-fill.svg',
+          route: '/',
+        },
+        {
+          name: 'About',
+          svg: 'assets/icons/sidebar/info-circle-fill.svg',
+          route: '/about',
+        },
+      ],
+    };
+  },
 
+  computed: {
+    sidebarCollapsed() {
+      return this.$store.state.sidebarCollapsed;
+    }
+  },
+
+  methods: {
     setActiveMenu(route) {
       this.$store.commit('setActiveMenu', route);
     },
@@ -60,23 +76,6 @@ app.component('sidebar', {
       }
       emitter.emit('sidebarWidthUpdated');
     },
-  },
-
-  data() {
-    return {
-      items: [
-        {
-          name: 'Dashboard',
-          svg: 'assets/icons/sidebar/grid-fill.svg',
-          route: '/',
-        },
-        {
-          name: 'About',
-          svg: 'assets/icons/sidebar/info-circle-fill.svg',
-          route: '/about',
-        },
-      ],
-    };
   },
 
   updated() {

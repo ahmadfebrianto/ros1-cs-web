@@ -7,7 +7,7 @@ app.component('dashboard', {
       <connection />
       <navigation-mode />
       <speed />
-      <joystick v-if="this.$store.state.navigationMode === 'Joystick'"/>
+      <joystick v-if="modeJoystick"/>
       <interactive v-else/>
     </div>
 
@@ -27,6 +27,12 @@ app.component('dashboard', {
       viewer: null,
       nav: null,
     };
+  },
+
+  computed: {
+    modeJoystick() {
+      return this.$store.state.navigationMode === 'Joystick';
+    }
   },
 
   methods: {

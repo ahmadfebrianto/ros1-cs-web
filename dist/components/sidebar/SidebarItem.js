@@ -6,11 +6,11 @@ app.component('sidebarItem', {
       class="block p-3">
       <img
         class="inline"
-        :class="removeMarginRightIfCollapsed()"
+        :class="sidebarItemClass"
         :src="item.svg" 
         :alt="item.name"
          />
-      <span class="" v-if="!sidebarIsCollapsed()">
+      <span class="" v-if="!sidebarCollapsed">
         {{ item.name }}
       </span>
 
@@ -18,11 +18,14 @@ app.component('sidebarItem', {
     `,
   props: ['item'],
 
-  methods: {
-    removeMarginRightIfCollapsed() {
-      return this.$store.state.sidebarCollapsed ? 'collapsed' : 'mr-2';
+  computed: {
+    sidebarItemClass() {
+      return {
+        'mr-2': !this.sidebarCollapsed
+      }
     },
-    sidebarIsCollapsed() {
+
+    sidebarCollapsed() {
       return this.$store.state.sidebarCollapsed;
     }
   },
