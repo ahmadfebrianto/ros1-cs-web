@@ -48,10 +48,6 @@ app.component('dashboard', {
   },
 
   mounted() {
-    emitter.on('disconnected', () => {
-      this.removeCanvas();
-    });
-
     emitter.on('mapLoaded', () => {
       const map = document.getElementById('map');
       let canvasses = map.getElementsByTagName('canvas');

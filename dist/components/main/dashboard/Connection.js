@@ -93,11 +93,11 @@ app.component('connection', {
         this.ros.close();
         this.ros = null;
         this.$store.commit('setRos', this.ros);
+        this.$store.commit('setNavigatorClient', null);
+        this.$store.commit('setConnectionData', null); 
+        this.$store.commit('setRobotConnected', false);
+        this.sendLog(`Connection closed`, 'error');
       }
-      this.$store.commit('setConnectionData', null); 
-      this.$store.commit('setRobotConnected', false);
-      this.sendLog(`Connection closed`, 'error');
-      emitter.emit('disconnected');
     },
 
     sendLog(text, category) {

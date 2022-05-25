@@ -35,8 +35,8 @@ app.component('dashboard-map', {
         withOrientation: true,
       });
 
-      emitter.emit('mapLoaded');
       this.$store.commit('setNavigatorClient', this.navClient);
+      emitter.emit('mapLoaded');
     },
 
     sendLog(text, category) {
@@ -64,7 +64,6 @@ app.component('dashboard-map', {
 
   mounted() {
     emitter.on('connected', () => {
-      console.log('on map: captured connected event');
       this.renderMap();
     });
 
