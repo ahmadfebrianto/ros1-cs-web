@@ -7,8 +7,8 @@ app.component('dashboard-map', {
           id="map" 
           class="flex justify-center items-center bg-gray-100
                 sm:h-auto md:h-500"
-          :class="disableClickOnJoystickMode()">
-          <img v-if="!isConnected()" src="assets/images/map/agv.png"> 
+          :class="navigationModeClass">
+          <img v-if="!robotConnected" src="assets/images/map/agv.png"> 
         </div>
     </div>`,
 
@@ -19,16 +19,6 @@ app.component('dashboard-map', {
   },
 
   methods: {
-    isConnected() {
-      return this.$store.state.status === 'Connected';
-    },
-
-    disableClickOnJoystickMode() {
-      return this.$store.state.navigationMode === 'Joystick'
-        ? 'pointer-events-none'
-        : '';
-    },
-
     renderMap() {
       var viewer = new ROS2D.Viewer({
         divID: 'map',
@@ -59,6 +49,17 @@ app.component('dashboard-map', {
     ros() {
       return this.$store.state.ros;
     },
+
+    robotConnected() {
+      return this.$store.state.robotConnected;
+    },
+
+    navigationModeClass() {
+      return {
+        'pointer-events-none': this.$store.state.navigationMode === 'Joystick',
+      }
+    }
+
   },
 
   mounted() {
@@ -67,18 +68,8 @@ app.component('dashboard-map', {
       this.renderMap();
     });
 
-    if (this.isConnected()) {
+    if (this.robotConnected) {
       this.renderMap();
-    }
-  },
-
-  updated() {
-    if (this.isConnected()) {
-      const map = document.getElementById('map');
-      let canvasses = map.getElementsByTagName('canvas');
-      while (canvasses.length > 1) {
-        map.removeChild(canvasses[0]);
-      }
     }
   },
 });

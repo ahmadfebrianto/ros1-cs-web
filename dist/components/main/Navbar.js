@@ -12,8 +12,8 @@ app.component('navbar', {
       </button>
       <div 
         class="px-3 py-1 text-slate-50 text-sm float-right rounded-full"
-        :class="setConnectionClass()">
-        {{ this.$store.state.status }}
+        :class="connectionClass">
+        {{ connectionStatus }}
       </div>
     </nav>
     `,
@@ -26,12 +26,17 @@ app.component('navbar', {
     toggleSidebar() {
       emitter.emit('sidebarToggled');
     },
-
-    setConnectionClass() {
-      return this.$store.state.status === 'Connected'
-        ? 'bg-green-primary'
-        : 'bg-red-primary';
-    },
   },
 
+  computed: {
+    connectionStatus() {
+      return this.$store.state.robotConnected ? 'Connected' : 'Disconnected';
+    },
+
+    connectionClass() {
+      return this.$store.state.robotConnected
+        ? 'bg-green-primary'
+        : 'bg-red-primary';
+    }
+  },
 });

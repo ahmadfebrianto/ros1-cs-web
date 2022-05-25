@@ -1,7 +1,7 @@
 app.component('joystick', {
   template: `
     <div class="card">
-      <div id="joystick" class="relative h-44" :class="classObject">
+      <div id="joystick" class="relative h-44" :class="connectionClass">
       </div>
     </div>
         `,
@@ -17,9 +17,9 @@ app.component('joystick', {
       return this.$store.state.ros;
     },
 
-    classObject() {
+    connectionClass() {
       return {
-        'pointer-events-none': this.$store.state.status === 'Disconnected',
+        'pointer-events-none': !this.$store.state.robotConnected,
       };
     },
 

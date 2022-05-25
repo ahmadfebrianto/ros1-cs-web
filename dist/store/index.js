@@ -3,7 +3,7 @@ const store = Vuex.createStore({
     ros: null,
     navigatorClient: null,
     connectionData: null,
-    status: 'Disconnected', // Connected, Disconnected
+    robotConnected: null,
     navigationMode: 'Interactive', // Joystick or Interactive
     activeMenu: 'Dashboard', // 'Dashboard', 'Settings', 'Documentation', 'About'
     linearSpeed: 0.1,
@@ -29,8 +29,8 @@ const store = Vuex.createStore({
       state.connectionData = connectionData;
     },
 
-    setStatus(state, status) {
-      state.status = status;
+    setRobotConnected(state, robotConnected) {
+      state.robotConnected = robotConnected;
     },
 
     setNavigationMode(state, navigationMode) {

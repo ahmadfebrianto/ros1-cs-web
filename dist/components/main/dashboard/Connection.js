@@ -23,7 +23,7 @@ app.component('connection', {
             <div>
                 <div class="flex mt-1">
                   <button 
-                    v-if="this.$store.state.status === 'Disconnected'" 
+                    v-if="!robotConnected" 
                     class="button bg-blue-primary hover:opacity-90" 
                     @click="connect">
                     Connect
@@ -47,6 +47,12 @@ app.component('connection', {
     };
   },
 
+  computed: {
+    robotConnected() {
+      return this.$store.state.robotConnected;
+    }
+  },
+
   methods: {
     connect() {
       if (this.ip === '' || this.port === '') {
@@ -66,7 +72,7 @@ app.component('connection', {
       this.ros = new ROSLIB.Ros(options);
 
       this.ros.on('connection', () => {
-        this.$store.commit('setStatus', 'Connected');
+        this.$store.commit('setRobotConnected', true);
         this.sendLog(
           `Connected to ${connectionData.ip} on port ${connectionData.port}`,
           'success'
@@ -89,7 +95,7 @@ app.component('connection', {
         this.$store.commit('setRos', this.ros);
       }
       this.$store.commit('setConnectionData', null); 
-      this.$store.commit('setStatus', 'Disconnected');
+      this.$store.commit('setRobotConnected', false);
       this.sendLog(`Connection closed`, 'error');
       emitter.emit('disconnected');
     },
@@ -101,7 +107,7 @@ app.component('connection', {
   },
 
   mounted() {
-    if (this.$store.state.status === 'Connected') {
+    if (this.robotConnected) {
       this.ros = this.$store.state.ros
     }
   } 

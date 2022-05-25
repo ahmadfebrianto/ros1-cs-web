@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="assets/icons/app/icon.ico" type="image/x-icon">
     <title>AGV SLAM</title>
 
-    <!-- JS -->
+    <!-- Tailwind -->
     <script src="assets/js/tailwind/tailwind.js"></script>
     <script src="assets/js/tailwind/tailwind.config.js"></script>
     <!-- CSS -->
@@ -20,14 +20,11 @@
     <script type="text/javascript" src="assets/js/ros/roslib.js"></script>
     <script type="text/javascript" src="assets/js/ros/ros2d.js"></script>
     <script type="text/javascript" src="assets/js/ros/nav2d.js"></script>
-
+    <!-- NippleJS / Joystick-->
     <script src="assets/js/joystick/nipplejs.js"></script>
-    
-    <!-- Vue Core -->
+    <!-- Vue JS-->
     <script src="assets/js/vue3/vue.global.js"></script>
-    <!-- Vue Router -->
     <script src="assets/js/vue3/vue-router.global.js"></script>
-    <!-- Vuex -->
     <script src="assets/js/vue3/vuex.global.js"></script>
     <!-- Event Emitter -->
     <script src="assets/js/mitt/mitt.umd.js"></script>
@@ -38,10 +35,10 @@
     <div id="app">
     </div>
 
-    <!-- Import App -->
+    <!-- App -->
     <script src="./main.js"></script>
 
-    <!-- Import Components -->
+    <!-- Components -->
     <script src="components/sidebar/SidebarItem.js"></script>
     <script src="components/main/Navbar.js"></script>
     <script src="components/main/dashboard/Connection.js"></script>
@@ -52,7 +49,7 @@
     <script src="components/main/dashboard/Joystick.js"></script>
     <script src="components/main/dashboard/Log.js"></script>
 
-    <!-- Import views -->
+    <!-- Views -->
     <script src="views/Dashboard.js"></script>
     <script src="views/About.js"></script>
     <script src="views/Sidebar.js"></script>
@@ -62,11 +59,8 @@
         const About = app.component('about')
     </script>
 
-    <!-- Import Router -->
     <script src="./router/index.js"></script>
-    <!-- Import Store -->
     <script src="./store/index.js"></script>
-    <!-- Mount App -->
     <script>
         const mountedApp = app.mount('#app')
     </script>
