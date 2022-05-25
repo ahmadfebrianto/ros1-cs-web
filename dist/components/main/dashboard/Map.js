@@ -36,21 +36,17 @@ app.component('dashboard-map', {
         height: 500,
       });
 
-      this.nav = new NAV2D.OccupancyGridClientNav({
+      this.navClient = new NAV2D.OccupancyGridClientNav({
         ros: this.ros,
         rootObject: viewer.scene,
         viewer: viewer,
         serverName: '/move_base',
-        markerImage: 'assets/icons/app/agv-marker.png',
+        // markerImage: 'assets/icons/app/agv-marker.png',
         withOrientation: true,
       });
 
       emitter.emit('mapLoaded');
-    },
-
-    cancelGoal() {
-      this.nav.navigator.cancelGoal();
-      this.sendLog('Goal cancelled', 'info');
+      this.$store.commit('setNavigatorClient', this.navClient);
     },
 
     sendLog(text, category) {
@@ -67,12 +63,13 @@ app.component('dashboard-map', {
 
   mounted() {
     emitter.on('connected', () => {
+      console.log('on map: captured connected event');
       this.renderMap();
     });
 
-    emitter.on('cancelGoal', () => {
-      this.cancelGoal();
-    });
+    if (this.isConnected()) {
+      this.renderMap();
+    }
   },
 
   updated() {

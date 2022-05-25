@@ -12,13 +12,23 @@ app.component('interactive', {
     `,
   methods: {
     cancelGoal() {
-      emitter.emit('cancelGoal');
+      this.navClient.navigator.cancelGoal();
+      this.sendLog('Goal canceled', 'info');
     },
+
+    sendLog(text, category) {
+      const log = { text, category };
+      emitter.emit('addLog', log);
+    }
   },
 
   computed: {
     connected() {
       return this.$store.state.status === 'Connected';
     },
+
+    navClient() {
+      return this.$store.state.navigatorClient;
+    }
   },
 });

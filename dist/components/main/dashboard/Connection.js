@@ -102,8 +102,7 @@ app.component('connection', {
 
   mounted() {
     if (this.$store.state.status === 'Connected') {
-      this.disconnect();
-      this.connect();
+      this.ros = this.$store.state.ros
     }
   } 
 });

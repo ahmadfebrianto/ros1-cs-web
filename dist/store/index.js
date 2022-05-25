@@ -1,6 +1,7 @@
 const store = Vuex.createStore({
   state: {
     ros: null,
+    navigatorClient: null,
     connection: null,
     status: 'Disconnected', // Connected, Disconnected
     navigationMode: 'Interactive', // Joystick or Interactive
@@ -18,6 +19,10 @@ const store = Vuex.createStore({
   mutations: {
     setRos(state, ros) {
       state.ros = ros;
+    },
+
+    setNavigatorClient(state, navigatorClient) {
+      state.navigatorClient = navigatorClient;
     },
 
     setConnection(state, connection) {

@@ -69,7 +69,7 @@ app.component('joystick', {
         zone: document.getElementById('joystick'),
         mode: 'static',
         position: { left: '50%', top: '50%' },
-        color: 'blue',
+        color: '#0369A1',
         dynamicPage: true,
         size: 100,
       };
