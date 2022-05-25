@@ -3,11 +3,10 @@ app.component('dashboard-map', {
     /*HTML*/
     `    
     <div class="card">
-        <div 
-          id="map" 
-          class="flex justify-center items-center bg-gray-100
-                sm:h-auto md:h-500"
-          :class="navigationModeClass">
+        <div id="map" 
+            class="flex justify-center items-center bg-gray-100
+                  sm:h-auto md:h-500"
+            :class="navigationModeClass">
           <img v-if="!robotConnected" src="assets/images/map/agv.png"> 
         </div>
     </div>`,
@@ -37,6 +36,16 @@ app.component('dashboard-map', {
 
       this.$store.commit('setNavigatorClient', this.navClient);
       emitter.emit('mapLoaded');
+    },
+
+    removeCanvas() {
+      if (!this.robotConnected) {
+        var map = document.getElementById('map');
+        var canvas = map.getElementsByTagName('canvas')
+        while (canvas.length > 0) {
+          map.removeChild(canvas[0]);
+        }
+      }
     },
 
     sendLog(text, category) {
@@ -70,5 +79,9 @@ app.component('dashboard-map', {
     if (this.robotConnected) {
       this.renderMap();
     }
+  },
+
+  updated() {
+    this.removeCanvas()
   },
 });

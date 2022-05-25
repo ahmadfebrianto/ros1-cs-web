@@ -2,7 +2,7 @@ app.component('speed', {
   template: `
     <div class="card">
       <div class="mb-1">
-        <small class="text-gray-700 font-bold tracking-wider">Speed</small>
+        <small class="text-gray-700 font-bold tracking-wider">Max Speed</small>
       </div>
 
       <div class="flex flex-col gap-2">
@@ -121,7 +121,7 @@ app.component('speed', {
     },
 
     checkMaxSpeed(speed) {
-      if (speed >= 9) {
+      if (speed >= 20) {
         return 'pointer-events-none';
       }
       return '';
