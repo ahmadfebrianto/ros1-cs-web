@@ -54,13 +54,13 @@ app.component('connection', {
         return;
       }
 
-      const connection = {
+      const connectionData = {
         ip: this.ip,
         port: this.port,
       };
 
       const options = {
-        url: `ws://${connection.ip}:${connection.port}`,
+        url: `ws://${connectionData.ip}:${connectionData.port}`,
       };
 
       this.ros = new ROSLIB.Ros(options);
@@ -68,7 +68,7 @@ app.component('connection', {
       this.ros.on('connection', () => {
         this.$store.commit('setStatus', 'Connected');
         this.sendLog(
-          `Connected to ${connection.ip} on port ${connection.port}`,
+          `Connected to ${connectionData.ip} on port ${connectionData.port}`,
           'success'
         );
         this.$store.commit('setRos', this.ros);
@@ -79,7 +79,7 @@ app.component('connection', {
         this.sendLog('Error connecting to websocket server.', 'error');
       });
 
-      this.$store.commit('setConnection', connection);
+      this.$store.commit('setConnectionData', connectionData);
     },
 
     disconnect() {
@@ -88,7 +88,7 @@ app.component('connection', {
         this.ros = null;
         this.$store.commit('setRos', this.ros);
       }
-      this.$store.commit('setConnection', null); 
+      this.$store.commit('setConnectionData', null); 
       this.$store.commit('setStatus', 'Disconnected');
       this.sendLog(`Connection closed`, 'error');
       emitter.emit('disconnected');

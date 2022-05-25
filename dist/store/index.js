@@ -2,7 +2,7 @@ const store = Vuex.createStore({
   state: {
     ros: null,
     navigatorClient: null,
-    connection: null,
+    connectionData: null,
     status: 'Disconnected', // Connected, Disconnected
     navigationMode: 'Interactive', // Joystick or Interactive
     activeMenu: 'Dashboard', // 'Dashboard', 'Settings', 'Documentation', 'About'
@@ -25,8 +25,8 @@ const store = Vuex.createStore({
       state.navigatorClient = navigatorClient;
     },
 
-    setConnection(state, connection) {
-      state.connection = connection;
+    setConnectionData(state, connectionData) {
+      state.connectionData = connectionData;
     },
 
     setStatus(state, status) {
