@@ -8,8 +8,7 @@ app.component('sidebarItem', {
         class="inline"
         :class="sidebarItemClass"
         :src="item.svg" 
-        :alt="item.name"
-         />
+        :alt="item.name"/>
       <span class="" v-if="!sidebarCollapsed">
         {{ item.name }}
       </span>

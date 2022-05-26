@@ -3,23 +3,23 @@ app.component('about', {
     <section class="bg-white">
       <div class="container px-5 py-10 mx-auto">
         <h1 
-          class="text-xl font-bold text-center text-gray-700 capitalize lg:text-3xl dark:text-white">
+          class="text-xl font-bold text-center 
+                text-gray-700 capitalize 
+                lg:text-3xl">
           SLAM Team
         </h1>
         <div class="grid grid-cols-1 gap-4 mt-5 xl:mt-10 md:grid-cols-2 xl:grid-cols-4">
-          <div 
-            class="shadow-primary bg-white-primary flex flex-col items-center p-8 
-                  transition-colors duration-200 transform 
-                  cursor-pointer group rounded-xl
-                  hover:shadow-blue-primary/40 transition-colors duration-200"
-            v-for="member in team">
-            <img 
-              class="object-cover w-32 h-32 rounded-full ring-4 ring-gray-300" 
+          <div class="shadow-primary bg-white-primary flex flex-col items-center p-8 
+                      transition-colors duration-200 transform 
+                      cursor-pointer group rounded-xl
+                      hover:shadow-blue-primary/40 transition-colors duration-200"
+              v-for="member in team">
+              
+            <img class="object-cover w-32 h-32 rounded-full ring-4 ring-gray-300" 
               :src="member.avatar" 
               alt="">
             
-            <h1 
-              class="mt-4 text-xl font-semibold text-gray-700 capitalize  text-center">
+            <h1 class="mt-4 text-xl font-semibold text-gray-700 capitalize  text-center">
               {{ member.name }}
             </h1>
             
@@ -28,8 +28,7 @@ app.component('about', {
             </p>
             
             <div class="flex mt-3 -mx-2">
-              <a 
-                target="_blank"
+              <a target="_blank"
                 :href="member.linkedin" 
                 class="mx-2 text-gray-600 hover:scale-110"
                 :class="disableIfLinkEmpty(member.linkedin)">
@@ -38,8 +37,7 @@ app.component('about', {
                 </svg>
               </a>
 
-              <a 
-                target="_blank"
+              <a target="_blank"
                 :href="member.github" 
                 class="mx-2 text-gray-600 hover:scale-110 "
                 :class="disableIfLinkEmpty(member.github)">

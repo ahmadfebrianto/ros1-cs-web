@@ -6,31 +6,28 @@ app.component('connection', {
             </div> 
             <div class="flex flex-3 gap-x-1 sm:flex-col md:flex-row">
                 <div class="basis-2/3">
-                    <input 
-                      class="input text-center tracking-widest focus:outline-none" 
-                      type="text" 
-                      v-model="ip" 
-                      placeholder="IP">
+                    <input class="input text-center tracking-widest focus:outline-none" 
+                          type="text" 
+                          v-model="ip" 
+                          placeholder="IP">
                 </div>
                 <div class="basis-1/3">
-                    <input 
-                      class="input text-center tracking-wider focus:outline-none" 
-                      type="text" 
-                      v-model="port" 
-                      placeholder="Port">
+                    <input class="input text-center tracking-wider focus:outline-none" 
+                          type="text" 
+                          v-model="port" 
+                          placeholder="Port">
                 </div>
             </div>
             <div>
                 <div class="flex mt-1">
-                  <button 
-                    v-if="!robotConnected" 
-                    class="button bg-blue-primary hover:opacity-90" 
-                    @click="connect">
+                  <button v-if="!robotConnected" 
+                          class="button bg-blue-primary hover:opacity-90" 
+                          @click="connect">
                     Connect
                   </button>
                   <button v-else 
-                    class="button bg-red-500 hover:opacity-90"
-                    @click="disconnect">
+                          class="button bg-red-500 hover:opacity-90"
+                          @click="disconnect">
                     Disconnect
                   </button>
                 </div>

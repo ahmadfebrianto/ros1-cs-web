@@ -6,13 +6,12 @@ app.component('log', {
             </div>
 
             <div class="input p-3">
-                <p 
-                    v-if="rosLogs.length > 0" 
-                    v-for="(log, index) in rosLogs" 
-                    :key="index" 
-                    class="text-xxs"
-                    :class="[log.color, highlightNewLog(index)]">
-                    {{ log.text }}
+                <p v-if="rosLogs.length > 0" 
+                  v-for="(log, index) in rosLogs" 
+                  :key="index" 
+                  class="text-xxs"
+                  :class="[log.color, highlightNewLog(index)]">
+                  {{ log.text }}
                 </p>
                 <p v-else class="text-xxs">No logs</p>
             </div>

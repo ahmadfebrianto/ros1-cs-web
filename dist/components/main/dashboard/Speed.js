@@ -12,25 +12,23 @@ app.component('speed', {
           </div>
           
           <div class="grid grid-cols-5
-                    w-full p-1 rounded-md
-                    bg-gray-tertiary text-blue-primary
-                    font-semibold text-center
-                    basis-2/3">
-            <div 
-              class="flex justify-center items-center
-                    hover:scale-150 cursor-pointer" 
-              :class="checkMinSpeed(computedLinearSpeed)"
-              @click="decreaseSpeed('L')">
+                      w-full p-1 rounded-md
+                      bg-gray-tertiary text-blue-primary
+                      font-semibold text-center
+                      basis-2/3">
+            <div class="flex justify-center items-center
+                        hover:scale-150 cursor-pointer" 
+                :class="checkMinSpeed(computedLinearSpeed)"
+                @click="decreaseSpeed('L')">
               <img src="assets/icons/speed/minus.svg" alt="Decrease Speed" />
             </div>
             <div class="col-span-3 text-md">
               {{ computedLinearSpeed }}
             </div>
-            <div 
-              class="flex justify-center items-center
-                    hover:scale-150 cursor-pointer" 
-              :class="checkMaxSpeed(computedLinearSpeed)"
-              @click="increaseSpeed('L')">
+            <div class="flex justify-center items-center
+                        hover:scale-150 cursor-pointer" 
+                :class="checkMaxSpeed(computedLinearSpeed)"
+                @click="increaseSpeed('L')">
               <img src="assets/icons/speed/plus.svg" alt="Increase Speed" class="" />
             </div>
           </div>
@@ -42,25 +40,23 @@ app.component('speed', {
           </div>
           
           <div class="grid grid-cols-5
-                    w-full p-1 rounded-md
-                    bg-gray-tertiary text-blue-primary
-                    font-semibold text-center
-                    basis-2/3">
-            <div 
-              class="flex justify-center items-center
-                    hover:scale-150 cursor-pointer" 
-              :class="checkMinSpeed(computedAngularSpeed)"
-              @click="decreaseSpeed('A')">
+                      w-full p-1 rounded-md
+                      bg-gray-tertiary text-blue-primary
+                      font-semibold text-center
+                      basis-2/3">
+            <div class="flex justify-center items-center
+                        hover:scale-150 cursor-pointer" 
+                :class="checkMinSpeed(computedAngularSpeed)"
+                @click="decreaseSpeed('A')">
               <img src="assets/icons/speed/minus.svg" alt="Decrease Speed" />
             </div>
             <div class="col-span-3 text-md">
               {{ computedAngularSpeed }}
             </div>
-            <div 
-              class="flex justify-center items-center
-                    hover:scale-150 cursor-pointer" 
-              :class="checkMaxSpeed(computedAngularSpeed)"
-              @click="increaseSpeed('A')">
+            <div class="flex justify-center items-center
+                        hover:scale-150 cursor-pointer" 
+                :class="checkMaxSpeed(computedAngularSpeed)"
+                @click="increaseSpeed('A')">
               <img src="assets/icons/speed/plus.svg" alt="Increase Speed" class="" />
             </div>
           </div>
