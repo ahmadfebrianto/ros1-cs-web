@@ -15,8 +15,8 @@ app.component('navigation-mode', {
     return {
       navigationModes: [
         {
-          id: 'mode-interactive',
-          name: 'Interactive',
+          id: 'mode-navgoal',
+          name: 'Navigation Goal',
         },
         {
           id: 'mode-joystick',

@@ -4,12 +4,10 @@ const store = Vuex.createStore({
     navigatorClient: null,
     connectionData: null,
     robotConnected: null,
-    navigationMode: 'Interactive', // Joystick or Interactive
-    activeMenu: 'Dashboard', // 'Dashboard', 'Settings', 'Documentation', 'About'
+    navigationMode: 'Navigation Goal',
+    activeMenu: 'Dashboard',
     linearSpeed: 0.1,
     angularSpeed: 0.1,
-    robotDirection: 'forward', // forward, backward, left, right
-    robotMoving: false,
     sidebarCollapsed: false,
     sidebarHidden: false,
     sidebarWidth: null,
@@ -47,14 +45,6 @@ const store = Vuex.createStore({
 
     setAngularSpeed(state, angularSpeed) {
       state.angularSpeed = angularSpeed;
-    },
-
-    setRobotDirection(state, robotDirection) {
-      state.robotDirection = robotDirection;
-    },
-
-    setRobotMoving(state, robotMoving) {
-      state.robotMoving = robotMoving;
     },
 
     setSidebarCollapsed(state, sidebarCollapsed) {

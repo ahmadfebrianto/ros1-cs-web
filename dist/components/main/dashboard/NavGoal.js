@@ -1,4 +1,4 @@
-app.component('interactive', {
+app.component('navgoal', {
   template: `
     <div class="card">
         <div class="flex flex-2 sm:flex-col md:flex-row gap-2 p-2">

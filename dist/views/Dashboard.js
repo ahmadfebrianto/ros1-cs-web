@@ -8,7 +8,7 @@ app.component('dashboard', {
       <navigation-mode />
       <speed />
       <joystick v-if="modeJoystick"/>
-      <interactive v-else/>
+      <navgoal v-else/>
     </div>
 
     <div class="sm:col-span-2 sm:row-span-2 md:basis-2/4">
