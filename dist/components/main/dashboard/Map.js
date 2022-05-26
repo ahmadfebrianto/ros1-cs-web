@@ -2,9 +2,9 @@ app.component('dashboard-map', {
   template:
     /*HTML*/
     `    
-    <div class="card">
+    <div class="card p-2">
         <div id="map" 
-            class="flex justify-center items-center bg-gray-100
+            class="flex justify-center items-center
                   sm:h-auto md:h-500"
             :class="navigationModeClass">
           <img v-if="!robotConnected" src="assets/images/map/agv.png"> 
@@ -66,6 +66,7 @@ app.component('dashboard-map', {
     navigationModeClass() {
       return {
         'pointer-events-none': this.$store.state.navigationMode === 'Joystick',
+        'bg-gray-100': !this.$store.state.robotConnected
       }
     }
 
