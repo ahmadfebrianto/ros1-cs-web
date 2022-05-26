@@ -78,6 +78,12 @@ app.component('connection', {
         emitter.emit('connected');
       });
 
+      this.ros.on('close', () => {
+        if (this.robotConnected) {
+          this.disconnect()
+        }
+      })
+
       this.ros.on('error', (error) => {
         this.sendLog('Error connecting to websocket server.', 'error');
       });
@@ -90,11 +96,11 @@ app.component('connection', {
         this.ros.close();
         this.ros = null;
         this.$store.commit('setRos', this.ros);
-        this.$store.commit('setNavigatorClient', null);
-        this.$store.commit('setConnectionData', null); 
-        this.$store.commit('setRobotConnected', false);
-        this.sendLog(`Connection closed`, 'error');
       }
+      this.$store.commit('setNavigatorClient', null);
+      this.$store.commit('setConnectionData', null); 
+      this.$store.commit('setRobotConnected', false);
+      this.sendLog(`Connection closed`, 'error');
     },
 
     sendLog(text, category) {
