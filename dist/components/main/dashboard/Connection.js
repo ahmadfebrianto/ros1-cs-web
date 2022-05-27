@@ -119,5 +119,31 @@ app.component('connection', {
       const log = { text, category };
       emitter.emit('addLog', log);
     },
+
+    saveConnectionData() {
+      const connectionData = {
+        ip: this.ip,
+        port: this.port,
+      };
+      this.$store.commit('setConnectionData', connectionData);
+    },
+
+    loadConnectionData() {
+      const connectionData = this.$store.state.connectionData;
+      if (connectionData) {
+        this.ip = connectionData.ip;
+        this.port = connectionData.port;
+      }
+    },
+  },
+
+  mounted() {
+    this.loadConnectionData();
+  },
+
+  watch: {
+    $route(to, from) {
+      this.saveConnectionData();
+    },
   },
 });

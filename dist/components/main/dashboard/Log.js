@@ -46,6 +46,7 @@ app.component('log', {
       }
       this.logs.push(_log);
 
+      // Remove old logs if more than 5
       if (this.logs.length > 5) {
         this.logs.shift();
       }
@@ -56,9 +57,9 @@ app.component('log', {
     },
 
     /*
-     * Upon visiting other pages (e.g. About), the logs are null so it must be saved
-     * to localStorage. When the user returns to the dashboard, the logs are loaded
-     * from localStorage.
+     * Upon visiting other pages (e.g. About), the logs will be cleared so it must be saved
+     * to localStorage in advance. When the user returns to the dashboard, the logs will then
+     * loaded from localStorage.
      */
     loadLogs() {
       if (localStorage.getItem('logs')) {
@@ -67,7 +68,7 @@ app.component('log', {
       }
     },
 
-    // Make the last log bold
+    // Make the last log text bold
     highlightNewLog(index) {
       if (index === this.logs.length - 1) {
         return 'font-black';
@@ -81,6 +82,7 @@ app.component('log', {
   },
 
   watch: {
+    // Watch router activity, i.e. when the user leaves the dashboard page
     $route(to, from) {
       this.saveLogs();
     },

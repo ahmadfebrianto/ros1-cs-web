@@ -2,7 +2,7 @@ const store = Vuex.createStore({
   state: {
     ros: null,
     navigatorClient: null,
-    connectionData: null,
+    connectionData: { ip: 'localhost', port: '9090' },
     robotConnected: null,
     navigationMode: 'Navigation Goal',
     activeMenu: 'Dashboard',
