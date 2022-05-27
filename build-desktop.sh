@@ -49,9 +49,10 @@ collect_output() {
   echo "[+] Collect output app"
   echo "$TAB|--collecting output app"
   BUNDLE_DIR="./src-tauri/target/release/bundle"
-  cp $BUNDLE_DIR/deb/*amd64.deb $OUTPUT_DIR
-  cp $BUNDLE_DIR/appimage/*amd64.AppImage $OUTPUT_DIR
+  mv $BUNDLE_DIR/deb/*amd64.deb $OUTPUT_DIR
+  mv $BUNDLE_DIR/appimage/*amd64.AppImage $OUTPUT_DIR
   check_result
+  echo "$TAB'--output apps are stored in '$OUTPUT_DIR'"
   echo "$TAB'--done!"
 }
 
