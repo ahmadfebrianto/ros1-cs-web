@@ -35,6 +35,30 @@ app.component('dashboard-map', {
         withOrientation: true,
       });
 
+      var path = new ROS2D.PathShape({
+        strokeSize: 1,
+        strokeColor: createjs.Graphics.getRGB(255, 0, 0, 0.66),
+      });
+
+      this.navClient.rootObject.addChild(path);  
+
+      var topic = new ROSLIB.Topic({
+        ros: this.ros,
+        name: '/move_base/NavfnROS/plan',
+        messageType: 'nav_msgs/Path',
+      });
+
+      topic.subscribe(function (message) {
+        if (
+          message !== null &&
+          typeof message !== 'undefined' &&
+          typeof message.poses !== 'undefined' &&
+          message.poses.length > 0
+        ) {
+          path.setPath(message);
+        }
+      });
+
       this.$store.commit('setNavigatorClient', this.navClient);
       emitter.emit('mapLoaded');
     },
