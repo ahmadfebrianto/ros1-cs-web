@@ -47,7 +47,7 @@ build_tauri_app() {
 
 collect_output() {
   echo "[+] Collect output app"
-  echo "$TAB|--collecting output app"
+  echo "$TAB|--collecting output apps"
   BUNDLE_DIR="./src-tauri/target/release/bundle"
   mv $BUNDLE_DIR/deb/*amd64.deb $OUTPUT_DIR
   mv $BUNDLE_DIR/appimage/*amd64.AppImage $OUTPUT_DIR

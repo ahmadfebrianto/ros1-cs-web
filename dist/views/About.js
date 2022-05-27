@@ -60,7 +60,7 @@ app.component('about', {
           name: 'M. Hilal Yahya H.',
           role: 'Hardware Engineer',
           avatar: 'assets/images/team/hilal.png',
-          github: '',
+          github: 'https://github.com/Hi-Peng',
           linkedin: 'https://www.linkedin.com/in/hilal-yahya-437049196/',
         },
         {
@@ -75,7 +75,7 @@ app.component('about', {
           role: 'Software Engineer',
           avatar: 'assets/images/team/mujib.jpg',
           github: 'https://github.com/mujibluth',
-          linkedin: '',
+          linkedin: 'https://www.linkedin.com/in/abdul-mujiburrohman-luthfi-3b73011b0',
         },
         {
           name: 'Dwikky Anugerah',
