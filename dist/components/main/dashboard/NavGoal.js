@@ -1,14 +1,18 @@
 app.component('navgoal', {
-  template: `
-    <div class="card">
+  template:
+    /* HTML */
+    `
+      <div class="card">
         <div class="flex flex-2 sm:flex-col md:flex-row gap-2 p-2">
-            <button class="button bg-red-500 hover:opacity-90 active:opacity-100"
-                    @click="cancelGoal"
-                    :class="connectionClass">
-              Cancel Goal
-            </button>
+          <button
+            class="button bg-red-500 hover:opacity-90 active:opacity-100"
+            @click="cancelGoal"
+            :class="connectionClass"
+          >
+            Cancel Goal
+          </button>
         </div>
-    </div>
+      </div>
     `,
   methods: {
     cancelGoal() {
@@ -33,6 +37,7 @@ app.component('navgoal', {
 
     connectionClass() {
       return {
+        // Disable 'Cancel Goal' button if robot is not connected
         'pointer-events-none opacity-50': !this.robotConnected,
       };
     },

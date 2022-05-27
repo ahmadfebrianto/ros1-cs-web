@@ -1,14 +1,15 @@
 app.component('dashboard-map', {
   template:
-    /*HTML*/
-    `    
-    <div class="card p-2">
-        <div id="map" 
-            class="flex justify-center items-center
-                  sm:h-auto md:h-500"
-            :class="navigationModeClass">
-          <img v-if="!robotConnected" src="assets/images/map/agv.png"> 
-        </div>
+    /* HTML */
+    ` <div class="card p-2">
+      <div
+        id="map"
+        class="flex justify-center items-center
+                sm:h-auto md:h-500"
+        :class="navigationModeClass"
+      >
+        <img v-if="!robotConnected" src="assets/images/map/agv.png" />
+      </div>
     </div>`,
 
   data() {
@@ -41,7 +42,7 @@ app.component('dashboard-map', {
     removeCanvas() {
       if (!this.robotConnected) {
         var map = document.getElementById('map');
-        var canvas = map.getElementsByTagName('canvas')
+        var canvas = map.getElementsByTagName('canvas');
         while (canvas.length > 0) {
           map.removeChild(canvas[0]);
         }
@@ -65,24 +66,41 @@ app.component('dashboard-map', {
 
     navigationModeClass() {
       return {
+        // When navigation mode is set to Joystick, disable click on map
         'pointer-events-none': this.$store.state.navigationMode === 'Joystick',
-        'bg-gray-100': !this.$store.state.robotConnected
-      }
-    }
-
+        // When the robot is connected, remove background color on map
+        'bg-gray-100': !this.$store.state.robotConnected,
+      };
+    },
   },
 
   mounted() {
+    /*
+     * Handle the event when robot is connected
+     * by rendering the map
+     */
     emitter.on('connected', () => {
       this.renderMap();
     });
 
+    /*
+     * When we move (from the Dashboard) to another page (e.g. About) while robot is connected
+     * and then return to the Dashboard, all components in the Dashboard are remounted
+     * including 'map' component. That causes the 'map' canvas to be removed.
+     * Since the robotConnected state is true, the placeholder image is not shown as well.
+     * This leaves the map component empty. To fix this, we have to re-render the map when
+     * the robot is connected because ros instance is still available in the store.
+     */
     if (this.robotConnected) {
       this.renderMap();
     }
   },
 
   updated() {
-    this.removeCanvas()
+    /*
+     * When the robot is disconnected, remove the map canvas. Otherwise, it will overlap
+     * the placeholder image. 
+     */
+    this.removeCanvas();
   },
 });

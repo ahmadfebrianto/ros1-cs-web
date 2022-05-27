@@ -1,53 +1,64 @@
 app.component('connection', {
-  template: `
-        <div id="connection" class="card">
-            <div class="mb-1">
-                <small class="text-gray-700 font-bold tracking-wider">Connection</small>
-            </div> 
-            <div class="flex flex-3 gap-x-1 sm:flex-col md:flex-row">
-                <div class="basis-2/3">
-                    <input class="input text-center tracking-widest focus:outline-none" 
-                          type="text" 
-                          v-model="ip" 
-                          placeholder="IP">
-                </div>
-                <div class="basis-1/3">
-                    <input class="input text-center tracking-wider focus:outline-none" 
-                          type="text" 
-                          v-model="port" 
-                          placeholder="Port">
-                </div>
-            </div>
-            <div>
-                <div class="flex mt-1">
-                  <button v-if="!robotConnected" 
-                          class="button bg-blue-primary hover:opacity-90" 
-                          @click="connect">
-                    Connect
-                  </button>
-                  <button v-else 
-                          class="button bg-red-500 hover:opacity-90"
-                          @click="disconnect">
-                    Disconnect
-                  </button>
-                </div>
-            </div>
+  template:
+    /* HTML */
+    `
+      <div id="connection" class="card">
+        <div class="mb-1">
+          <small class="text-gray-700 font-bold tracking-wider"
+            >Connection</small
+          >
         </div>
-
+        <div class="flex flex-3 gap-x-1 sm:flex-col md:flex-row">
+          <div class="basis-2/3">
+            <input
+              class="input text-center tracking-widest focus:outline-none"
+              type="text"
+              v-model="ip"
+              placeholder="IP"
+            />
+          </div>
+          <div class="basis-1/3">
+            <input
+              class="input text-center tracking-wider focus:outline-none"
+              type="text"
+              v-model="port"
+              placeholder="Port"
+            />
+          </div>
+        </div>
+        <div>
+          <div class="flex mt-1">
+            <button
+              v-if="!robotConnected"
+              class="button bg-blue-primary hover:opacity-90"
+              @click="connect"
+            >
+              Connect
+            </button>
+            <button
+              v-else
+              class="button bg-red-500 hover:opacity-90"
+              @click="disconnect"
+            >
+              Disconnect
+            </button>
+          </div>
+        </div>
+      </div>
     `,
 
   data() {
     return {
       ros: null,
       ip: 'localhost',
-      port: '9090',
+      port: '9090', // Default port for rosbridge
     };
   },
 
   computed: {
     robotConnected() {
       return this.$store.state.robotConnected;
-    }
+    },
   },
 
   methods: {
@@ -75,14 +86,15 @@ app.component('connection', {
           'success'
         );
         this.$store.commit('setRos', this.ros);
+        // Emit 'connected' event to map component
         emitter.emit('connected');
       });
 
       this.ros.on('close', () => {
         if (this.robotConnected) {
-          this.disconnect()
+          this.disconnect();
         }
-      })
+      });
 
       this.ros.on('error', (error) => {
         this.sendLog('Error connecting to websocket server.', 'error');
@@ -95,10 +107,10 @@ app.component('connection', {
       if (this.ros !== null) {
         this.ros.close();
         this.ros = null;
-        this.$store.commit('setRos', this.ros);
       }
+      this.$store.commit('setRos', this.ros);
       this.$store.commit('setNavigatorClient', null);
-      this.$store.commit('setConnectionData', null); 
+      this.$store.commit('setConnectionData', null);
       this.$store.commit('setRobotConnected', false);
       this.sendLog(`Connection closed`, 'error');
     },
@@ -108,10 +120,4 @@ app.component('connection', {
       emitter.emit('addLog', log);
     },
   },
-
-  mounted() {
-    if (this.robotConnected) {
-      this.ros = this.$store.state.ros
-    }
-  } 
 });

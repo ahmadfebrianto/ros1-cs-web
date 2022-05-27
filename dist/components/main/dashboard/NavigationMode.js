@@ -1,15 +1,16 @@
 app.component('navigation-mode', {
-  template: `
-    <div class="card">
+  template:
+    /* HTML */
+    `
+      <div class="card">
         <div class="">
           <small class="text-gray-700 font-bold tracking-wider">Mode</small>
         </div>
         <div class="" v-for="navigationMode in navigationModes">
-            <navigation-mode-item :navigationMode="navigationMode" />
+          <navigation-mode-item :navigationMode="navigationMode" />
         </div>
-    </div>
-    
-      `,
+      </div>
+    `,
 
   data() {
     return {
@@ -28,25 +29,31 @@ app.component('navigation-mode', {
 });
 
 app.component('navigation-mode-item', {
-  template: `
-    <input @click="setNavigationMode(navigationMode.name)"
-          class="form-check-input appearance-none rounded-full h-4 w-4 
+  template:
+    /* HTML */
+    `
+      <input
+        @click="setNavigationMode(navigationMode.name)"
+        class="form-check-input appearance-none rounded-full h-4 w-4 
                 border border-gray-300 bg-white checked:bg-blue-primary 
                 checked:border-blue-primaryfocus:outline-none 
                 transition duration-200 mt-1 align-top bg-no-repeat 
-                bg-center bg-contain float-left mr-2 cursor-pointer" 
-          type="radio" 
-          name="navigation-mode" 
-          :id="navigationMode.id"
-          :checked="checkNavigationMode(navigationMode.name)">
+                bg-center bg-contain float-left mr-2 cursor-pointer"
+        type="radio"
+        name="navigation-mode"
+        :id="navigationMode.id"
+        :checked="checkNavigationMode(navigationMode.name)"
+      />
 
-    <label class="form-check-label inline-block 
-                text-gray-800 text-xs tracking-wider 
-                cursor-pointer" 
-          :for="navigationMode.id">
-      {{ navigationMode.name}}
-    </label>
-  `,
+      <label
+        class="form-check-label inline-block 
+                  text-gray-800 text-xs tracking-wider 
+                  cursor-pointer"
+        :for="navigationMode.id"
+      >
+        {{ navigationMode.name}}
+      </label>
+    `,
   props: ['navigationMode'],
 
   methods: {
@@ -56,6 +63,7 @@ app.component('navigation-mode-item', {
     },
 
     checkNavigationMode(mode) {
+      // Check if the current mode is the same as the one we are checking
       return this.$store.state.navigationMode === mode;
     },
 
