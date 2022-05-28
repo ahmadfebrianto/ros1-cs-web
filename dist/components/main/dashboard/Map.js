@@ -15,6 +15,8 @@ app.component('dashboard-map', {
   data() {
     return {
       nav: null,
+      navCLient: null,
+      pathShape: null,
     };
   },
 
@@ -35,12 +37,28 @@ app.component('dashboard-map', {
         withOrientation: true,
       });
 
-      var path = new ROS2D.PathShape({
+      this.$store.commit('setNavigatorClient', this.navClient);
+      emitter.emit('mapLoaded');
+    },
+
+    removeCanvas() {
+      if (!this.robotConnected) {
+        var map = document.getElementById('map');
+        var canvas = map.getElementsByTagName('canvas');
+        while (canvas.length > 0) {
+          map.removeChild(canvas[0]);
+        }
+      }
+    },
+
+    createPathShape() {
+      var that = this;
+      this.pathShape = new ROS2D.PathShape({
         strokeSize: 1,
         strokeColor: createjs.Graphics.getRGB(0, 8, 255, 0.25),
       });
 
-      this.navClient.rootObject.addChild(path);
+      this.navClient.rootObject.addChild(this.pathShape);
 
       var topic = new ROSLIB.Topic({
         ros: this.ros,
@@ -55,22 +73,13 @@ app.component('dashboard-map', {
           typeof message.poses !== 'undefined' &&
           message.poses.length > 0
         ) {
-          path.setPath(message);
+          that.pathShape.setPath(message);
         }
       });
-
-      this.$store.commit('setNavigatorClient', this.navClient);
-      emitter.emit('mapLoaded');
     },
 
-    removeCanvas() {
-      if (!this.robotConnected) {
-        var map = document.getElementById('map');
-        var canvas = map.getElementsByTagName('canvas');
-        while (canvas.length > 0) {
-          map.removeChild(canvas[0]);
-        }
-      }
+    removePathShape() {
+      this.navClient.rootObject.removeChild(this.pathShape);
     },
 
     sendLog(text, category) {
@@ -123,11 +132,13 @@ app.component('dashboard-map', {
 
     emitter.on('goalSet', () => {
       this.$store.commit('setGoalSet', true);
+      this.createPathShape();
       this.sendLog('Goal sent', 'info');
     });
 
     emitter.on('goalResult', (result) => {
       this.$store.commit('setGoalSet', false);
+      this.removePathShape();
       if (result.status === 3) {
         this.sendLog('Goal reached', 'success');
       } else if (result.status === 2) {
