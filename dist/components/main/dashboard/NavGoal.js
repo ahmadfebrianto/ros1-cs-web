@@ -7,13 +7,14 @@ app.component('navgoal', {
           <button
             class="button bg-red-500 hover:opacity-90 active:opacity-100"
             @click="cancelGoal"
-            :class="connectionClass"
+            :class="goalClass"
           >
             Cancel Goal
           </button>
         </div>
       </div>
     `,
+
   methods: {
     cancelGoal() {
       this.navClient.navigator.cancelGoal();
@@ -27,6 +28,11 @@ app.component('navgoal', {
   },
 
   computed: {
+
+    goalSet() {
+      return this.$store.state.goalSet;
+    },
+
     robotConnected() {
       return this.$store.state.robotConnected;
     },
@@ -35,11 +41,21 @@ app.component('navgoal', {
       return this.$store.state.navigatorClient;
     },
 
-    connectionClass() {
+    goalClass() {
       return {
         // Disable 'Cancel Goal' button if robot is not connected
-        'pointer-events-none opacity-50': !this.robotConnected,
+        'pointer-events-none opacity-50': !this.goalSet,
       };
     },
+  },
+
+  mounted() {
+    emitter.on('goalSet', () => {
+      this.$store.commit('setGoalSet', true);
+    });
+
+    emitter.on('goalReached', () => {
+      this.$store.commit('setGoalSet', false);
+    })
   },
 });

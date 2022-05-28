@@ -91,7 +91,9 @@ app.component('dashboard-map', {
     navigationModeClass() {
       return {
         // When navigation mode is set to Joystick, disable click on map
-        'pointer-events-none': this.$store.state.navigationMode === 'Joystick',
+        'pointer-events-none':
+          this.$store.state.navigationMode === 'Joystick' ||
+          this.$store.state.goalSet,
         // When the robot is connected, remove background color on map
         'bg-gray-100': !this.$store.state.robotConnected,
       };

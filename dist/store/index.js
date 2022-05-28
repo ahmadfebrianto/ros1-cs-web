@@ -5,6 +5,7 @@ const store = Vuex.createStore({
     connectionData: { ip: 'localhost', port: '9090' },
     robotConnected: null,
     navigationMode: 'Navigation Goal',
+    goalSet: false,
     activeMenu: 'Dashboard',
     linearSpeed: 0.1,
     angularSpeed: 0.1,
@@ -33,6 +34,10 @@ const store = Vuex.createStore({
 
     setNavigationMode(state, navigationMode) {
       state.navigationMode = navigationMode;
+    },
+
+    setGoalSet(state, goalSet) {
+      state.goalSet = goalSet;
     },
 
     setActiveMenu(state, activeMenu) {
