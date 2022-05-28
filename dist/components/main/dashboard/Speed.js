@@ -11,8 +11,9 @@ app.component('speed', {
 
         <div class="flex flex-col gap-2">
           <div class="flex flex-row gap-5">
-            <div class="basis-1/3 flex items-center pl-2">
+            <div class="basis-2/4 flex items-center pl-2">
               <small>Linear</small>
+              <small class="ml-2 bg-gray-300 rounded-md p-1 text-xxxs">m/s</small>
             </div>
 
             <div
@@ -20,21 +21,21 @@ app.component('speed', {
                       w-full p-1 rounded-md
                       bg-gray-tertiary text-blue-primary
                       font-semibold text-center
-                      basis-2/3"
+                      basis-2/4"
             >
               <div
                 class="flex justify-center items-center
                         hover:scale-150 cursor-pointer"
-                :class="checkMinSpeed(computedLinearSpeed)"
+                :class="checkMinSpeed(linearSpeed)"
                 @click="decreaseSpeed('L')"
               >
                 <img src="assets/icons/speed/minus.svg" alt="Decrease Speed" />
               </div>
-              <div class="col-span-3 text-md">{{ computedLinearSpeed }}</div>
+              <div class="col-span-3 text-sm tracking-widest">{{ linearSpeed }}</div>
               <div
                 class="flex justify-center items-center
                         hover:scale-150 cursor-pointer"
-                :class="checkMaxSpeed(computedLinearSpeed)"
+                :class="checkMaxSpeed(linearSpeed)"
                 @click="increaseSpeed('L')"
               >
                 <img
@@ -47,8 +48,9 @@ app.component('speed', {
           </div>
 
           <div class="flex flex-row gap-5">
-            <div class="basis-1/3 flex items-center pl-2">
+            <div class="basis-2/4 flex items-center pl-2">
               <small>Angular</small>
+              <small class="ml-2 bg-gray-300 rounded-md p-1 text-xxxs">rad/s</small>
             </div>
 
             <div
@@ -56,21 +58,21 @@ app.component('speed', {
                       w-full p-1 rounded-md
                       bg-gray-tertiary text-blue-primary
                       font-semibold text-center
-                      basis-2/3"
+                      basis-2/4"
             >
               <div
                 class="flex justify-center items-center
                         hover:scale-150 cursor-pointer"
-                :class="checkMinSpeed(computedAngularSpeed)"
+                :class="checkMinSpeed(angularSpeed)"
                 @click="decreaseSpeed('A')"
               >
                 <img src="assets/icons/speed/minus.svg" alt="Decrease Speed" />
               </div>
-              <div class="col-span-3 text-md">{{ computedAngularSpeed }}</div>
+              <div class="col-span-3 text-sm tracking-widest">{{ angularSpeed }}</div>
               <div
                 class="flex justify-center items-center
                         hover:scale-150 cursor-pointer"
-                :class="checkMaxSpeed(computedAngularSpeed)"
+                :class="checkMaxSpeed(angularSpeed)"
                 @click="increaseSpeed('A')"
               >
                 <img
@@ -96,27 +98,18 @@ app.component('speed', {
     };
   },
 
-  computed: {
-    computedLinearSpeed() {
-      return Math.floor(this.linearSpeed * 10);
-    },
-    computedAngularSpeed() {
-      return Math.floor(this.angularSpeed * 10);
-    },
-  },
-
   methods: {
     commitRobotSpeed(type) {
       if (type === 'L') {
         this.$store.commit('setLinearSpeed', this.linearSpeed);
         this.sendLog(
-          `Linear speed set to ${this.computedLinearSpeed}`,
+          `Linear speed set to ${this.linearSpeed}`,
           'success'
         );
       } else {
         this.$store.commit('setAngularSpeed', this.angularSpeed);
         this.sendLog(
-          `Angular speed set to ${this.computedAngularSpeed}`,
+          `Angular speed set to ${this.angularSpeed}`,
           'success'
         );
       }
@@ -124,25 +117,25 @@ app.component('speed', {
 
     increaseSpeed(type) {
       if (type === 'L') {
-        this.linearSpeed += 0.1;
+        this.linearSpeed = Number(Number(this.linearSpeed + 0.1).toFixed(1))
       } else {
-        this.angularSpeed += 0.1;
+        this.angularSpeed = Number(Number(this.angularSpeed + 0.1).toFixed(1))
       }
       this.commitRobotSpeed(type);
     },
 
     decreaseSpeed(type) {
       if (type === 'L') {
-        this.linearSpeed -= 0.1;
+        this.linearSpeed = Number(Number(this.linearSpeed - 0.1).toFixed(1))
       } else {
-        this.angularSpeed -= 0.1;
+        this.angularSpeed = Number(Number(this.angularSpeed - 0.1).toFixed(1))
       }
       this.commitRobotSpeed(type);
     },
 
     // If the current speed is greater than or equal 20, disable the increase speed button
     checkMaxSpeed(speed) {
-      if (speed >= 20) {
+      if (speed >= 2.0) {
         return 'pointer-events-none';
       }
       return '';
@@ -150,7 +143,7 @@ app.component('speed', {
 
     // If the current speed is less than or equal 0, disable the decrease speed button
     checkMinSpeed(speed) {
-      if (speed <= 1) {
+      if (speed <= 0.1) {
         return 'pointer-events-none';
       }
       return '';

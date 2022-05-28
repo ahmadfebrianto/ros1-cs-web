@@ -10,7 +10,7 @@ app.component('dashboard', {
         <div class="sm:row-span-3 sm:col-span-1 md:basis-1/4">
           <connection />
           <navigation-mode />
-          <speed />
+          <speed v-if="modeJoystick"/>
           <joystick v-if="modeJoystick" />
           <navgoal v-else />
         </div>

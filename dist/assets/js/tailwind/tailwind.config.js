@@ -45,6 +45,7 @@ tailwind.config = {
       },
       fontSize: {
         xxs: '10px',
+        xxxs: '8px',
       },
     },
   },
