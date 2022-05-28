@@ -6,6 +6,7 @@ const store = Vuex.createStore({
     robotConnected: null,
     navigationMode: 'Navigation Goal',
     goalSet: false,
+    goalSent: false,
     activeMenu: 'Dashboard',
     linearSpeed: 0.1,
     angularSpeed: 0.1,
@@ -40,6 +41,10 @@ const store = Vuex.createStore({
       state.goalSet = goalSet;
     },
 
+    setGoalSent(state, goalSent) {
+      state.goalSent = goalSent;
+    },
+    
     setActiveMenu(state, activeMenu) {
       state.activeMenu = activeMenu;
     },

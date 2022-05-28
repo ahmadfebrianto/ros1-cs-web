@@ -102,7 +102,7 @@ app.component('dashboard-map', {
         // When navigation mode is set to Joystick, disable click on map
         'pointer-events-none':
           this.$store.state.navigationMode === 'Joystick' ||
-          this.$store.state.goalSet,
+          this.$store.state.goalSent,
         // When the robot is connected, remove background color on map
         'bg-gray-100': !this.$store.state.robotConnected,
       };
@@ -130,14 +130,16 @@ app.component('dashboard-map', {
       this.renderMap();
     }
 
-    emitter.on('goalSet', () => {
-      this.$store.commit('setGoalSet', true);
+    emitter.on('sendGoal', (pose) => {
+      this.navClient.navigator.sendGoal(pose);
       this.createPathShape();
+      this.$store.commit('setGoalSet', false);
+      this.$store.commit('setGoalSent', true);
       this.sendLog('Goal sent', 'info');
     });
 
     emitter.on('goalResult', (result) => {
-      this.$store.commit('setGoalSet', false);
+      this.$store.commit('setGoalSent', false);
       this.removePathShape();
       if (result.status === 3) {
         this.sendLog('Goal reached', 'success');

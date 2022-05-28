@@ -95,7 +95,9 @@ NAV2D.Navigator = function (options) {
   var withOrientation = options.withOrientation || false;
   var markerImage = options.markerImage || false;
   this.rootObject = options.rootObject || new createjs.Container();
-
+  this.currentGoal = null;
+  this.orientationMarker = null;
+  
   // setup the actionlib client
   var actionClient = new ROSLIB.ActionClient({
     ros: ros,
@@ -109,9 +111,8 @@ NAV2D.Navigator = function (options) {
    * @param pose - the goal pose
    */
 
-  var currentGoal
-
-  function sendGoal(pose) {
+  this.sendGoal = function(pose) {
+    this.rootObject.removeChild(this.orientationMarker);
     // create a goal
     var goal = new ROSLIB.Goal({
       actionClient: actionClient,
@@ -213,8 +214,8 @@ NAV2D.Navigator = function (options) {
         position: new ROSLIB.Vector3(coords),
       });
       // send the goal
-      sendGoal(pose);
-      emitter.emit('goalSet')
+      // sendGoal(pose);
+      emitter.emit('goalSet', pose);
     });
   } else {
     // withOrientation === true
@@ -223,7 +224,7 @@ NAV2D.Navigator = function (options) {
     var positionVec3 = null;
     var thetaRadians = 0;
     var thetaDegrees = 0;
-    var orientationMarker = null;
+    // var orientationMarker = null;
     var mouseDown = false;
     var xDelta = 0;
     var yDelta = 0;
@@ -235,10 +236,10 @@ NAV2D.Navigator = function (options) {
         positionVec3 = new ROSLIB.Vector3(position);
         mouseDown = true;
       } else if (mouseState === 'move') {
-        // remove obsolete orientation marker
-        that.rootObject.removeChild(orientationMarker);
-
         if (mouseDown === true) {
+          // remove obsolete orientation marker
+          that.rootObject.removeChild(that.orientationMarker);
+
           // if mouse button is held down:
           // - get current mouse position
           // - calulate direction between stored <position> and current position
@@ -246,7 +247,7 @@ NAV2D.Navigator = function (options) {
           var currentPos = stage.globalToRos(event.stageX, event.stageY);
           var currentPosVec3 = new ROSLIB.Vector3(currentPos);
 
-          orientationMarker = new ROS2D.NavigationArrow({
+          that.orientationMarker = new ROS2D.NavigationArrow({
             size: 25,
             strokeSize: 1,
             fillColor: createjs.Graphics.getRGB(0, 255, 0, 0.66),
@@ -266,13 +267,13 @@ NAV2D.Navigator = function (options) {
             thetaDegrees -= 90;
           }
 
-          orientationMarker.x = positionVec3.x;
-          orientationMarker.y = -positionVec3.y;
-          orientationMarker.rotation = thetaDegrees;
-          orientationMarker.scaleX = 1.0 / stage.scaleX;
-          orientationMarker.scaleY = 1.0 / stage.scaleY;
+          that.orientationMarker.x = positionVec3.x;
+          that.orientationMarker.y = -positionVec3.y;
+          that.orientationMarker.rotation = thetaDegrees;
+          that.orientationMarker.scaleX = 1.0 / stage.scaleX;
+          that.orientationMarker.scaleY = 1.0 / stage.scaleY;
 
-          that.rootObject.addChild(orientationMarker);
+          that.rootObject.addChild(that.orientationMarker);
         }
       } else if (mouseDown) {
         // mouseState === 'up'
@@ -308,8 +309,8 @@ NAV2D.Navigator = function (options) {
           orientation: orientation,
         });
         // send the goal
-        sendGoal(pose);
-        emitter.emit('goalSet')
+        // sendGoal(pose);
+        emitter.emit('goalSet', pose);
       }
     };
 
