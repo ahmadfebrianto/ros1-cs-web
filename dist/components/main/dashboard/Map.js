@@ -122,11 +122,17 @@ app.component('dashboard-map', {
     }
 
     emitter.on('goalSet', () => {
+      this.$store.commit('setGoalSet', true);
       this.sendLog('Goal sent', 'info');
     });
 
-    emitter.on('goalReached', () => {
-      this.sendLog('Goal reached', 'success');
+    emitter.on('goalResult', (result) => {
+      this.$store.commit('setGoalSet', false);
+      if (result.status === 3) {
+        this.sendLog('Goal reached', 'success');
+      } else if (result.status === 2) {
+        this.sendLog('Goal canceled', 'info');
+      }
     });
   },
 

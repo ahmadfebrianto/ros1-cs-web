@@ -142,9 +142,9 @@ NAV2D.Navigator = function (options) {
     goalMarker.scaleY = 1.0 / stage.scaleY;
     that.rootObject.addChild(goalMarker);
 
-    goal.on('result', function () {
+    goal.on('result', function (result) {
       that.rootObject.removeChild(goalMarker);
-      emitter.emit('goalReached')
+      emitter.emit('goalResult', result);
     });
   }
 

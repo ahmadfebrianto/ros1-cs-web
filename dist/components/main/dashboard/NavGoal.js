@@ -18,7 +18,7 @@ app.component('navgoal', {
   methods: {
     cancelGoal() {
       this.navClient.navigator.cancelGoal();
-      this.sendLog('Goal canceled', 'info');
+      // this.sendLog('Goal canceled', 'info');
     },
 
     sendLog(text, category) {
@@ -47,15 +47,5 @@ app.component('navgoal', {
         'pointer-events-none opacity-50': !this.goalSet,
       };
     },
-  },
-
-  mounted() {
-    emitter.on('goalSet', () => {
-      this.$store.commit('setGoalSet', true);
-    });
-
-    emitter.on('goalReached', () => {
-      this.$store.commit('setGoalSet', false);
-    })
   },
 });

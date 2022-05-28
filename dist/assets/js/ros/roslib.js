@@ -1605,7 +1605,7 @@ function ActionClient(options) {
 
       if (goal) {
         goal.emit('status', resultMessage.status);
-        goal.emit('result', resultMessage.result);
+        goal.emit('result', resultMessage.status);
       }
     });
   }
