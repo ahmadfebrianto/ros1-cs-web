@@ -37,7 +37,7 @@ app.component('dashboard-map', {
 
       var path = new ROS2D.PathShape({
         strokeSize: 1,
-        strokeColor: createjs.Graphics.getRGB(255, 0, 0, 0.66),
+        strokeColor: createjs.Graphics.getRGB(0, 8, 255, 0.25),
       });
 
       this.navClient.rootObject.addChild(path);
