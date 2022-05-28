@@ -144,7 +144,7 @@ app.component('dashboard-map', {
       if (result.status === 3) {
         this.sendLog('Goal reached', 'success');
       } else if (result.status === 2) {
-        this.sendLog('Goal canceled', 'info');
+        this.sendLog('Goal canceled', 'error');
       }
     });
   },

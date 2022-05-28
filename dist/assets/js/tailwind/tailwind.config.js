@@ -28,7 +28,7 @@ tailwind.config = {
         log: {
           error: '#B91C1C',
           success: '#15803D',
-          info: '#C2410C',
+          info: '#0369A1',
         },
       },
       maxWidth: {
