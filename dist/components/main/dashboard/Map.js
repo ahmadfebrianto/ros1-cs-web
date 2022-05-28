@@ -40,7 +40,7 @@ app.component('dashboard-map', {
         strokeColor: createjs.Graphics.getRGB(255, 0, 0, 0.66),
       });
 
-      this.navClient.rootObject.addChild(path);  
+      this.navClient.rootObject.addChild(path);
 
       var topic = new ROSLIB.Topic({
         ros: this.ros,
@@ -118,12 +118,20 @@ app.component('dashboard-map', {
     if (this.robotConnected) {
       this.renderMap();
     }
+
+    emitter.on('goalSet', () => {
+      this.sendLog('Goal sent', 'info');
+    });
+
+    emitter.on('goalReached', () => {
+      this.sendLog('Goal reached', 'success');
+    });
   },
 
   updated() {
     /*
      * When the robot is disconnected, remove the map canvas. Otherwise, it will overlap
-     * the placeholder image. 
+     * the placeholder image.
      */
     this.removeCanvas();
   },

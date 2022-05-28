@@ -94,4 +94,4 @@ const app = Vue.createApp({
   },
 });
 
-const emitter = new EventEmitter2();
+// const emitter = new EventEmitter2();

@@ -144,6 +144,7 @@ NAV2D.Navigator = function (options) {
 
     goal.on('result', function () {
       that.rootObject.removeChild(goalMarker);
+      emitter.emit('goalReached')
     });
   }
 
@@ -213,6 +214,7 @@ NAV2D.Navigator = function (options) {
       });
       // send the goal
       sendGoal(pose);
+      emitter.emit('goalSet')
     });
   } else {
     // withOrientation === true
@@ -307,6 +309,7 @@ NAV2D.Navigator = function (options) {
         });
         // send the goal
         sendGoal(pose);
+        emitter.emit('goalSet')
       }
     };
 
