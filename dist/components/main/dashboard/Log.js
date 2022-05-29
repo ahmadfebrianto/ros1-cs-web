@@ -13,9 +13,9 @@ app.component('log', {
             v-for="(log, index) in rosLogs"
             :key="index"
             class="text-xxs"
-            :class="[log.color, highlightNewLog(index)]"
+            :class="log.color"
           >
-            {{ log.text }}
+            <small :class="highlightNewLog(index)">-</small> {{ log.text }}
           </p>
           <p v-else class="text-xxs">No logs</p>
         </div>
@@ -71,7 +71,9 @@ app.component('log', {
     // Make the last log text bold
     highlightNewLog(index) {
       if (index === this.logs.length - 1) {
-        return 'font-black';
+        return 'text-blue-primary font-bold';
+      } else {
+        return 'text-gray-400'
       }
     },
   },
