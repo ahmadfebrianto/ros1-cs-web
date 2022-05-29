@@ -112,6 +112,7 @@ app.component('connection', {
       this.$store.commit('setNavigatorClient', null);
       this.$store.commit('setConnectionData', null);
       this.$store.commit('setRobotConnected', false);
+      emitter.emit('disconnected')
       this.sendLog(`Connection closed`, 'error');
     },
 

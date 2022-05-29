@@ -19,7 +19,8 @@ app.component('dashboard', {
           <dashboard-map />
         </div>
 
-        <div class="sm:col-span-2 md:basis-1/4">
+        <div class="sm:hidden md:block md:basis-1/4">
+          <pose />
           <log />
         </div>
       </div>

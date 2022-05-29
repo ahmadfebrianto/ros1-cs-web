@@ -30,6 +30,7 @@ app.component('navgoal', {
   methods: {
     sendGoal() {
       emitter.emit('sendGoal', this.pose);
+      console.log(this.pose);
     },
 
     cancelGoal() {
