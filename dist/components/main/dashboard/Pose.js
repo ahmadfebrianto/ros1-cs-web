@@ -6,30 +6,31 @@ app.component('pose', {
         <div class="mb-1">
           <small class="text-gray-700 font-bold tracking-wider">Position</small>
         </div>
-        <div class="flex items-center">
+        <div v-for="(posValue, posLabel) in position" class="flex items-center">
           <div class="basis-1/5 text-center justify-center">
-            <small>X</small>
+            <small>{{ posLabel }}</small>
           </div>
           <div class="input basis-4/5 pl-4">
-            <small>{{ posX }}</small>
+            <small>{{ posValue }}</small>
           </div>
         </div>
+      </div>
 
-        <div class="flex items-center justify-center">
-          <div class="basis-1/5 text-center">
-            <small>Y</small>
-          </div>
-          <div class="input basis-4/5 pl-4">
-            <small>{{ posY }}</small>
-          </div>
+      <div class="card flex flex-col">
+        <div class="mb-1">
+          <small class="text-gray-700 font-bold tracking-wider"
+            >Orientation</small
+          >
         </div>
-
-        <div class="flex items-center justify-center">
-          <div class="basis-1/5 text-center">
-            <small>Z</small>
+        <div
+          v-for="(orValue, orLabel) in orientation"
+          class="flex items-center"
+        >
+          <div class="basis-1/5 text-center justify-center">
+            <small>{{ orLabel }}</small>
           </div>
           <div class="input basis-4/5 pl-4">
-            <small>{{ posZ }}</small>
+            <small>{{ orValue }}</small>
           </div>
         </div>
       </div>
@@ -37,9 +38,18 @@ app.component('pose', {
 
   data() {
     return {
-      posX: '?',
-      posY: '?',
-      posZ: '?',
+      position: {
+        x: '?',
+        y: '?',
+        z: '?',
+      },
+
+      orientation: {
+        x: '?',
+        y: '?',
+        z: '?',
+        w: '?',
+      },
     };
   },
 
@@ -63,11 +73,29 @@ app.component('pose', {
 
       topic.subscribe((message) => {
         if (message !== null && typeof message !== 'undefined') {
-          this.posX = message.position.x;
-          this.posY = message.position.y;
-          this.posZ = message.position.z;
+          this.position.x = message.position.x;
+          this.position.y = message.position.y;
+          this.position.z = message.position.z;
+
+          this.orientation.x = message.orientation.x;
+          this.orientation.y = message.orientation.y;
+          this.orientation.z = message.orientation.z;
+          this.orientation.w = message.orientation.w;
         }
       });
+    },
+
+    clearPosition() {
+      this.position.x = '?';
+      this.position.y = '?';
+      this.position.z = '?';
+    },
+
+    clearOrientation() {
+      this.orientation.x = '?';
+      this.orientation.y = '?';
+      this.orientation.z = '?';
+      this.orientation.w = '?';
     },
   },
 
@@ -77,9 +105,8 @@ app.component('pose', {
     });
 
     emitter.on('disconnected', () => {
-      this.posX = '?';
-      this.posY = '?';
-      this.posZ = '?';
+      this.clearPosition();
+      this.clearOrientation();
     });
 
     if (this.robotConnected) {
