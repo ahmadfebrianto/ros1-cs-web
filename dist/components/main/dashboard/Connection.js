@@ -59,6 +59,10 @@ app.component('connection', {
     robotConnected() {
       return this.$store.state.robotConnected;
     },
+
+    goalSent() {
+      return this.$store.state.goalSent;
+    },
   },
 
   methods: {
@@ -104,7 +108,9 @@ app.component('connection', {
     },
 
     disconnect() {
-      emitter.emit('disconnect');
+      if (this.goalSent) {
+        emitter.emit('cancelGoal');
+      }
       if (this.ros !== null) {
         this.ros.close();
         this.ros = null;

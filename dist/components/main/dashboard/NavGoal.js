@@ -78,11 +78,11 @@ app.component('navgoal', {
     emitter.on('goalSet', (pose) => {
       this.$store.commit('setGoalSet', true);
       this.pose = pose;
-    })
+    });
 
-    emitter.on('disconnect', () => {
-      this.cancelGoal()
+    emitter.on('cancelGoal', () => {
+      this.cancelGoal();
       this.$store.commit('setGoalSent', false);
-    })
-  }
+    });
+  },
 });
