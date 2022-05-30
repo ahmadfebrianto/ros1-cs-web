@@ -104,6 +104,7 @@ app.component('connection', {
     },
 
     disconnect() {
+      emitter.emit('disconnect');
       if (this.ros !== null) {
         this.ros.close();
         this.ros = null;
@@ -112,8 +113,11 @@ app.component('connection', {
       this.$store.commit('setNavigatorClient', null);
       this.$store.commit('setConnectionData', null);
       this.$store.commit('setRobotConnected', false);
-      emitter.emit('disconnected')
-      this.sendLog(`Connection closed`, 'error');
+
+      if (!this.robotConnected) {
+        emitter.emit('disconnected');
+        this.sendLog(`Connection closed`, 'error');
+      }
     },
 
     sendLog(text, category) {

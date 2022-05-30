@@ -74,7 +74,6 @@ app.component('dashboard-map', {
           message.poses.length > 0
         ) {
           that.pathShape.setPath(message);
-          console.log(message);
         }
       });
     },

@@ -30,7 +30,6 @@ app.component('navgoal', {
   methods: {
     sendGoal() {
       emitter.emit('sendGoal', this.pose);
-      console.log(this.pose);
     },
 
     cancelGoal() {
@@ -79,6 +78,11 @@ app.component('navgoal', {
     emitter.on('goalSet', (pose) => {
       this.$store.commit('setGoalSet', true);
       this.pose = pose;
+    })
+
+    emitter.on('disconnect', () => {
+      this.cancelGoal()
+      this.$store.commit('setGoalSent', false);
     })
   }
 });
