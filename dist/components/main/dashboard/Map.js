@@ -41,6 +41,9 @@ app.component('dashboard-map', {
       emitter.emit('mapLoaded');
     },
 
+    /* 
+     * Hapus map ketika koneksi terputus karena ia tidak otomatis terhapus
+     */
     removeCanvas() {
       if (!this.robotConnected) {
         var map = document.getElementById('map');
@@ -51,6 +54,9 @@ app.component('dashboard-map', {
       }
     },
 
+    /* 
+     * Render path shape
+     */
     createPathShape() {
       var that = this;
       this.pathShape = new ROS2D.PathShape({
@@ -78,6 +84,9 @@ app.component('dashboard-map', {
       });
     },
 
+    /* 
+     * Hapus path shape saat robot telah sampai tujuan
+     */
     removePathShape() {
       this.navClient.rootObject.removeChild(this.pathShape);
     },
@@ -99,11 +108,9 @@ app.component('dashboard-map', {
 
     navigationModeClass() {
       return {
-        // When navigation mode is set to Joystick, disable click on map
         'pointer-events-none':
           this.$store.state.navigationMode === 'Joystick' ||
           this.$store.state.goalSent,
-        // When the robot is connected, remove background color on map
         'bg-gray-100': !this.$store.state.robotConnected,
       };
     },
@@ -111,25 +118,23 @@ app.component('dashboard-map', {
 
   mounted() {
     /*
-     * Handle the event when robot is connected
-     * by rendering the map
+     * Render map saat berhasil terhubung ke ros pertama kali
      */
     emitter.on('connected', () => {
       this.renderMap();
     });
 
     /*
-     * When we move (from the Dashboard) to another page (e.g. About) while robot is connected
-     * and then return to the Dashboard, all components in the Dashboard are remounted
-     * including 'map' component. That causes the 'map' canvas to be removed.
-     * Since the robotConnected state is true, the placeholder image is not shown as well.
-     * This leaves the map component empty. To fix this, we have to re-render the map when
-     * the robot is connected because ros instance is still available in the store.
+     * Saat ros masih terhubung dan kemudian kita mengunjungi halaman lain, seperti About, maka
+     * map akan hilang. Oleh karena itu, ia perlu dirender kembali saat kembali ke Dashboard.
      */
     if (this.robotConnected) {
       this.renderMap();
     }
 
+    /* 
+     * Kirim goal ke ros server
+     */
     emitter.on('sendGoal', (pose) => {
       this.navClient.navigator.sendGoal(pose);
       this.createPathShape();
@@ -138,6 +143,9 @@ app.component('dashboard-map', {
       this.sendLog('Goal sent', 'info');
     });
 
+    /* Saat robot berhenti, ada dua kemungkinan yaitu ia telah sampai ke tujuan atau ia dihentikan
+     * di tengah jalan (goal canceled). Maka harus diperhatikan statusnya untuk mengirim log yang sesuai
+     */
     emitter.on('goalResult', (result) => {
       this.$store.commit('setGoalSent', false);
       this.removePathShape();
@@ -151,8 +159,7 @@ app.component('dashboard-map', {
 
   updated() {
     /*
-     * When the robot is disconnected, remove the map canvas. Otherwise, it will overlap
-     * the placeholder image.
+     * Saat robot disconnect, hapus canvas/map 
      */
     this.removeCanvas();
   },

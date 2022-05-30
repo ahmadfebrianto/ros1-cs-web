@@ -57,12 +57,6 @@ app.component('dashboard', {
 
   mounted() {
     emitter.on('mapLoaded', () => {
-      /*
-       * There is a strange behaviour in this app. When we reconnect to the robot after jumping
-       * from Dashboard to another page a couple of times, the map will render multiple canvasses
-       * depending on how many times we leave the dashboard page. In order to leave only one canvas,
-       * the others must be removed in this lifecycle hook.
-       */
       this.removeCanvasses();
     });
   },

@@ -135,7 +135,6 @@ app.component('speed', {
       this.commitRobotSpeed(type);
     },
 
-    // If the current speed is greater than or equal 20, disable the increase speed button
     checkMaxSpeed(speed) {
       if (speed >= 2.0) {
         return 'pointer-events-none';
@@ -143,7 +142,6 @@ app.component('speed', {
       return '';
     },
 
-    // If the current speed is less than or equal 0, disable the decrease speed button
     checkMinSpeed(speed) {
       if (speed <= 0.1) {
         return 'pointer-events-none';

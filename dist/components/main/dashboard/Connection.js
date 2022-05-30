@@ -51,7 +51,7 @@ app.component('connection', {
     return {
       ros: null,
       ip: 'localhost',
-      port: '9090', // Default port for rosbridge
+      port: '9090', // Port default
     };
   },
 
@@ -149,9 +149,15 @@ app.component('connection', {
   },
 
   mounted() {
+    /* 
+     * Muat data koneksi dari local storage
+     */
     this.loadConnectionData();
   },
 
+  /*
+   * Ketika berpindah halaman, simpan data koneksi ke local storage 
+   */
   watch: {
     $route(to, from) {
       this.saveConnectionData();

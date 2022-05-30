@@ -63,7 +63,6 @@ app.component('navigation-mode-item', {
     },
 
     checkNavigationMode(mode) {
-      // Check if the current mode is the same as the one we are checking
       return this.$store.state.navigationMode === mode;
     },
 

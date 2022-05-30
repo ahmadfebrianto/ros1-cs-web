@@ -20,15 +20,17 @@ app.component('joystick', {
 
     connectionClass() {
       return {
-        // Disable joystick if robot is not connected
+        // Disable joystick saat robot tidak terhubung
         'pointer-events-none': !this.$store.state.robotConnected,
       };
     },
 
+    /* Kecepatan maju mundur */
     linearSpeed() {
       return this.$store.state.linearSpeed;
     },
 
+    /* Kecepatan belok kanan kiri */
     angularSpeed() {
       return this.$store.state.angularSpeed;
     },
@@ -41,13 +43,6 @@ app.component('joystick', {
         name: '/cmd_vel',
         messageType: 'geometry_msgs/Twist',
       });
-
-      /* 
-       * The maximum and minimum speed values for linear and angular speeds are 1 and -1 respectively.
-       * In order to get the correct speed values (according to our max and mix values) to send to ROS, 
-       * we need to multiply the actual joystick value by our own max and min values and then divide by 
-       * the max and min values of the joystick.
-       */
 
       var _linear = (linear * this.linearSpeed) / 1;
       var _angular = -(angular * this.angularSpeed) / 1;
@@ -94,10 +89,7 @@ app.component('joystick', {
       });
 
       this.joystick.on('move', (event, nipple) => {
-        /* 
-         * 50 is a relative value. It must be the half of the size of the joystick.
-         * In this case, the size of the joystick is 100px.
-         */
+        
         if (nipple.distance / 50 > 0.1) {
           linear_speed =
             (Math.sign(Math.sin(nipple.angle.radian)) * nipple.distance) / 50;
@@ -117,7 +109,6 @@ app.component('joystick', {
   },
 
   mounted() {
-    // Render the joystick when the component is mounted
     this.createJoystick();
   },
 });

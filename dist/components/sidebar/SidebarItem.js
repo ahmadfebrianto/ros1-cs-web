@@ -15,7 +15,6 @@ app.component('sidebarItem', {
   props: ['item'],
 
   computed: {
-    // If sidebar is not collapsed, add margin to the right of the icon
     sidebarItemClass() {
       return {
         'mr-2': !this.sidebarCollapsed,

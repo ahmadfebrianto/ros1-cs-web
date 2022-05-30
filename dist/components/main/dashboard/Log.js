@@ -54,14 +54,15 @@ app.component('log', {
       }
     },
 
+    /* 
+     * Simpan log ke local storage
+     */
     saveLogs() {
       localStorage.setItem('logs', JSON.stringify(this.logs));
     },
 
-    /*
-     * Upon visiting other pages (e.g. About), the logs will be cleared so it must be saved
-     * to localStorage in advance. When the user returns to the dashboard, the logs will then
-     * loaded from localStorage.
+    /* 
+     * Muat log yang tersimpan di local storage 
      */
     loadLogs() {
       if (localStorage.getItem('logs')) {
@@ -70,7 +71,9 @@ app.component('log', {
       }
     },
 
-    // Make the last log text bold
+    /* 
+     * Kurangi opacity log yang lama agar bida membedakan log yang baru
+     */
     highlightNewLog(index) {
       if (index === this.logs.length - 1) {
         return 'opacity-100';
@@ -86,7 +89,6 @@ app.component('log', {
   },
 
   watch: {
-    // Watch router activity, i.e. when the user leaves the dashboard page
     $route(to, from) {
       this.saveLogs();
     },

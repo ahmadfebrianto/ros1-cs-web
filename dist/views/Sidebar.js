@@ -62,7 +62,6 @@ app.component('sidebar', {
       this.$store.commit('setActiveMenu', route);
     },
 
-    // Colorize the active menu item
     setActiveMenuColor(route) {
       if (this.$store.state.activeMenu === route) {
         return 'bg-blue-tertiary pointer-events-none';
