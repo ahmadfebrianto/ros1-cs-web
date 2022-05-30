@@ -8,15 +8,17 @@ app.component('log', {
         </div>
 
         <div class="input p-3">
-          <p
-            v-if="rosLogs.length > 0"
-            v-for="(log, index) in rosLogs"
-            :key="index"
-            class="text-xxs"
-            :class="log.color"
-          >
-            <small :class="highlightNewLog(index)">-</small> {{ log.text }}
-          </p>
+          <table v-if="rosLogs.length > 0">
+            <tr
+              v-for="(log, index) in rosLogs"
+              :key="index"
+              class="text-xxs"
+              :class="log.color"
+            >
+              <td :class="highlightNewLog(index)" class="align-top">-</td>
+              <td>{{ log.text }}</td>
+            </tr>
+          </table>
           <p v-else class="text-xxs">No logs</p>
         </div>
       </div>
@@ -71,9 +73,9 @@ app.component('log', {
     // Make the last log text bold
     highlightNewLog(index) {
       if (index === this.logs.length - 1) {
-        return 'text-blue-primary font-bold';
+        return 'opacity-100';
       } else {
-        return 'text-gray-400'
+        return 'opacity-30';
       }
     },
   },

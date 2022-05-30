@@ -59,7 +59,7 @@ app.component('navigation-mode-item', {
   methods: {
     setNavigationMode(mode) {
       this.$store.commit('setNavigationMode', mode);
-      this.sendLog(`Navigation mode changed to ${mode}`);
+      this.sendLog(`Navigation mode changed to ${mode}`, 'info');
     },
 
     checkNavigationMode(mode) {
