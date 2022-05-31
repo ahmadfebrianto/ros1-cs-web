@@ -4,10 +4,14 @@
   <p align="center" style="">SLAM AGV Desktop App</p>
 </p>
 
+
 ## Tentang Project
+
 SLAM AGV adalah aplikasi berbasis desktop yang digunakan untuk mengontrol dan memonitor robot AGV. Basis kode aplikasi ini menggunakan basis kode _frontend_ dengan library [Vue JS v3](https://vuejs.org/). Build menjadi aplikasi desktop dilakukan dengan bantuan tool yang bernama [tauri](https://tauri.studio/)
 
+
 ## Build
+
 Berikut adalah langkah langkah untuk mengompilasi (build) basis kode menjadi aplikasi desktop.
 
 1. ### Build manual  
@@ -44,8 +48,10 @@ Berikut adalah langkah langkah untuk mengompilasi (build) basis kode menjadi apl
       `git push origin release`
     - Download output   
       Saat build berhasil, maka output untuk ketiga platform akan tersedia otomatis untuk didownload di bagian workflow.
-      
+
+
 ## Fitur
+
 Beberapa fitur yang ada di dalam aplikasi ini adalah:
 
 | Fitur | Keterangan |
@@ -59,6 +65,11 @@ Beberapa fitur yang ada di dalam aplikasi ini adalah:
 | Kontrol Kecepatan | Fitur ini memungkinkan pengguna untuk mengontrol kecepatan pergerakan robot di mode `Joystick`. Satuan kecepatan `Linear` adalah `meter per second`, sedangkan satuan kecepatan `Angular` adalah `radian per second`. |
 | Pose | Menampilkan informasi posisi dan orientasi dari robot |
 | Logs | Menampilkan feedback dari perintah yang diberikan oleh pengguna |
+
+
+## Demo
+
+[Video Demo Aplikasi ](https://drive.google.com/file/d/1I9Qhymc7dLNifSmQYTbJbVKDRu3idc5F/preview)
 
 
 ## Referensi
