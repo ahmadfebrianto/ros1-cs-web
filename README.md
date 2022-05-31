@@ -19,11 +19,21 @@ Berikut adalah langkah langkah untuk mengompilasi (build) basis kode menjadi apl
     - Install [Node JS](https://nodejs.org/en/)
     - Build 
       - npm  
-        `npm run tauri build`
-      - yarn   
-        `yarn tauri build`
+        - `npm install`  
+        - `npm run tauri build`
+      - yarn 
+        - `npm i -g yarn`  
+        - `yarn`
+        - `yarn tauri build`
+
     - Khusus untuk platform Linux, build dapat dilakukan secara otomatis dengan menjalankan script [build-desktop.sh](./build-desktop.sh).   
       `./build-desktop.sh`
+
+    - Output   
+      - Saat melakukan build dengan npm atau yarn di lokal, maka outputnya akan berada di `src-tauri/target/release/bundle`
+
+      - Saat melakukan build dengan script `build-desktop.sh`, maka outputnya berada di `build/linux/<tanggal dan waktu build>`
+
 2. ### Build otomatis dengan Github Actions     
     Build untuk semua platform dapat dilakukan dengan otomatis menggunakan bantuan Github Actions. Berikut adalah langkah-langkahnya.
 
@@ -32,7 +42,9 @@ Berikut adalah langkah langkah untuk mengompilasi (build) basis kode menjadi apl
       `git checkout -b release`
     - Push kode   
       `git push origin release`
-
+    - Download output   
+      Saat build berhasil, maka output untuk ketiga platform akan tersedia otomatis untuk didownload di bagian workflow.
+      
 ## Fitur
 Beberapa fitur yang ada di dalam aplikasi ini adalah:
 
