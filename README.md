@@ -12,7 +12,7 @@
 
 ## Tentang Project
 
-SLAM AGV adalah aplikasi berbasis desktop yang digunakan untuk mengontrol dan memonitor robot AGV. Basis kode aplikasi ini menggunakan basis kode _frontend_ dengan library [Vue JS v3](https://vuejs.org/). Build menjadi aplikasi desktop dilakukan dengan bantuan tool yang bernama [tauri](https://tauri.studio/)
+SLAM AGV adalah aplikasi berbasis desktop yang digunakan untuk mengontrol dan memonitor robot AGV. Basis kode aplikasi ini menggunakan basis kode _frontend_ dengan library [Vue JS v3](https://vuejs.org/). Kompilasi ke aplikasi desktop dilakukan dengan bantuan tool yang bernama [tauri](https://tauri.studio/).
 
 ## Fitur
 
@@ -21,7 +21,7 @@ Beberapa fitur yang ada di dalam aplikasi ini adalah:
 | Fitur                  | Keterangan                                                                                                                                                                                                            |
 | ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Status koneksi         | Terletak di pojok kanan atas, fitur ini akan menginformasikan status koneksi dengan robot.                                                                                                                            |
-| IP & Port              | Memungkinkan pengguna untuk mengatur IP dan Port yang digunakan oleh robot AGV                                                                                                                                        |
+| IP & Port              | Memungkinkan pengguna untuk menginputkan IP dan Port yang digunakan oleh robot AGV                                                                                                                                    |
 | Map                    | Fitur ini menampilkan map dan lokasi robot                                                                                                                                                                            |
 | Mode `Navigation Goal` | Mode ini memungkinakan pengguna untuk mengontrol robot dengan menentukan goal atau destinasinya di map dengan cara melakukan klik di bagian map. Untuk mengirimkan goal, tekan tombol `Send Goal`                     |
 | Mode `Joystick`        | Mode ini memungkinkan pengguna untuk mengontrol pergerakan robot secara manual                                                                                                                                        |
@@ -80,9 +80,9 @@ Berikut adalah langkah langkah untuk mengompilasi (build) basis kode menjadi apl
 
 ## Referensi
 
-[1] http://wiki.ros.org/ros2djs/Tutorials/VisualizingAMap  
-[2] http://wiki.ros.org/nav2djs/Tutorials/CreatingABasicNav2DWidget  
-[3] https://vuejs.org/  
-[4] https://vuex.vuejs.org/  
-[5] https://router.vuejs.org/  
-[6] https://www.youtube.com/playlist?list=PLK0b4e05LnzagmZCkKIQo9KKqtGo_3aKj
+[1] [Contoh Penggunaan ROS2DJS](http://wiki.ros.org/ros2djs/Tutorials/VisualizingAMap)  
+[2] [Contoh Penggunaan NAV2DJS](http://wiki.ros.org/nav2djs/Tutorials/CreatingABasicNav2DWidget)  
+[3] [Dokumentasi Vue JS](https://vuejs.org/guide/introduction.html)  
+[4] [VueX Untuk State Management](https://vuex.vuejs.org)  
+[5] [Vue Router](https://router.vuejs.org)  
+[6] [Playlist Tentang Membuat UI Untuk Robot Berbasi ROS](https://www.youtube.com/playlist?list=PLK0b4e05LnzagmZCkKIQo9KKqtGo_3aKj)
