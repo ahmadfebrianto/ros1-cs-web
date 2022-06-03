@@ -136,7 +136,7 @@ app.component('speed', {
     },
 
     checkMaxSpeed(speed) {
-      if (speed >= 2.0) {
+      if (speed >= 5.0) {
         return 'pointer-events-none';
       }
       return '';
