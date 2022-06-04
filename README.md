@@ -78,6 +78,13 @@ Berikut adalah langkah langkah untuk mengompilasi (build) basis kode menjadi apl
 
 [Video Demo Aplikasi ](https://drive.google.com/file/d/1I9Qhymc7dLNifSmQYTbJbVKDRu3idc5F/preview)
 
+## Pengembangan Selanjutnya   
+
+Berikut adalah beberapa tips untuk pengembang selanjutnya yang akan mengerjakan projek ini:
+- Pakai VS Code editor
+- Install ekstensi [ES6 String HTML](https://marketplace.visualstudio.com/items?itemName=Tobermory.es6-string-html)   
+  `Ekstensi ini berfungsi untuk mewarnai syntax html yang terdapat di dalam vue components`
+
 ## Referensi
 
 [1] [Contoh Penggunaan ROS2DJS](http://wiki.ros.org/ros2djs/Tutorials/VisualizingAMap)  
