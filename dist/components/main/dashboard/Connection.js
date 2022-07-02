@@ -78,7 +78,7 @@ app.component('connection', {
       };
 
       const options = {
-        url: `ws://${connectionData.ip}:${connectionData.port}`,
+          url: `wss://${connectionData.ip}:${connectionData.port}`,
       };
 
       this.ros = new ROSLIB.Ros(options);
