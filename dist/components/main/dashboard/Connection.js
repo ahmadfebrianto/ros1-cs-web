@@ -8,21 +8,31 @@ app.component('connection', {
             >Connection</small
           >
         </div>
-        <div class="flex flex-3 gap-x-1 sm:flex-col md:flex-row">
-          <div class="basis-2/3">
-            <input
-              class="input text-center tracking-widest focus:outline-none"
-              type="text"
-              v-model="ip"
-              placeholder="IP"
-            />
+        <div class="flex-col">
+          <div class="flex flex-3 gap-x-1 sm:flex-col md:flex-row">
+            <div class="basis-2/3">
+              <input
+                class="input text-center tracking-widest focus:outline-none"
+                type="text"
+                v-model="ip"
+                placeholder="IP"
+              />
+            </div>
+            <div class="basis-1/3">
+              <input
+                class="input text-center tracking-wider focus:outline-none"
+                type="text"
+                v-model="port"
+                placeholder="Port"
+              />
+            </div>
           </div>
-          <div class="basis-1/3">
+          <div class="">
             <input
               class="input text-center tracking-wider focus:outline-none"
-              type="text"
-              v-model="port"
-              placeholder="Port"
+              type="password"
+              v-model="secret"
+              placeholder="Secret"
             />
           </div>
         </div>
@@ -51,7 +61,8 @@ app.component('connection', {
     return {
       ros: null,
       ip: 'localhost',
-      port: '9090', // Port default
+      port: '9090',
+      secret: '',
     };
   },
 
@@ -128,14 +139,14 @@ app.component('connection', {
     authenticate() {
       let client = new ClientJS();
       let dest = this.ip;
-      let secret = '1234567890abcdef';
+      // let secret = '1234567890abcdef';
       let rand = this.randromString(10);
       let time = new Date().getTime() / 1000;
       let timeEnd = 0;
       let level = 'admin';
       let useragent = client.getUserAgentLowerCase();
       let mac = sha512(
-        secret +
+        this.secret +
           useragent +
           dest +
           rand +
