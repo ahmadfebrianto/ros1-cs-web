@@ -29,6 +29,7 @@ app.component('connection', {
           </div>
           <div class="">
             <input
+              :class="authenticatedClass"
               class="input text-center tracking-wider focus:outline-none"
               type="password"
               v-model="secret"
@@ -73,6 +74,12 @@ app.component('connection', {
 
     goalSent() {
       return this.$store.state.goalSent;
+    },
+
+    authenticatedClass() {
+      return {
+        'pointer-events-none opacity-50': this.robotConnected,
+      };
     },
   },
 
