@@ -77,11 +77,11 @@ app.component('connection', {
         port: this.port,
       };
 
-      const options = {
-          url: `wss://${connectionData.ip}:${connectionData.port}`,
-      };
+      const address = `wss://${connectionData.ip}:${connectionData.port}`;
 
-      this.ros = new ROSLIB.Ros(options);
+      this.ros = new ROSLIB.Ros();
+      this.authenticate();
+      this.ros.connect(address);
 
       this.ros.on('connection', () => {
         this.$store.commit('setRobotConnected', true);
@@ -90,7 +90,6 @@ app.component('connection', {
           'success'
         );
         this.$store.commit('setRos', this.ros);
-        // Emit 'connected' event to map component
         emitter.emit('connected');
       });
 
@@ -126,6 +125,31 @@ app.component('connection', {
       }
     },
 
+    authenticate() {
+      let client = new ClientJS();
+      let dest = this.ip;
+      let secret = '1234567890abcdef';
+      let rand = this.randromString(10);
+      let time = new Date().getTime() / 1000;
+      let timeEnd = 0;
+      let level = 'admin';
+      let useragent = client.getUserAgentLowerCase();
+      let mac = sha512(
+        secret +
+          useragent +
+          dest +
+          rand +
+          parseInt(time).toString() +
+          level +
+          parseInt(timeEnd).toString()
+      );
+      this.ros.authenticate(mac, useragent, dest, rand, time, level, timeEnd);
+    },
+
+    randromString(n) {
+      return '';
+    },
+
     sendLog(text, category) {
       const log = { text, category };
       emitter.emit('addLog', log);
@@ -149,14 +173,14 @@ app.component('connection', {
   },
 
   mounted() {
-    /* 
+    /*
      * Muat data koneksi dari local storage
      */
     this.loadConnectionData();
   },
 
   /*
-   * Ketika berpindah halaman, simpan data koneksi ke local storage 
+   * Ketika berpindah halaman, simpan data koneksi ke local storage
    */
   watch: {
     $route(to, from) {
