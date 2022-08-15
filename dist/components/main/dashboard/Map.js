@@ -8,7 +8,7 @@ app.component('dashboard-map', {
                 sm:h-auto md:h-500"
         :class="navigationModeClass"
       >
-        <img v-if="!robotConnected" src="assets/images/map/agv.png" />
+        <img v-if="!robotConnected" src="assets/images/map/ttb3.png" />
       </div>
     </div>`,
 
@@ -33,7 +33,6 @@ app.component('dashboard-map', {
         rootObject: viewer.scene,
         viewer: viewer,
         serverName: '/move_base',
-        // markerImage: 'assets/icons/app/agv-marker.png',
         withOrientation: true,
       });
 

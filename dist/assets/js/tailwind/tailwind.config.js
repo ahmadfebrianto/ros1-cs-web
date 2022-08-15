@@ -15,9 +15,9 @@ tailwind.config = {
           tertiary: '#e7ecf1ea',
         },
         blue: {
-          primary: '#0369A1',
-          secondary: '#1c78aa8a',
-          tertiary: '#3587b3',
+          primary: '#12456e',
+          secondary: '#196099',
+          tertiary: '#226191',
         },
         green: {
           primary: '#10b981',

@@ -12,7 +12,7 @@ app.component('sidebar', {
           <img
             v-if="sidebarCollapsed"
             class="m-auto"
-            src="assets/icons/app/32x32.png"
+            src="assets/icons/sidebar/header/af.png"
           />
           <img
             v-else
