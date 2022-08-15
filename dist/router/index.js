@@ -4,11 +4,6 @@ const routes = [
     name: 'dashboard',
     component: Dashboard,
   },
-  {
-    path: '/about',
-    name: 'about',
-    component: About,
-  },
 ];
 
 const router = VueRouter.createRouter({

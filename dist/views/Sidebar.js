@@ -42,11 +42,6 @@ app.component('sidebar', {
           svg: 'assets/icons/sidebar/grid-fill.svg',
           route: '/',
         },
-        {
-          name: 'About',
-          svg: 'assets/icons/sidebar/info-circle-fill.svg',
-          route: '/about',
-        },
       ],
     };
   },
